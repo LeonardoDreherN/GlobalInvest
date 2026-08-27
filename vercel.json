@@ -1,7 +1,8 @@
 {
   "redirects": [
     { "source": "/publicacao/:slug.html", "destination": "/publicacao/:slug", "permanent": true },
-    { "source": "/blog/:slug.html", "destination": "/blog/:slug", "permanent": true }
+    { "source": "/blog/:slug.html", "destination": "/blog/:slug", "permanent": true },
+    { "source": "/produto/:slug.html", "destination": "/produto/:slug", "permanent": true }
   ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://globalinvest.onrender.com/api/:path*" },
@@ -10,6 +11,7 @@
     { "source": "/sitemap.xml", "destination": "https://globalinvest.onrender.com/sitemap.xml" },
     { "source": "/install.php", "destination": "https://globalinvest.onrender.com/install.php" },
     { "source": "/publicacao/:slug", "destination": "https://globalinvest.onrender.com/publicacao/:slug" },
-    { "source": "/blog/:slug", "destination": "https://globalinvest.onrender.com/blog/:slug" }
+    { "source": "/blog/:slug", "destination": "https://globalinvest.onrender.com/blog/:slug" },
+    { "source": "/produto/:slug", "destination": "https://globalinvest.onrender.com/produto/:slug" }
   ]
 }

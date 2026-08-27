@@ -1,0 +1,79 @@
+[
+  {
+    "slug": "produto-palestras",
+    "category": "Cursos e palestras",
+    "title": "Palestras que conectam conhecimento, decisão e execução.",
+    "summary": "Conteúdo sob medida para equipes, eventos e comunidades que precisam transformar informação qualificada em prioridades claras, conversa produtiva e ação consistente.",
+    "body": "## Mais do que inspiração: uma conversa preparada para gerar movimento.\n\nUma palestra relevante começa antes do palco. A Global Invest Brasil parte do contexto do público, dos objetivos do encontro e das decisões que precisam amadurecer. O resultado é uma apresentação com repertório técnico, linguagem clara e exemplos conectados à realidade de quem participa.\n\nCada entrega pode combinar gestão, negócios digitais, tecnologia, planejamento, cenários e proteção patrimonial. O foco não é oferecer fórmulas prontas, mas ampliar a qualidade da reflexão e criar uma base comum para os próximos passos da organização.\n\n## O que você encontra\n\n- **Diagnóstico do contexto** — Definição de objetivos, nível de profundidade e recorte temático.\n- **Roteiro com propósito** — Conteúdo estruturado para informar, provocar e orientar decisões.\n- **Encaminhamentos úteis** — Síntese final que ajuda o público a sair do evento com prioridades claras.\n\n## Para quem é e como funciona\n\n- **Para quem é** — Empresas, associações, escolas, eventos corporativos e comunidades que buscam conteúdo de alto nível com relevância prática.\n- **Como funciona** — Briefing, desenho do tema, preparação do roteiro e entrega no formato mais adequado ao público.\n\n## Método de trabalho\n\n1. **Briefing estratégico** — Objetivos, perfil do público e contexto.\n2. **Desenho do roteiro** — Tema, profundidade e exemplos aplicáveis.\n3. **Entrega** — Palestra presencial, online ou híbrida.\n4. **Próximos passos** — Síntese e caminhos para continuar a conversa.",
+    "image_url": "/assets/images/produtos/palestra.webp",
+    "purchase_url": "/contato.html?assunto=palestras",
+    "cta_label": "Solicitar proposta",
+    "price": null
+  },
+  {
+    "slug": "produto-curso",
+    "category": "Cursos e palestras",
+    "title": "Gestão de Negócios Online: método para estruturar, administrar e crescer.",
+    "summary": "Uma formação prática para empreendedores que precisam organizar posicionamento, planejamento, finanças, processos, vendas, tecnologia e indicadores em uma rotina de gestão consistente.",
+    "body": "## O negócio digital exige método, não improviso.\n\nMuitos negócios começam com uma boa ideia e encontram dificuldade justamente no momento de transformar intenção em operação. Este curso organiza os elementos que sustentam uma empresa digital: proposta de valor, metas, precificação, controles financeiros, processos, aquisição de clientes e acompanhamento de indicadores.\n\nA formação foi pensada para quem quer enxergar as conexões entre decisão comercial, rotina operacional e crescimento. Em vez de tratar cada tema de forma isolada, apresenta uma sequência de trabalho que pode ser adaptada à maturidade e à realidade de cada negócio.\n\n## O que você encontra\n\n- **Posicionamento e proposta** — Clareza sobre público, problema, oferta e diferenciação.\n- **Finanças e indicadores** — Números que ajudam a acompanhar margem, caixa e desempenho.\n- **Processos e tecnologia** — Rotinas e ferramentas para ganhar consistência sem perder controle.\n\n## Para quem é e como funciona\n\n- **Para quem é** — Empreendedores, gestores e profissionais que desejam organizar ou profissionalizar um negócio digital.\n- **Como funciona** — Conteúdo estruturado em módulos, com exemplos, exercícios de reflexão e orientação para aplicação.\n\n## Método de trabalho\n\n1. **Posicionamento** — Defina proposta, público e direção.\n2. **Planejamento** — Transforme objetivos em prioridades.\n3. **Gestão** — Organize finanças, processos e indicadores.\n4. **Crescimento** — Acompanhe, corrija e avance com método.",
+    "image_url": "/assets/images/produtos/curso-gestao-negocios-online.webp",
+    "purchase_url": "https://gems-br.myshopify.com/products/curso-de-gestao-de-negocios-online",
+    "cta_label": "Quero participar do curso",
+    "price": null
+  },
+  {
+    "slug": "produto-o-seu-maior-patrimonio",
+    "category": "Cursos e palestras",
+    "title": "O Seu Maior Patrimônio: muito além do dinheiro no banco.",
+    "summary": "Um curso para repensar o que realmente sustenta uma vida e um negócio de longo prazo — critério, conhecimento e responsabilidade como os verdadeiros ativos que protegem decisões, relações e resultados ao longo do tempo.",
+    "body": "## Patrimônio é mais do que número em extrato.\n\nMais do que acumular bens, o professor Jorge Dadalt propõe uma reflexão sobre critério, conhecimento e responsabilidade como os verdadeiros ativos que protegem decisões, relações e resultados ao longo do tempo.\n\nUma formação para quem busca construir patrimônio com consciência — não apenas números, mas capacidade de decidir bem.\n\n## O que você encontra\n\n- **Nova definição de patrimônio** — Entenda o que sustenta resultado e continuidade além do saldo bancário.\n- **Critério para decisões** — Desenvolva parâmetros próprios para escolhas de longo prazo.\n- **Aplicação no dia a dia** — Conecte a reflexão à rotina pessoal e à gestão do negócio.\n\n## Para quem é e como funciona\n\n- **Para quem é** — Empresários, profissionais e investidores que quer ampliar sua visão sobre construção de patrimônio.\n- **Como funciona** — Conteúdo estruturado para refletir, aplicar e revisar critérios de decisão de longo prazo.\n\n## Método de trabalho\n\n1. **Reflexão** — O que realmente é patrimônio.\n2. **Critério** — Parâmetros para decidir bem.\n3. **Aplicação** — Conecte com sua realidade.\n4. **Continuidade** — Revise e sustente escolhas no tempo.",
+    "image_url": "/assets/images/produtos/o-seu-maior-patrimonio.webp",
+    "purchase_url": "https://gems-br.myshopify.com/products/o-seu-maior-patrimonio",
+    "cta_label": "Quero fazer o curso",
+    "price": null
+  },
+  {
+    "slug": "produto-primeiro-negocio",
+    "category": "Mentorias",
+    "title": "Meu Primeiro Negócio: da ideia à primeira estrutura comercial.",
+    "summary": "Uma mentoria para quem quer começar com mais clareza, testar uma proposta de valor e construir uma base realista para os primeiros 90 dias de operação.",
+    "body": "## Começar bem significa aprender antes de escalar.\n\nA primeira fase de um negócio pede escolhas simples, mas decisivas: qual problema será atendido, para quem, por qual proposta e com quais recursos. A mentoria organiza essas perguntas em uma sequência de trabalho que reduz dispersão e ajuda a transformar hipótese em uma oferta testável.\n\nO processo não promete resultado automático. Ele oferece critério para construir uma estrutura comercial inicial, estimar necessidades básicas, definir prioridades e iniciar a operação com mais consciência sobre risco, esforço e oportunidade.\n\n## O que você encontra\n\n- **Proposta e público** — Delimite o problema, o perfil do cliente e a oferta inicial.\n- **Validação orientada** — Teste hipóteses, organize evidências e ajuste o caminho.\n- **Plano de partida** — Defina prioridades comerciais e operacionais para os primeiros meses.\n\n## Para quem é e como funciona\n\n- **Para quem é** — Pessoas que desejam transformar uma ideia em negócio e empreendedores em fase inicial de organização.\n- **Como funciona** — Encontros orientados por diagnóstico, com tarefas objetivas e plano de ação adaptado ao estágio do projeto.\n\n## Método de trabalho\n\n1. **Ideia** — Problema, público e oportunidade.\n2. **Validação** — Hipóteses, testes e aprendizado.\n3. **Estrutura** — Oferta, canais e rotina inicial.\n4. **Lançamento** — Plano de ação para entrar em campo.",
+    "image_url": "/assets/images/produtos/mentoria-primeiro-negocio.webp",
+    "purchase_url": "/contato.html?assunto=mentoria-primeiro-negocio",
+    "cta_label": "Quero conversar sobre a mentoria",
+    "price": null
+  },
+  {
+    "slug": "produto-organizando",
+    "category": "Mentorias",
+    "title": "Organizando Meu Negócio: processos claros para crescer com controle.",
+    "summary": "Uma mentoria para empresas que já operam, mas precisam melhorar rotina, controles, visão financeira e acompanhamento de indicadores para decidir com mais segurança.",
+    "body": "## Crescimento sem rotina cria esforço; organização cria capacidade.\n\nQuando uma empresa passa a vender mais, as decisões deixam de caber na memória do fundador. A mentoria ajuda a mapear atividades críticas, organizar responsáveis, estabelecer controles e dar visibilidade às informações que realmente interessam à gestão.\n\nO trabalho combina leitura do momento atual com construção de uma rotina viável. A intenção é reduzir retrabalho, melhorar a previsibilidade e permitir que o empreendedor avance sem depender exclusivamente de intervenções urgentes.\n\n## O que você encontra\n\n- **Mapa de processos** — Identifique fluxos essenciais, gargalos e responsáveis.\n- **Rotina financeira** — Estruture dados de faturamento, custos, caixa e margem.\n- **Painel de indicadores** — Defina métricas simples para acompanhar o que importa.\n\n## Para quem é e como funciona\n\n- **Para quem é** — Empresas em operação que precisam transformar improviso em processo e ampliar o controle gerencial.\n- **Como funciona** — Diagnóstico, definição de prioridades, encontros de trabalho e acompanhamento da implantação das rotinas combinadas.\n\n## Método de trabalho\n\n1. **Diagnóstico** — Leitura de operação, processos e números.\n2. **Prioridades** — Definição do que organizar primeiro.\n3. **Implantação** — Rotinas, responsáveis e controles.\n4. **Acompanhamento** — Revisão de indicadores e ajustes.",
+    "image_url": "/assets/images/produtos/mentoria-organizando-negocio.webp",
+    "purchase_url": "/contato.html?assunto=mentoria-organizando",
+    "cta_label": "Quero organizar meu negócio",
+    "price": null
+  },
+  {
+    "slug": "produto-escalando",
+    "category": "Mentorias",
+    "title": "Escalando Meu Negócio: crescimento sustentável, sem perder o controle.",
+    "summary": "Uma mentoria para negócios que precisam crescer com mais disciplina comercial, capacidade operacional, automação e indicadores que antecipem riscos e oportunidades.",
+    "body": "## Escalar é ampliar capacidade sem transformar crescimento em desorganização.\n\nA expansão exige mais do que aumentar vendas. É preciso avaliar canais, margem, capacidade de entrega, processos, dados e as pessoas que sustentam a operação. Nesta mentoria, o crescimento é tratado como um projeto de gestão, não como uma corrida por volume.\n\nO objetivo é desenhar um caminho consistente para ampliar o negócio: escolher prioridades, definir metas acompanháveis, fortalecer a operação e identificar onde tecnologia e automação podem reduzir fricção sem afastar a empresa do cliente.\n\n## O que você encontra\n\n- **Plano de crescimento** — Metas, hipóteses e marcos para ampliar com método.\n- **Canais e oferta** — Leitura de aquisição, retenção, margem e potencial de expansão.\n- **Automação responsável** — Processos mais leves, dados mais confiáveis e decisões mais rápidas.\n\n## Para quem é e como funciona\n\n- **Para quem é** — Empresas com operação validada que buscam ampliar receita e capacidade de forma estruturada.\n- **Como funciona** — Diagnóstico de escala, definição de alavancas prioritárias e encontros para acompanhar execução e aprendizado.\n\n## Método de trabalho\n\n1. **Cenário** — Canais, operação, margem e capacidade.\n2. **Alavancas** — Escolha das prioridades de crescimento.\n3. **Execução** — Metas, automação e governança.\n4. **Revisão** — Indicadores, aprendizado e correções.",
+    "image_url": "/assets/images/produtos/mentoria-escalando-negocio.webp",
+    "purchase_url": "/contato.html?assunto=mentoria-escalando",
+    "cta_label": "Quero escalar com método",
+    "price": null
+  },
+  {
+    "slug": "produto-blindagem-patrimonial",
+    "category": "Mentorias",
+    "title": "Blindagem Patrimonial: estrutura, prevenção e continuidade.",
+    "summary": "Uma mentoria educacional para empresários e famílias que desejam compreender alternativas de governança, sucessão e organização patrimonial com visão estratégica.",
+    "body": "## Patrimônio consolidado pede organização, governança e continuidade.\n\nA proteção patrimonial começa por uma leitura responsável da estrutura existente: relações societárias, ativos, obrigações, sucessão, riscos operacionais e objetivos familiares. A mentoria organiza esses temas para que o participante possa formular perguntas melhores e tomar decisões com suporte técnico qualificado.\n\nO trabalho tem caráter educacional e estratégico. Quando necessário, a Global Invest Brasil orienta a identificação de temas que devem ser aprofundados com profissionais legalmente habilitados, como advogados, contadores e especialistas regulatórios.\n\n## O que você encontra\n\n- **Mapa patrimonial** — Leitura de estruturas, relações e pontos que merecem atenção.\n- **Governança e sucessão** — Discussão de continuidade, responsabilidades e processos decisórios.\n- **Plano de encaminhamento** — Prioridades e interface com especialistas habilitados quando aplicável.\n\n## Para quem é e como funciona\n\n- **Para quem é** — Empresários e famílias com patrimônio constituído que desejam organizar temas de continuidade e governança.\n- **Como funciona** — Diagnóstico inicial, encontros de aprofundamento e plano de encaminhamentos, respeitando os limites da atividade educacional.\n\n## Método de trabalho\n\n1. **Diagnóstico** — Estrutura, objetivos e riscos percebidos.\n2. **Governança** — Papéis, decisões e continuidade.\n3. **Encaminhamentos** — Temas técnicos e especialistas necessários.\n4. **Plano** — Prioridades e próximos passos.\n\n> A Global Invest Brasil não administra patrimônio de terceiros, não presta aconselhamento jurídico, contábil ou regulatório individualizado e não recomenda ativos. A mentoria é educacional; decisões e implementações exigem avaliação de profissionais habilitados.",
+    "image_url": "/assets/images/produtos/mentoria-blindagem-patrimonial.webp",
+    "purchase_url": "/contato.html?assunto=mentoria-blindagem-patrimonial",
+    "cta_label": "Quero conversar sobre a mentoria",
+    "price": null
+  }
+]
