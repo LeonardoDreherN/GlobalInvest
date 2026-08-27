@@ -17,7 +17,7 @@ function already_installed(bool $envMode, string $configFile): bool {
 if (already_installed($envMode, $configFile)) { http_response_code(403); exit('Instalação já concluída. Por segurança, remova install.php depois de testar o painel.'); }
 
 $error = '';
-if ($_SE   RVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $adminName = trim($_POST['admin_name'] ?? ''); $adminEmail = trim($_POST['admin_email'] ?? ''); $adminPass = (string)($_POST['admin_password'] ?? ''); $confirm = (string)($_POST['admin_password_confirm'] ?? '');
     try {
         if (!$adminName || !filter_var($adminEmail, FILTER_VALIDATE_EMAIL) || strlen($adminPass) < 10 || $adminPass !== $confirm) throw new RuntimeException('Revise os campos. A senha administrativa deve ter ao menos 10 caracteres e as senhas devem coincidir.');
