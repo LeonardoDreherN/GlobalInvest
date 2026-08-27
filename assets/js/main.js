@@ -912,3 +912,43 @@ new MutationObserver((records) => {
 }).observe(document.body, { childList: true, subtree: true });
 
 document.querySelectorAll("[data-year]").forEach((node) => node.textContent = new Date().getFullYear());
+
+/* Checkout direto na Shopify. Os botões de compra apontam para a página do produto
+   (https://gems-br.myshopify.com/products/{handle}). No clique, resolvemos o ID da
+   variante via /products/{handle}.js e mandamos o visitante para o checkout
+   (/cart/{id}:1?return_to=/checkout). Se a loja estiver com senha, offline ou a
+   consulta falhar, mantém-se o comportamento atual: abrir a página do produto. */
+(function shopifyDirectCheckout() {
+  const STORE_ORIGIN = "https://gems-br.myshopify.com";
+  const PRODUCT_PATH = "gems-br.myshopify.com/products/";
+  const variantCache = new Map();
+
+  const handleFromHref = (href) => (String(href).match(/\/products\/([a-z0-9_-]+)/i) || [])[1] || "";
+
+  async function resolveVariantId(handle) {
+    if (variantCache.has(handle)) return variantCache.get(handle);
+    const response = await fetch(`${STORE_ORIGIN}/products/${handle}.js`, { headers: { accept: "application/json" } });
+    if (!response.ok) throw new Error("produto indisponível");
+    const data = await response.json();
+    const variants = Array.isArray(data.variants) ? data.variants : [];
+    const chosen = variants.find((variant) => variant.available !== false) || variants[0];
+    if (!chosen || !chosen.id) throw new Error("variante não encontrada");
+    variantCache.set(handle, chosen.id);
+    return chosen.id;
+  }
+
+  document.addEventListener("click", (event) => {
+    const link = event.target.closest(`a[href*="${PRODUCT_PATH}"]`);
+    if (!link || link.dataset.checkoutBusy === "true") return;
+    const handle = handleFromHref(link.getAttribute("href"));
+    if (!handle) return;
+    event.preventDefault();
+    link.dataset.checkoutBusy = "true";
+    const newTab = link.target === "_blank";
+    const go = (url) => (newTab ? window.open(url, "_blank", "noopener") : window.location.assign(url));
+    resolveVariantId(handle)
+      .then((variantId) => go(`${STORE_ORIGIN}/cart/${variantId}:1?return_to=/checkout`))
+      .catch(() => go(link.href))
+      .finally(() => { link.dataset.checkoutBusy = "false"; });
+  });
+})();
