@@ -309,12 +309,39 @@ fetch("/api/content", { cache: "no-store" }).then((response) => response.ok ? re
 
   const pageByFile = { "index.html": "inicio", "produtos.html": "produtos", "mentorias.html": "mentorias", "seu-negocio.html": "negocio", "artigos.html": "blog", "publicacoes.html": "publicacoes", "contato.html": "contato" };
   const currentFile = location.pathname.split("/").pop() || "index.html";
-  // Produtos e mentorias são conteúdo fixo do site. Eles não dependem do banco
-  // administrativo e, portanto, não devem ser ocultados quando a API está vazia.
-  const pageKey = ["produtos.html", "mentorias.html"].includes(currentFile)
-    ? null
-    : pageByFile[currentFile];
+  // Mentorias ainda é página fixa; produtos, publicações e blog vêm do banco.
+  const pageKey = currentFile === "mentorias.html" ? null : pageByFile[currentFile];
   const pageItems = pageKey && content.pages?.[pageKey] ? content.pages[pageKey] : [];
+
+  // Catálogo: atualiza os cards curados de produtos.html com os dados do banco
+  // (título, resumo, categoria, imagem) e aponta o botão para /produto/{slug}.
+  // Cards sem produto correspondente no banco ficam como estão.
+  if (pageKey === "produtos" && pageItems.length) {
+    const slugToId = {
+      "produto-livro": "livro", "produto-palestras": "palestras", "produto-curso": "curso-gestao-online",
+      "produto-ideia-ao-lucro": "ebook-ideia-ao-lucro", "produto-o-seu-maior-patrimonio": "o-seu-maior-patrimonio",
+      "produto-primeiro-negocio": "meu-primeiro-negocio", "produto-organizando": "organizando-meu-negocio",
+      "produto-escalando": "escalando-meu-negocio", "produto-blindagem-patrimonial": "blindagem-patrimonial",
+      "produto-site": "fabricamos-seu-site", "produto-ecommerce": "construimos-ecommerce", "produto-app-dedicado": "criamos-app-dedicado"
+    };
+    const bySlug = new Map(pageItems.map((it) => [it.slug, it]));
+    Object.entries(slugToId).forEach(([slug, elId]) => {
+      const el = document.getElementById(elId);
+      const item = bySlug.get(slug);
+      if (!el || !item) return;
+      const h2 = el.querySelector(".product-copy h2, h2");
+      const para = el.querySelector(".product-copy > p, p");
+      const kicker = el.querySelector(".kicker, .article-cover-label");
+      const img = el.querySelector("img");
+      const cta = el.querySelector("a.btn, a.managed-link");
+      if (h2 && item.title) h2.textContent = item.title;
+      if (para && item.summary) para.textContent = item.summary;
+      if (kicker && item.category) kicker.textContent = item.category;
+      if (img && item.image) img.setAttribute("src", item.image);
+      if (cta) cta.setAttribute("href", `/produto/${slug}`);
+    });
+    return;
+  }
   const staticIds = {
     produtos: {
       "produto-livro": "#livro", "produto-palestras": "#palestras", "produto-curso": "#curso-gestao-online",
