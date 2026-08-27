@@ -27,6 +27,10 @@ RewriteRule ^api/cookie-consent/?$ api/cookie-consent.php [L,QSA]
 RewriteRule ^api/health/?$ api/health.php [L,QSA]
 RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
 
+# URLs antigas .html das publicações -> URL limpa (o conteúdo agora vem do banco).
+RewriteRule ^publicacao/([a-z0-9-]+)\.html$ /publicacao/$1 [R=301,L,NC]
+RewriteRule ^blog/([a-z0-9-]+)\.html$ /blog/$1 [R=301,L,NC]
+
 # Mantém URLs amigáveis de artigos dinâmicos.
 RewriteRule ^publicacao/([a-z0-9-]+)/?$ article.php?type=publication&slug=$1 [L,QSA,NC]
 RewriteRule ^blog/([a-z0-9-]+)/?$ article.php?type=blog&slug=$1 [L,QSA,NC]

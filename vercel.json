@@ -1,4 +1,8 @@
 {
+  "redirects": [
+    { "source": "/publicacao/:slug.html", "destination": "/publicacao/:slug", "permanent": true },
+    { "source": "/blog/:slug.html", "destination": "/blog/:slug", "permanent": true }
+  ],
   "rewrites": [
     { "source": "/api/:path*", "destination": "https://globalinvest.onrender.com/api/:path*" },
     { "source": "/admin/:path*", "destination": "https://globalinvest.onrender.com/admin/:path*" },
