@@ -1,0 +1,2 @@
+# Após aprovação no Google AdSense, substitua esta linha pelo registro fornecido na sua conta.
+# Exemplo: google.com, pub-SEU_ID_DE_PUBLICADOR, DIRECT, f08c47fec0942fa0

@@ -1,0 +1,16 @@
+{
+  "name": "Global Invest Brasil",
+  "short_name": "Global Invest Brasil",
+  "description": "Portal de educação financeira, negócios e investimentos.",
+  "lang": "pt-BR",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f2f8f7",
+  "theme_color": "#07535a",
+  "icons": [
+    {"src": "/favicon-32x32.png", "sizes": "32x32", "type": "image/png"},
+    {"src": "/favicon-16x16.png", "sizes": "16x16", "type": "image/png"},
+    {"src": "/assets/images/logo-globalinvestbr-circular.png", "sizes": "512x468", "type": "image/png", "purpose": "any"},
+    {"src": "/assets/images/apple-touch-icon.png", "sizes": "192x192", "type": "image/png"}
+  ]
+}

@@ -1,0 +1,32 @@
+Options -Indexes
+DirectoryIndex index.html index.php
+RewriteEngine On
+
+# Protege credenciais, banco e arquivos internos.
+RewriteRule ^(?:app|database|storage)/ - [F,L,NC]
+<FilesMatch "\.(?:sql|md|log|env|sh)$">
+  Require all denied
+</FilesMatch>
+<FilesMatch "^(?:Dockerfile|vercel\.json)$">
+  Require all denied
+</FilesMatch>
+
+# Cabeçalhos de segurança.
+<IfModule mod_headers.c>
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+</IfModule>
+
+# Rotas PHP utilizadas pelo site estático.
+RewriteRule ^api/content/?$ api/content.php [L,QSA]
+RewriteRule ^api/contacts/?$ api/contacts.php [L,QSA]
+RewriteRule ^api/newsletter/?$ api/newsletter.php [L,QSA]
+RewriteRule ^api/cookie-consent/?$ api/cookie-consent.php [L,QSA]
+RewriteRule ^api/health/?$ api/health.php [L,QSA]
+RewriteRule ^sitemap\.xml$ sitemap.php [L,QSA]
+
+# Mantém URLs amigáveis de artigos dinâmicos.
+RewriteRule ^publicacao/([a-z0-9-]+)/?$ article.php?type=publication&slug=$1 [L,QSA,NC]
+RewriteRule ^blog/([a-z0-9-]+)/?$ article.php?type=blog&slug=$1 [L,QSA,NC]

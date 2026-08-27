@@ -1,0 +1,7 @@
+# Credenciais locais — nunca commitar. No Render/Vercel, use variáveis de ambiente.
+app/config.php
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.log

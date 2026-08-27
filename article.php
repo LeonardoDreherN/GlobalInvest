@@ -1,0 +1,7 @@
+<?php
+declare(strict_types=1);
+require_once __DIR__ . '/app/bootstrap.php';
+$type = ($_GET['type'] ?? '') === 'blog' ? 'blog_posts' : 'publications'; $slug = trim($_GET['slug'] ?? '');
+try { $s=db()->prepare("SELECT p.*,c.name AS category FROM {$type} p LEFT JOIN " . ($type==='blog_posts'?'blog_categories':'publication_categories') . " c ON c.id=p.category_id WHERE p.slug=? AND p.status='published'");$s->execute([$slug]);$p=$s->fetch(); if(!$p) throw new RuntimeException(); }
+catch(Throwable $e){http_response_code(404);exit('Página não encontrada.');}
+?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=h($p['seo_title']?:$p['title'])?> | Global Invest Brasil</title><meta name="description" content="<?=h($p['seo_description']?:$p['excerpt'])?>"><link rel="canonical" href="<?=h(base_url().$_SERVER['REQUEST_URI'])?>"><link rel="stylesheet" href="/assets/css/styles.css"><script src="/adsense-loader.php" defer></script></head><body><main class="article-page" style="max-width:900px;margin:48px auto;padding:0 20px"><p><?=h($p['category']??'')?></p><h1><?=h($p['title'])?></h1><?php if($p['image_url']):?><img src="<?=h($p['image_url'])?>" alt="<?=h($p['image_alt']?:$p['title'])?>" style="max-width:100%;border-radius:16px"><?php endif;?><article><?=nl2br(h($p['content']))?></article></main></body></html>
