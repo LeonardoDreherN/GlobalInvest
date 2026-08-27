@@ -117,6 +117,42 @@ foreach ($files as $file) {
     }
 }
 
+// Publicações que estavam embutidas em new-publications*.js, extraídas para JSON
+// por scripts/build-publicacoes-extra.js.
+$extraJson = __DIR__ . '/database/publicacoes-extra.json';
+if (is_file($extraJson)) {
+    $extra = json_decode((string) file_get_contents($extraJson), true) ?: [];
+    foreach ($extra as $row) {
+        $slug = (string) ($row['slug'] ?? '');
+        if ($slug === '') continue;
+        try {
+            $categoryId = $catMap[mb_strtolower((string) ($row['category'] ?? ''))] ?? null;
+            $stmt = $pdo->prepare(
+                "INSERT INTO publications (category_id, title, slug, excerpt, content, image_url, image_alt, author_name, seo_title, seo_description, status, published_at)
+                 VALUES (:cat, :title, :slug, :excerpt, :content, :img, :alt, 'Global Invest Brasil', :seotitle, :seodesc, 'published', :pub)
+                 ON CONFLICT (slug) DO NOTHING"
+            );
+            $stmt->execute([
+                ':cat' => $categoryId,
+                ':title' => (string) ($row['title'] ?? $slug),
+                ':slug' => $slug,
+                ':excerpt' => (string) ($row['excerpt'] ?? ''),
+                ':content' => (string) ($row['content'] ?? ''),
+                ':img' => ($row['image_url'] ?? '') ?: null,
+                ':alt' => ($row['image_alt'] ?? '') ?: null,
+                ':seotitle' => ($row['title'] ?? '') ?: null,
+                ':seodesc' => ($row['excerpt'] ?? '') ?: null,
+                ':pub' => $row['published_at'] ?? null,
+            ]);
+            if ($stmt->rowCount() > 0) { $done++; echo "OK    {$slug}  [json]  " . ($row['published_at'] ?? '') . "\n"; }
+            else { $skipped++; echo "JÁ EXISTE  {$slug}\n"; }
+        } catch (Throwable $e) {
+            $errors[] = "$slug: " . $e->getMessage();
+            echo "ERRO  {$slug}: " . $e->getMessage() . "\n";
+        }
+    }
+}
+
 echo "\n--------\n";
 echo "Inseridas: {$done}\nIgnoradas: {$skipped}\n";
 $total = (int) $pdo->query('SELECT COUNT(*) FROM publications')->fetchColumn();

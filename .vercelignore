@@ -6,6 +6,7 @@ app/
 api/
 admin/
 database/
+scripts/
 *.sql
 Dockerfile
 docker-entrypoint.sh
