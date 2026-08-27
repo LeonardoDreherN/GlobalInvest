@@ -1,0 +1,15 @@
+# A Vercel serve só o site estático. Todo o PHP (painel, APIs, artigos
+# dinâmicos, sitemap) roda no Render e é acessado pelos rewrites do vercel.json.
+# Manter os .php fora do deploy da Vercel evita expor o código-fonte.
+*.php
+app/
+api/
+admin/
+database/
+*.sql
+Dockerfile
+docker-entrypoint.sh
+.dockerignore
+DEPLOY-RENDER-VERCEL-SUPABASE.md
+LEIA-ME-PRIMEIRO.md
+REVISAO-SEO-ADSENSE.md

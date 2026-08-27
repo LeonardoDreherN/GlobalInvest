@@ -385,6 +385,32 @@ fetch("/api/content", { cache: "no-store" }).then((response) => response.ok ? re
     }
   });
 
+  // Publicações e Blog: a lista vem 100% do banco (/api/content). Se o banco
+  // devolver itens, o grid é substituído; senão mantém o conteúdo de exemplo.
+  if ((pageKey === "publicacoes" || pageKey === "blog") && pageItems.length) {
+    const grid = document.querySelector("[data-article-grid]");
+    if (grid) {
+      const esc = (v) => String(v ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const safe = (v) => /^(https?:|mailto:|tel:|\/|#)/i.test(String(v || "")) ? String(v) : "#";
+      const total = pageItems.length;
+      grid.innerHTML = pageItems.map((item, index) => {
+        const catName = item.category || (pageKey === "blog" ? "Blog" : "Publicação");
+        const cslug = publicationCategorySlug(catName);
+        ensurePublicationCategory(catName);
+        const day = String(item.published_at || item.date || "").slice(0, 10);
+        const date = day ? new Date(`${day}T12:00:00`).toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric" }) : "";
+        const img = item.image || articleImages[cslug] || articleImages.gestao;
+        return `<article class="article-card article-card--with-image" data-article-category="${esc(cslug)}"><div class="article-cover article-cover--image"><img src="${esc(img)}" alt="${esc(catName)}: ${esc(item.title)}" loading="lazy"></div><div class="article-body"><span class="article-number">${publicationNumber(index, total)}</span><span class="article-meta">${esc(catName)} · ${esc(date)}</span><h2>${esc(item.title)}</h2><p>${esc(item.summary || "")}</p><a class="article-status" href="${esc(safe(item.link))}">${pageKey === "blog" ? "Ler artigo" : "Saiba mais"}</a></div></article>`;
+      }).join("");
+      const countEl = document.querySelector("[data-article-count]");
+      if (countEl) countEl.textContent = String(total);
+      const emptyEl = document.querySelector("[data-article-empty]");
+      if (emptyEl) emptyEl.hidden = true;
+      document.dispatchEvent(new CustomEvent("globalinvest:publications-updated"));
+    }
+    return;
+  }
+
   const managedItems = pageItems.filter(item => item.visible && !known[item.id]);
   if (managedItems.length) {
     const escapeHtml = (value) => String(value).replace(/[&<>"]/g, character => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[character]));
