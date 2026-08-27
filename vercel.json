@@ -1,11 +1,11 @@
 {
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://SEU-BACKEND.onrender.com/api/:path*" },
-    { "source": "/admin/:path*", "destination": "https://SEU-BACKEND.onrender.com/admin/:path*" },
-    { "source": "/adsense-loader.php", "destination": "https://SEU-BACKEND.onrender.com/adsense-loader.php" },
-    { "source": "/sitemap.xml", "destination": "https://SEU-BACKEND.onrender.com/sitemap.xml" },
-    { "source": "/install.php", "destination": "https://SEU-BACKEND.onrender.com/install.php" },
-    { "source": "/publicacao/:slug", "destination": "https://SEU-BACKEND.onrender.com/publicacao/:slug" },
-    { "source": "/blog/:slug", "destination": "https://SEU-BACKEND.onrender.com/blog/:slug" }
+    { "source": "/api/:path*", "destination": "https://globalinvest.onrender.com/api/:path*" },
+    { "source": "/admin/:path*", "destination": "https://globalinvest.onrender.com/admin/:path*" },
+    { "source": "/adsense-loader.php", "destination": "https://globalinvest.onrender.com/adsense-loader.php" },
+    { "source": "/sitemap.xml", "destination": "https://globalinvest.onrender.com/sitemap.xml" },
+    { "source": "/install.php", "destination": "https://globalinvest.onrender.com/install.php" },
+    { "source": "/publicacao/:slug", "destination": "https://globalinvest.onrender.com/publicacao/:slug" },
+    { "source": "/blog/:slug", "destination": "https://globalinvest.onrender.com/blog/:slug" }
   ]
 }
