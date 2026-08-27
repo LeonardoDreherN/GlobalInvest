@@ -16,6 +16,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $s=$pdo->prepare('SELECT * FROM admins WHERE email=? AND is_active=1');$s->execute([$email]);$a=$s->fetch();
         if($a&&password_verify($_POST['password']??'',$a['password_hash'])){
             $pdo->prepare('DELETE FROM login_attempts WHERE email=? OR ip_address=?')->execute([$email,$ip]);
+            session_regenerate_id(true);
             $_SESSION['admin']=['id'=>$a['id'],'name'=>$a['name'],'email'=>$a['email'],'role'=>$a['role']];header('Location:/admin/dashboard.php');exit;
         }
         $pdo->prepare('INSERT INTO login_attempts (email,ip_address) VALUES (?,?)')->execute([$email,$ip]);
