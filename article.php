@@ -69,7 +69,7 @@ $bodyHtml = md_to_html($p['content'] ?? '');
     'publisher' => ['@type' => 'Organization', 'name' => 'Global Invest Brasil', 'logo' => ['@type' => 'ImageObject', 'url' => base_url() . '/assets/images/logo-globalinvestbr-circular.png']],
     'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $canonical],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
-<script src="/assets/js/main.js?v=70" defer></script>
+<script src="/assets/js/main.js?v=71" defer></script>
 <script src="/adsense-loader.php" defer></script>
 </head>
 <body data-content-server-rendered="true">
