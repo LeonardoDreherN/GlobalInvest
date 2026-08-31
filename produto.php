@@ -75,7 +75,7 @@ $bodyHtml = preg_replace_callback(
         'availability' => 'https://schema.org/InStock',
     ] : null,
 ]), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
-<script src="/assets/js/main.js?v=71" defer></script>
+<script src="/assets/js/main.js?v=72" defer></script>
 <script src="/adsense-loader.php" defer></script>
 </head>
 <body data-content-server-rendered="true">

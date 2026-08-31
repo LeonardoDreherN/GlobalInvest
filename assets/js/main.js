@@ -980,41 +980,47 @@ new MutationObserver((records) => {
 
 document.querySelectorAll("[data-year]").forEach((node) => node.textContent = new Date().getFullYear());
 
-/* Checkout direto na Shopify. Os botões de compra apontam para a página do produto
-   (https://gems-br.myshopify.com/products/{handle}). No clique, resolvemos o ID da
-   variante via /products/{handle}.js e mandamos o visitante para o checkout
-   (/cart/{id}:1?return_to=/checkout). Se a loja estiver com senha, offline ou a
-   consulta falhar, mantém-se o comportamento atual: abrir a página do produto. */
+/* Checkout direto na Shopify. Os botões de compra apontam para a página do
+   produto na loja (ex.: https://brcrystals.com/products/{handle}). No clique,
+   resolvemos o ID da variante via {loja}/products/{handle}.js e mandamos o
+   visitante direto para o checkout ({loja}/cart/{id}:1?return_to=/checkout).
+   Funciona com qualquer domínio de loja. Se a consulta falhar (loja com
+   senha, produto indisponível, offline), abre a página do produto normalmente. */
 (function shopifyDirectCheckout() {
-  const STORE_ORIGIN = "https://gems-br.myshopify.com";
-  const PRODUCT_PATH = "gems-br.myshopify.com/products/";
   const variantCache = new Map();
 
-  const handleFromHref = (href) => (String(href).match(/\/products\/([a-z0-9_-]+)/i) || [])[1] || "";
+  function parseStoreLink(href) {
+    let url;
+    try { url = new URL(href, location.href); } catch (e) { return null; }
+    if (url.origin === location.origin) return null; // link interno, não é a loja
+    const m = url.pathname.match(/^\/products\/([a-z0-9_-]+)\/?$/i);
+    return m ? { origin: url.origin, handle: m[1] } : null;
+  }
 
-  async function resolveVariantId(handle) {
-    if (variantCache.has(handle)) return variantCache.get(handle);
-    const response = await fetch(`${STORE_ORIGIN}/products/${handle}.js`, { headers: { accept: "application/json" } });
+  async function resolveVariantId(origin, handle) {
+    const key = origin + "|" + handle;
+    if (variantCache.has(key)) return variantCache.get(key);
+    const response = await fetch(`${origin}/products/${handle}.js`, { headers: { accept: "application/json" } });
     if (!response.ok) throw new Error("produto indisponível");
     const data = await response.json();
     const variants = Array.isArray(data.variants) ? data.variants : [];
     const chosen = variants.find((variant) => variant.available !== false) || variants[0];
     if (!chosen || !chosen.id) throw new Error("variante não encontrada");
-    variantCache.set(handle, chosen.id);
+    variantCache.set(key, chosen.id);
     return chosen.id;
   }
 
   document.addEventListener("click", (event) => {
-    const link = event.target.closest(`a[href*="${PRODUCT_PATH}"]`);
+    const link = event.target.closest('a[href*="/products/"]');
     if (!link || link.dataset.checkoutBusy === "true") return;
-    const handle = handleFromHref(link.getAttribute("href"));
-    if (!handle) return;
+    const store = parseStoreLink(link.getAttribute("href"));
+    if (!store) return;
     event.preventDefault();
     link.dataset.checkoutBusy = "true";
     const newTab = link.target === "_blank";
     const go = (url) => (newTab ? window.open(url, "_blank", "noopener") : window.location.assign(url));
-    resolveVariantId(handle)
-      .then((variantId) => go(`${STORE_ORIGIN}/cart/${variantId}:1?return_to=/checkout`))
+    resolveVariantId(store.origin, store.handle)
+      .then((variantId) => go(`${store.origin}/cart/${variantId}:1?return_to=/checkout`))
       .catch(() => go(link.href))
       .finally(() => { link.dataset.checkoutBusy = "false"; });
   });
