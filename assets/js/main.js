@@ -69,7 +69,7 @@ function formatQuoteValue(item) {
 }
 
 function formatQuoteChange(value) {
-  if (!Number.isFinite(value)) return "—";
+  if (!Number.isFinite(value)) return "n/d";
   return `${value < 0 ? "▼" : "▲"} ${value >= 0 ? "+" : ""}${quoteNumber.format(value)}%`;
 }
 
