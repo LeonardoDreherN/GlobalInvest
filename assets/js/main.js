@@ -318,8 +318,9 @@ fetch("/api/content", { cache: "no-store" }).then((response) => response.ok ? re
   // Cards sem produto correspondente no banco ficam como estão.
   if (pageKey === "produtos" && pageItems.length) {
     const slugToId = {
-      "produto-livro": "livro", "produto-palestras": "palestras", "produto-curso": "curso-gestao-online",
-      "produto-ideia-ao-lucro": "ebook-ideia-ao-lucro", "produto-o-seu-maior-patrimonio": "o-seu-maior-patrimonio",
+      "produto-livro": "livro", "produto-livro-impresso": "livro-impresso", "produto-palestras": "palestras", "produto-curso": "curso-gestao-online",
+      "produto-ideia-ao-lucro": "ebook-ideia-ao-lucro", "produto-ideia-ao-lucro-impresso": "ideia-ao-lucro-impresso",
+      "produto-o-seu-maior-patrimonio": "o-seu-maior-patrimonio", "produto-o-seu-maior-patrimonio-impresso": "o-seu-maior-patrimonio-impresso",
       "produto-primeiro-negocio": "meu-primeiro-negocio", "produto-organizando": "organizando-meu-negocio",
       "produto-escalando": "escalando-meu-negocio", "produto-blindagem-patrimonial": "blindagem-patrimonial",
       "produto-site": "fabricamos-seu-site", "produto-ecommerce": "construimos-ecommerce", "produto-app-dedicado": "criamos-app-dedicado"
