@@ -12,7 +12,7 @@ try {
     if (!$p) throw new RuntimeException('not found');
 } catch (Throwable $e) {
     http_response_code(404);
-    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=67"></head><body><main class="product-page"><div class="product-layout container"><div><a class="publication-back" href="/produtos.html">← Ver produtos</a><h1>Produto não encontrado</h1><p>O item que você procura não existe ou saiu do ar.</p></div></div></main></body></html><?php
+    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=68"></head><body><main class="product-page"><div class="product-layout container"><div><a class="publication-back" href="/produtos.html">← Ver produtos</a><h1>Produto não encontrado</h1><p>O item que você procura não existe ou saiu do ar.</p></div></div></main></body></html><?php
     exit;
 }
 
@@ -59,7 +59,7 @@ $bodyHtml = preg_replace_callback(
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="stylesheet" href="/assets/css/styles.css?v=67">
+<link rel="stylesheet" href="/assets/css/styles.css?v=68">
 <script type="application/ld+json"><?= json_encode(array_filter([
     '@context' => 'https://schema.org',
     '@type' => 'Product',
@@ -105,7 +105,7 @@ $bodyHtml = preg_replace_callback(
 </div>
 </div>
 <?php if ($image !== ''): ?>
-<figure class="product-hero-media"><img src="<?= h($image) ?>" alt="<?= h($title) ?>" width="1024" height="1536" decoding="async" fetchpriority="high"></figure>
+<figure class="product-hero-media"><img src="<?= h($image) ?>" alt="<?= h($title) ?>" decoding="async" fetchpriority="high"></figure>
 <?php endif; ?>
 </div>
 </section>
