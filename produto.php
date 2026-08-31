@@ -12,7 +12,7 @@ try {
     if (!$p) throw new RuntimeException('not found');
 } catch (Throwable $e) {
     http_response_code(404);
-    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=66"></head><body><main class="product-landing"><section class="section"><div class="container narrow"><a class="publication-back" href="/produtos.html">← Ver produtos</a><h1>Produto não encontrado</h1><p>O item que você procura não existe ou saiu do ar.</p></div></section></main></body></html><?php
+    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=67"></head><body><main class="product-page"><div class="product-layout container"><div><a class="publication-back" href="/produtos.html">← Ver produtos</a><h1>Produto não encontrado</h1><p>O item que você procura não existe ou saiu do ar.</p></div></div></main></body></html><?php
     exit;
 }
 
@@ -28,11 +28,17 @@ $price = $p['price'] ?? null;
 $priceLabel = ($price !== null && $price !== '' && (float) $price > 0)
     ? 'R$ ' . number_format((float) $price, 2, ',', '.')
     : '';
-$bodyHtml = md_to_html($p['body'] ?? '');
-// quebra o corpo em blocos por <h2> para virar seções com fundo alternado
-$bodyBlocks = array_values(array_filter(array_map('trim', preg_split('/(?=<h2>)/', $bodyHtml)), 'strlen'));
 $isExternal = (bool) preg_match('#^https?://#i', $buyUrl);
 $ctaAttrs = $isExternal ? ' target="_blank" rel="noopener sponsored"' : '';
+$buyNote = $isExternal ? 'Compra pelo checkout oficial da loja' : 'Atendimento direto pela equipe Global Invest Brasil';
+
+$bodyHtml = md_to_html($p['body'] ?? '');
+// Perguntas frequentes: "<h2>...?</h2><p>...</p>" vira accordion <details>.
+$bodyHtml = preg_replace_callback(
+    '#<h2>([^<]*\?)</h2>\s*<p>(.*?)</p>#is',
+    fn($m) => '<details class="product-faq"><summary>' . trim($m[1]) . '</summary><p>' . $m[2] . '</p></details>',
+    $bodyHtml
+);
 ?><!doctype html>
 <html lang="pt-BR">
 <head>
@@ -53,7 +59,7 @@ $ctaAttrs = $isExternal ? ' target="_blank" rel="noopener sponsored"' : '';
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="stylesheet" href="/assets/css/styles.css?v=66">
+<link rel="stylesheet" href="/assets/css/styles.css?v=67">
 <script type="application/ld+json"><?= json_encode(array_filter([
     '@context' => 'https://schema.org',
     '@type' => 'Product',
@@ -84,35 +90,48 @@ $ctaAttrs = $isExternal ? ' target="_blank" rel="noopener sponsored"' : '';
 <ul class="nav-links" id="menu" data-nav-links></ul>
 </nav>
 </header>
-<main id="conteudo" class="product-landing">
-<section class="product-landing-hero">
-<div class="container product-landing-hero-grid">
-<div>
+<main id="conteudo" class="product-page">
+
+<section class="product-hero">
+<div class="container product-hero-inner">
+<div class="product-hero-text">
 <a class="publication-back" href="/produtos.html">← Voltar aos produtos</a>
-<span class="eyebrow"><?= h($category ?: 'Global Invest Brasil') ?></span>
+<?php if ($category !== ''): ?><span class="eyebrow"><?= h($category) ?></span><?php endif; ?>
 <h1><?= h($title) ?></h1>
-<?php if ($summary !== ''): ?><p><?= h($summary) ?></p><?php endif; ?>
-<?php if ($priceLabel !== ''): ?><p class="product-landing-price"><strong><?= h($priceLabel) ?></strong></p><?php endif; ?>
-<div class="product-landing-actions">
+<?php if ($summary !== ''): ?><p class="product-hero-lead"><?= h($summary) ?></p><?php endif; ?>
+<div class="product-hero-actions">
 <a class="btn btn-primary" href="<?= h($buyUrl) ?>"<?= $ctaAttrs ?>><?= h($cta) ?></a>
-<?php if ($bodyHtml !== ''): ?><a class="btn btn-secondary" href="#detalhes">Conheça os detalhes</a><?php endif; ?>
+<?php if ($bodyHtml !== ''): ?><a class="btn btn-ghost" href="#detalhes">Ver detalhes</a><?php endif; ?>
 </div>
 </div>
-<div class="product-landing-visual">
-<?php if ($image !== ''): ?><img class="product-landing-image" src="<?= h($image) ?>" alt="<?= h($title) ?>" width="1024" height="1536" decoding="async"><?php endif; ?>
-</div>
+<?php if ($image !== ''): ?>
+<figure class="product-hero-media"><img src="<?= h($image) ?>" alt="<?= h($title) ?>" width="1024" height="1536" decoding="async" fetchpriority="high"></figure>
+<?php endif; ?>
 </div>
 </section>
-<?php if ($bodyBlocks): ?>
-<div id="detalhes">
-<?php foreach ($bodyBlocks as $i => $block): ?>
-<section class="product-block<?= $i % 2 ? ' alt' : '' ?>"><div class="container narrow product-rich-text"><?= $block ?></div></section>
-<?php endforeach; ?>
+
+<div class="container product-layout">
+<article class="product-article" id="detalhes">
+<?php if ($bodyHtml !== ''): ?><?= $bodyHtml ?><?php else: ?><p><?= h($summary) ?></p><?php endif; ?>
+</article>
+
+<aside class="product-buybox">
+<div class="product-buybox-card">
+<?php if ($image !== ''): ?><img class="product-buybox-thumb" src="<?= h($image) ?>" alt="" loading="lazy"><?php endif; ?>
+<?php if ($category !== ''): ?><span class="product-buybox-cat"><?= h($category) ?></span><?php endif; ?>
+<strong class="product-buybox-title"><?= h($title) ?></strong>
+<?php if ($priceLabel !== ''): ?><span class="product-buybox-price"><?= h($priceLabel) ?></span><?php endif; ?>
+<a class="btn btn-primary btn-block" href="<?= h($buyUrl) ?>"<?= $ctaAttrs ?>><?= h($cta) ?></a>
+<ul class="product-buybox-notes">
+<li><?= h($buyNote) ?></li>
+</ul>
 </div>
-<?php endif; ?>
+</aside>
+</div>
+
 <section class="product-cta-final">
 <div class="container narrow">
-<span class="kicker">Dê o próximo passo</span>
+<span class="kicker">Próximo passo</span>
 <h2><?= h($title) ?></h2>
 <p>Converse com a Global Invest Brasil e entenda como esta solução se encaixa no seu momento.</p>
 <a class="btn btn-primary" href="<?= h($buyUrl) ?>"<?= $ctaAttrs ?>><?= h($cta) ?></a>
