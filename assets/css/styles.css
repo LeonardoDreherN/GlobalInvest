@@ -1013,15 +1013,17 @@ h1 .accent { color: var(--teal-500); font-style: italic; }
   border-bottom: 3px solid var(--orange);
   box-shadow: 0 8px 26px rgba(6, 54, 58, .28);
 }
-.site-header .nav { min-height: 118px; padding-block: 8px; gap: 32px; }
-.site-header .brand { gap: 0; }
+.site-header .nav { min-height: 108px; padding-block: 8px; gap: 28px; }
+.site-header .brand { gap: 14px; }
 
-/* Só a logo, maior. A escrita "Global Invest Brasil" fica oculta. */
-.home-brand-symbol { width: 102px; height: 102px; flex: 0 0 102px; }
-.brand-logo { width: 118px; height: 118px; }
-.site-header .home-brand-name,
-.site-header .brand-name,
-.site-header .brand-lockup { display: none; }
+/* Logo grande + a escrita "Global Invest Brasil" ao lado, em branco sobre o verde. */
+.home-brand-symbol { width: 88px; height: 88px; flex: 0 0 88px; }
+.brand-logo { width: 104px; height: 104px; }
+.site-header .home-brand-name { display: flex; color: #fff; font-size: clamp(15px, 1.9vw, 19px); font-weight: 800; letter-spacing: .01em; }
+.site-header .home-brand-name em { color: var(--orange); font-style: normal; }
+.site-header .brand-lockup { display: inline-flex; }
+.site-header .brand-lockup em { color: var(--orange); font-style: normal; }
+.site-header .brand-name { display: inline-flex; color: #fff; font-size: clamp(15px, 1.9vw, 19px); }
 
 /* Menu claro sobre o verde (só os itens de 1º nível) */
 .nav-links { gap: 32px; }
@@ -1045,7 +1047,9 @@ h1 .accent { color: var(--teal-500); font-style: italic; }
 
 @media (max-width: 920px) {
   .site-header .nav { min-height: 74px; gap: 12px; }
-  .site-header .home-brand-symbol { width: 56px; height: 56px; flex-basis: 56px; }
+  .site-header .brand { gap: 10px; }
+  .site-header .home-brand-symbol { width: 52px; height: 52px; flex-basis: 52px; }
+  .site-header .home-brand-name, .site-header .brand-name { font-size: 15px; }
 
   /* Painel do menu: abaixo do header, branco, ROLÁVEL — nunca corta o
      último item (Contato). Botão laranja vira link normal aqui. */
@@ -1077,9 +1081,13 @@ h1 .accent { color: var(--teal-500); font-style: italic; }
   .site-header .submenu a { padding: 11px 12px; font-size: .92rem; }
 }
 @media (max-width: 600px) {
-  .site-header .nav { min-height: 66px; }
-  .site-header .home-brand-symbol { width: 50px; height: 50px; flex-basis: 50px; }
-  .site-header .nav-links { inset-block-start: 66px; max-height: calc(100dvh - 66px); }
+  .site-header .nav { min-height: 64px; }
+  .site-header .home-brand-symbol { width: 46px; height: 46px; flex-basis: 46px; }
+  .site-header .home-brand-name, .site-header .brand-name { font-size: 13.5px; }
+  .site-header .nav-links { inset-block-start: 64px; max-height: calc(100dvh - 64px); }
+}
+@media (max-width: 380px) {
+  .site-header .home-brand-name, .site-header .brand-name { display: none; }
 }
 
 /* ============================================================
