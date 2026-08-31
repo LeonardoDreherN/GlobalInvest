@@ -355,6 +355,24 @@ fetch("/api/content", { cache: "no-store" }).then((response) => response.ok ? re
     applyProductCategoryFilter();
     return;
   }
+
+  // Home: "Publicado recentemente" — 3 últimas publicações do banco.
+  const homeLatestGrid = document.querySelector("[data-home-publications]");
+  if (homeLatestGrid) {
+    const pubs = (content.pages && content.pages.publicacoes) || [];
+    if (pubs.length) {
+      const esc = (v) => String(v ?? "").replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const safe = (v) => /^(https?:|\/|#)/i.test(String(v || "")) ? String(v) : "#";
+      homeLatestGrid.innerHTML = pubs.slice(0, 3).map((it) => {
+        const day = String(it.published_at || "").slice(0, 10);
+        const date = day ? new Date(`${day}T12:00:00`).toLocaleDateString("pt-BR", { day: "numeric", month: "short", year: "numeric" }) : "";
+        return `<a class="hx-latest-card" href="${esc(safe(it.link))}"><span class="hx-latest-cat">${esc(it.category || "Publicação")}</span><h3>${esc(it.title)}</h3><p>${esc(it.summary || "")}</p><span class="hx-latest-meta">${esc(date)}</span></a>`;
+      }).join("");
+      const wrap = document.querySelector("[data-home-latest]");
+      if (wrap) wrap.hidden = false;
+    }
+  }
+
   const staticIds = {
     produtos: {
       "produto-livro": "#livro", "produto-palestras": "#palestras", "produto-curso": "#curso-gestao-online",
