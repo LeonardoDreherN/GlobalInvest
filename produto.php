@@ -12,7 +12,7 @@ try {
     if (!$p) throw new RuntimeException('not found');
 } catch (Throwable $e) {
     http_response_code(404);
-    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=65"></head><body><main class="product-landing"><section class="section"><div class="container narrow"><a class="publication-back" href="/produtos.html">← Ver produtos</a><h1>Produto não encontrado</h1><p>O item que você procura não existe ou saiu do ar.</p></div></section></main></body></html><?php
+    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=66"></head><body><main class="product-landing"><section class="section"><div class="container narrow"><a class="publication-back" href="/produtos.html">← Ver produtos</a><h1>Produto não encontrado</h1><p>O item que você procura não existe ou saiu do ar.</p></div></section></main></body></html><?php
     exit;
 }
 
@@ -29,6 +29,8 @@ $priceLabel = ($price !== null && $price !== '' && (float) $price > 0)
     ? 'R$ ' . number_format((float) $price, 2, ',', '.')
     : '';
 $bodyHtml = md_to_html($p['body'] ?? '');
+// quebra o corpo em blocos por <h2> para virar seções com fundo alternado
+$bodyBlocks = array_values(array_filter(array_map('trim', preg_split('/(?=<h2>)/', $bodyHtml)), 'strlen'));
 $isExternal = (bool) preg_match('#^https?://#i', $buyUrl);
 $ctaAttrs = $isExternal ? ' target="_blank" rel="noopener sponsored"' : '';
 ?><!doctype html>
@@ -51,7 +53,7 @@ $ctaAttrs = $isExternal ? ' target="_blank" rel="noopener sponsored"' : '';
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="stylesheet" href="/assets/css/styles.css?v=65">
+<link rel="stylesheet" href="/assets/css/styles.css?v=66">
 <script type="application/ld+json"><?= json_encode(array_filter([
     '@context' => 'https://schema.org',
     '@type' => 'Product',
@@ -101,14 +103,22 @@ $ctaAttrs = $isExternal ? ' target="_blank" rel="noopener sponsored"' : '';
 </div>
 </div>
 </section>
-<?php if ($bodyHtml !== ''): ?>
-<section class="section product-landing-about" id="detalhes">
+<?php if ($bodyBlocks): ?>
+<div id="detalhes">
+<?php foreach ($bodyBlocks as $i => $block): ?>
+<section class="product-block<?= $i % 2 ? ' alt' : '' ?>"><div class="container narrow product-rich-text"><?= $block ?></div></section>
+<?php endforeach; ?>
+</div>
+<?php endif; ?>
+<section class="product-cta-final">
 <div class="container narrow">
-<div class="product-rich-text"><?= $bodyHtml ?></div>
-<div class="product-landing-actions"><a class="btn btn-primary" href="<?= h($buyUrl) ?>"<?= $ctaAttrs ?>><?= h($cta) ?></a></div>
+<span class="kicker">Dê o próximo passo</span>
+<h2><?= h($title) ?></h2>
+<p>Converse com a Global Invest Brasil e entenda como esta solução se encaixa no seu momento.</p>
+<a class="btn btn-primary" href="<?= h($buyUrl) ?>"<?= $ctaAttrs ?>><?= h($cta) ?></a>
+<?php if ($priceLabel !== ''): ?><span class="cta-price"><?= h($priceLabel) ?></span><?php endif; ?>
 </div>
 </section>
-<?php endif; ?>
 </main>
 <footer class="site-footer">
 <div class="container">
