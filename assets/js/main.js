@@ -144,8 +144,19 @@ function normalizeMainMenu() {
 }
 normalizeMainMenu();
 
+/* Categoria de produto (nome do banco) -> slug usado no filtro do catálogo. */
+const productCategorySlug = (name) => ({
+  "e-books": "ebooks",
+  "livros": "livros",
+  "cursos e palestras": "cursos",
+  "mentorias": "mentorias",
+  "sites e e-commerces": "sites-ecommerce",
+  "sites e e-commerce": "sites-ecommerce"
+}[String(name || "").trim().toLowerCase()] || publicationCategorySlug(name));
+
 /* Catálogo de produtos: os submenus levam diretamente à categoria escolhida. */
-if (document.body.dataset.productCatalog === "true") {
+function applyProductCategoryFilter() {
+  if (document.body.dataset.productCatalog !== "true") return;
   const category = new URLSearchParams(location.search).get("categoria");
   const labels = {
     livros: "Livros",
@@ -154,26 +165,26 @@ if (document.body.dataset.productCatalog === "true") {
     "sites-ecommerce": "Sites e e-commerce",
     mentorias: "Mentorias"
   };
-  if (category && labels[category]) {
-    document.querySelectorAll("[data-product-category]").forEach((item) => {
-      item.hidden = item.dataset.productCategory !== category;
-    });
-    document.querySelectorAll("[data-product-category-group]").forEach((item) => {
-      item.hidden = item.dataset.productCategoryGroup !== category;
-    });
-    document.querySelectorAll(".service-catalog, .product-catalog").forEach((section) => {
-      const hasVisibleProduct = [...section.querySelectorAll("[data-product-category]")]
-        .some((item) => !item.hidden);
-      section.hidden = !hasVisibleProduct;
-    });
-    const panel = document.querySelector("#catalog-filter");
-    const summary = document.querySelector("[data-product-filter-summary]");
-    if (panel && summary) {
-      summary.textContent = `Produtos em destaque: ${labels[category]}`;
-      panel.hidden = false;
-    }
+  if (!(category && labels[category])) return;
+  document.querySelectorAll("[data-product-category]").forEach((item) => {
+    item.hidden = item.dataset.productCategory !== category;
+  });
+  document.querySelectorAll("[data-product-category-group]").forEach((item) => {
+    item.hidden = item.dataset.productCategoryGroup !== category;
+  });
+  document.querySelectorAll(".service-catalog, .product-catalog").forEach((section) => {
+    const hasVisibleProduct = [...section.querySelectorAll("[data-product-category]")]
+      .some((item) => !item.hidden);
+    section.hidden = !hasVisibleProduct;
+  });
+  const panel = document.querySelector("#catalog-filter");
+  const summary = document.querySelector("[data-product-filter-summary]");
+  if (panel && summary) {
+    summary.textContent = `Produtos em destaque: ${labels[category]}`;
+    panel.hidden = false;
   }
 }
+applyProductCategoryFilter();
 
 const commerceAdsMarkup = () => `
     <article class="commerce-ad international-ad">
@@ -332,15 +343,16 @@ fetch("/api/content", { cache: "no-store" }).then((response) => response.ok ? re
       if (!el || !item) return;
       const h2 = el.querySelector(".product-copy h2, h2");
       const para = el.querySelector(".product-copy > p, p");
-      const kicker = el.querySelector(".kicker, .article-cover-label");
       const img = el.querySelector("img");
       const cta = el.querySelector("a.btn, a.managed-link");
       if (h2 && item.title) h2.textContent = item.title;
       if (para && item.summary) para.textContent = item.summary;
-      if (kicker && item.category) kicker.textContent = item.category;
+      if (item.category) el.dataset.productCategory = productCategorySlug(item.category);
       if (img && item.image) img.setAttribute("src", item.image);
       if (cta) cta.setAttribute("href", `/produto/${slug}`);
     });
+    // as categorias agora vêm do banco; reaplica o filtro ?categoria= do catálogo
+    applyProductCategoryFilter();
     return;
   }
   const staticIds = {
