@@ -46,10 +46,17 @@ $bodyHtml = preg_replace_callback(
     },
     $bodyHtml
 );
-$blocks = array_values(array_filter(array_map('trim', preg_split('/(?=<h2>)/', $bodyHtml)), 'strlen'));
+$blocks = array_values(array_filter(array_map('trim', preg_split('/(?=<h2>|<blockquote>)/', $bodyHtml)), 'strlen'));
 
-function pl_buy(string $cls, string $url, string $attrs, string $label): string {
-    return '<a class="pl-btn' . ($cls ? ' ' . $cls : '') . '" href="' . h($url) . '"' . $attrs . '>' . h($label) . '</a>';
+$trust = $isExternal
+    ? ['Acesso imediato', 'Material Global Invest Brasil', 'Garantia de 7 dias']
+    : ['Feito com o seu caso', 'Sem fórmula pronta', 'Método Global Invest Brasil'];
+$alert = $isExternal
+    ? 'Compra segura na loja oficial &middot; acesso imediato por e-mail.'
+    : 'Conteúdo e método do Professor Jorge Dadalt, com décadas conduzindo negócios reais.';
+
+function pl_buy(string $url, string $attrs, string $label): string {
+    return '<a class="pl-btn" href="' . h($url) . '"' . $attrs . '>' . h($label) . '</a>';
 }
 ?><!doctype html>
 <html lang="pt-BR">
@@ -75,7 +82,7 @@ function pl_buy(string $cls, string $url, string $attrs, string $label): string 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/assets/css/styles.css?v=72">
-<link rel="stylesheet" href="/assets/css/produto-landing.css?v=1">
+<link rel="stylesheet" href="/assets/css/produto-landing.css?v=2">
 <script type="application/ld+json"><?= json_encode(array_filter([
     '@context' => 'https://schema.org',
     '@type' => 'Product',
@@ -113,38 +120,63 @@ function pl_buy(string $cls, string $url, string $attrs, string $label): string 
 <div class="pl-wrap pl-hero-in">
 <div>
 <a class="pl-back" href="/produtos.html">&larr; Voltar aos produtos</a>
-<?php if ($category !== ''): ?><span class="pl-eyebrow"><?= h($category) ?></span><?php endif; ?>
+<span class="pl-flag"><?= h($category ?: 'Global Invest Brasil') ?></span>
 <h1><?= h($title) ?></h1>
 <?php if ($summary !== ''): ?><p class="pl-hero-lead"><?= h($summary) ?></p><?php endif; ?>
-<?= pl_buy('', $buyUrl, $ctaAttrs, $cta) ?>
+<?= pl_buy($buyUrl, $ctaAttrs, $cta) ?>
 <p class="pl-note"><?= h($buyNote) ?></p>
+<div class="pl-trust"><?php foreach ($trust as $t): ?><span><?= h($t) ?></span><?php endforeach; ?></div>
 </div>
 <?php if ($image !== ''): ?><div class="pl-hero-media"><img src="<?= h($image) ?>" alt="<?= h($title) ?>" decoding="async" fetchpriority="high"></div><?php endif; ?>
 </div>
 </section>
 
-<?php foreach ($blocks as $i => $block): ?>
-<section class="pl-sec <?= $i % 2 ? 'pl-sec--ivory' : 'pl-sec--paper' ?>"><div class="pl-wrap pl-body pl-reveal"><?= $block ?></div></section>
-<?php endforeach; ?>
+<div class="pl-alert"><div class="pl-wrap"><b><?= $alert ?></b></div></div>
+
+<?php
+$dark = true; $pullGold = true;
+foreach ($blocks as $block):
+    if (strncmp($block, '<blockquote>', 12) === 0):
+        if (preg_match('#^(<blockquote>.*?</blockquote>)(.*)$#s', $block, $mm)):
+            $quote = preg_replace('#</?blockquote>#', '', $mm[1]);
+            ?><section class="pl-pull <?= $pullGold ? 'pl-pull--gold' : 'pl-pull--dark' ?>"><div class="pl-wrap"><?= $quote ?></div></section><?php
+            $pullGold = !$pullGold;
+            $rest = trim($mm[2]);
+            if ($rest !== ''):
+                ?><section class="pl-sec <?= $dark ? 'pl-sec--ink' : 'pl-sec--paper' ?>"><div class="pl-wrap pl-body pl-reveal"><?= $rest ?></div></section><?php
+                $dark = !$dark;
+            endif;
+        endif;
+        continue;
+    endif;
+    ?><section class="pl-sec <?= $dark ? 'pl-sec--ink' : 'pl-sec--paper' ?>"><div class="pl-wrap pl-body pl-reveal"><?= $block ?></div></section><?php
+    $dark = !$dark;
+endforeach;
+?>
 
 <section class="pl-offer-sec">
 <div class="pl-wrap">
 <div class="pl-offer pl-reveal">
-<div class="pl-offer__t"><?= $isExternal ? 'Acesso imediato &middot; Compra segura' : 'Fale com a equipe Global Invest Brasil' ?></div>
+<div class="pl-offer__t"><?= $isExternal ? 'Acesso imediato &middot; Compra segura' : 'Atendimento Global Invest Brasil' ?></div>
 <div class="pl-offer__b">
 <h2><?= h($title) ?></h2>
 <?php if ($summary !== ''): ?><p><?= h($summary) ?></p><?php endif; ?>
 <?php if ($priceLabel !== ''): ?><div class="pl-price"><?= h($priceLabel) ?></div><?php endif; ?>
-<div class="pl-offer__cta"><?= pl_buy('', $buyUrl, $ctaAttrs, $cta) ?></div>
+<div class="pl-offer__cta"><?= pl_buy($buyUrl, $ctaAttrs, $cta) ?></div>
 <?php if ($isExternal): ?><div class="pl-seals"><span>Pagamento seguro</span><span>Acesso imediato por e-mail</span><span>Garantia de 7 dias</span></div><?php endif; ?>
 </div>
 </div>
+<?php if ($isExternal): ?>
+<div class="pl-grt pl-reveal">
+<div class="pl-seal"><b>7</b><i>dias</i></div>
+<div><h3>O risco é todo nosso.</h3><p>Se em até 7 dias você concluir que não serve para a sua realidade, responde o e-mail da compra e devolvemos 100% do valor.</p></div>
+</div>
+<?php endif; ?>
 </div>
 </section>
 
 <?php if ($faq !== ''): ?>
-<section class="pl-sec pl-sec--ivory"><div class="pl-wrap pl-body pl-reveal">
-<span class="pl-eyebrow">Dúvidas frequentes</span>
+<section class="pl-sec pl-sec--ink"><div class="pl-wrap pl-body pl-reveal">
 <h2>Perguntas frequentes</h2>
 <div class="pl-faq"><?= $faq ?></div>
 </div></section>
@@ -155,7 +187,7 @@ function pl_buy(string $cls, string $url, string $attrs, string $label): string 
 <span class="pl-eyebrow">Próximo passo</span>
 <h2><?= h($title) ?></h2>
 <p>Converse com a Global Invest Brasil e veja como esta solução se encaixa no seu momento.</p>
-<?= pl_buy('', $buyUrl, $ctaAttrs, $cta) ?>
+<?= pl_buy($buyUrl, $ctaAttrs, $cta) ?>
 </div>
 </section>
 
@@ -163,7 +195,7 @@ function pl_buy(string $cls, string $url, string $attrs, string $label): string 
 
 <div class="pl-buybar">
 <div class="pl-buybar__p"><b><?= $priceLabel !== '' ? h($priceLabel) : 'Global Invest Brasil' ?></b><small><?= h($category ?: 'Produto') ?></small></div>
-<?= pl_buy('', $buyUrl, $ctaAttrs, $cta) ?>
+<?= pl_buy($buyUrl, $ctaAttrs, $cta) ?>
 </div>
 
 <footer class="site-footer">
