@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Seu e-book está pronto | Global Invest Brasil</title>
+<meta name="robots" content="noindex, follow">
+<meta name="theme-color" content="#06363a">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noite:#06363a; --verde:#07535a; --verde2:#0a4a44; --verde3:#0e6b60;
+  --ouro:#ff7a1a; --ouro2:#ffb267; --ouro3:#d95a00;
+  --creme:#faf7f0; --areia:#f4f7f5; --texto:#DCE5DD; --fraco:#8fb0ac;
+  --borda:rgba(255,122,26,.3);
+  --sans:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Lora',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:var(--serif); background:var(--noite); color:var(--texto); font-size:17px;
+  line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+  display:flex; flex-direction:column; min-height:100vh}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--ouro2);outline-offset:3px;border-radius:4px}
+.wrap{width:min(760px,92vw); margin:0 auto}
+h1,h2,h3,.sans{font-family:var(--sans)}
+
+.site-header{position:sticky;top:0;z-index:60;background:#07535a;border-bottom:3px solid var(--ouro);
+  box-shadow:0 8px 26px rgba(6,54,58,.28);font-family:var(--sans)}
+.site-header .nav{max-width:1120px;margin:0 auto;padding:8px clamp(20px,5vw,44px);min-height:100px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.site-header .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;flex:0 0 auto}
+.site-header .brand img{width:78px;height:78px;display:block}
+.site-header .brand-name{color:#fff;font-family:var(--sans);font-weight:700;font-size:clamp(15px,1.9vw,18px);
+  letter-spacing:.01em;line-height:1.1}
+.site-header .brand-name em{color:var(--ouro2);font-style:normal}
+.site-header .menu-toggle{display:none;width:42px;height:42px;border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.12);border-radius:10px;color:#fff;font-size:1.2rem;cursor:pointer;line-height:1}
+.site-header .nav-links{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0}
+.site-header .nav-links a{display:block;text-decoration:none;color:rgba(255,255,255,.88);
+  font-size:14.5px;font-weight:600;padding:6px 0}
+.site-header .nav-links a:hover{color:#fff;box-shadow:inset 0 -2px 0 var(--ouro)}
+.site-header .nav-links li:last-child a{background:var(--ouro);color:#fff;padding:11px 20px;border-radius:10px;box-shadow:none}
+@media(max-width:920px){
+  .site-header .nav{min-height:72px}
+  .site-header .brand img{width:50px;height:50px}
+  .site-header .brand-name{font-size:14px}
+  .site-header .menu-toggle{display:grid;place-items:center}
+  .site-header .nav-links{position:fixed;inset:72px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
+    background:#fff;padding:6px 14px 22px;max-height:calc(100dvh - 72px);overflow-y:auto;
+    box-shadow:0 18px 30px rgba(21,40,32,.12);display:none}
+  .site-header .nav-links.open{display:flex}
+  .site-header .nav-links li{border-top:1px solid #ece4d3}
+  .site-header .nav-links li:first-child{border-top:0}
+  .site-header .nav-links a{color:#0b2430;font-size:16px;padding:15px 6px;box-shadow:none}
+  .site-header .nav-links li:last-child a{background:none;color:#0b2430;padding:15px 6px;border-radius:0}
+}
+
+.btn{display:inline-block; font-family:var(--sans); font-weight:700; font-size:15px;
+  padding:15px 30px; border-radius:8px; border:0; cursor:pointer; text-decoration:none;
+  background:linear-gradient(135deg,var(--ouro2),var(--ouro)); color:#2a1400;
+  transition:transform .18s ease, box-shadow .18s ease; box-shadow:0 6px 22px rgba(255,122,26,.3)}
+.btn:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,122,26,.42)}
+.btn--linha{background:none; color:var(--ouro2); box-shadow:inset 0 0 0 1px rgba(255,122,26,.5)}
+.btn--linha:hover{background:rgba(255,122,26,.1); box-shadow:inset 0 0 0 1px var(--ouro)}
+
+main{flex:1; padding:70px 0 90px;
+  background:radial-gradient(120% 70% at 50% 0%,#0e6b60 0%,#0a4a44 45%,#06363a 100%)}
+.card{background:linear-gradient(170deg,#0a4a44,#052a2e); border:1px solid var(--borda);
+  border-radius:14px; padding:44px 40px; text-align:center; box-shadow:0 34px 80px rgba(0,0,0,.5)}
+.tick{width:66px; height:66px; margin:0 auto 22px; border-radius:50%;
+  background:var(--ouro); color:#2a1400; font-size:34px; font-weight:700; font-family:var(--sans);
+  display:flex; align-items:center; justify-content:center}
+.olho{font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--ouro); margin-bottom:14px}
+h1{font-size:clamp(28px,4.6vw,40px); line-height:1.08; font-weight:700; letter-spacing:-.03em; color:#fff}
+.card p.lead{font-size:17.5px; color:#C9D6CB; margin:18px auto 0; max-width:50ch}
+.acoes{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin-top:30px}
+.aviso{font-family:var(--sans); font-size:13px; color:var(--fraco); margin-top:22px; line-height:1.7}
+
+.upsell{margin-top:26px; border:1px solid var(--borda); border-radius:14px; overflow:hidden;
+  background:linear-gradient(160deg,rgba(14,107,96,.4),rgba(6,54,58,.7))}
+.upsell .in{padding:38px 40px; text-align:center}
+.upsell img.logo{width:104px; margin:0 auto 18px}
+.upsell h2{font-family:var(--sans); font-size:clamp(22px,3.4vw,30px); font-weight:700;
+  letter-spacing:-.02em; color:#fff; line-height:1.12}
+.upsell h2 span{color:var(--ouro2)}
+.upsell p{font-family:var(--sans); font-size:15px; color:#C3D2C6; margin:14px auto 0; max-width:52ch}
+.upsell .acoes{margin-top:24px}
+
+.assinatura{display:flex; align-items:center; gap:20px; padding:24px 40px;
+  border-top:1px solid rgba(255,122,26,.25); background:rgba(0,0,0,.28); text-align:left}
+.assinatura img{width:84px; height:84px; border-radius:50%; border:3px solid var(--ouro);
+  flex:none; object-fit:cover}
+.assinatura .nome{font-family:var(--sans); font-weight:700; font-size:16px; color:#fff; margin-bottom:5px}
+.assinatura p{font-family:var(--sans); font-size:13px; line-height:1.6; color:#B6C6BA}
+
+.rodape{background:#04282b; padding:34px 0; border-top:1px solid rgba(255,122,26,.2); text-align:center}
+.rodape p{font-family:var(--sans); font-size:12.5px; color:#7fa39f; line-height:1.7}
+
+@media(max-width:640px){
+  main{padding:44px 0 64px}
+  .card{padding:34px 22px}
+  .upsell .in{padding:30px 22px}
+  .assinatura{flex-direction:column; text-align:center; padding:24px 22px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Navegação principal">
+    <a class="brand" href="/index.html" aria-label="Global Invest Brasil - início">
+      <img decoding="async" src="/assets/images/logo-globalinvestbr-circular.png" alt="" width="96" height="96">
+      <span class="brand-name">Global <em>Invest</em> Brasil</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" id="menuToggle">&#9776;</button>
+    <ul class="nav-links" id="site-menu">
+      <li><a href="/index.html">Início</a></li>
+      <li><a href="/produtos.html">Produtos</a></li>
+      <li><a href="/publicacoes.html">Artigos Técnicos</a></li>
+      <li><a href="/seu-negocio.html">Proteja Seu Negócio</a></li>
+      <li><a href="/artigos.html">Blog</a></li>
+      <li><a href="/contato.html">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="card">
+      <div class="tick">&#10003;</div>
+      <p class="olho">E-book liberado</p>
+      <h1>Pronto. O seu e-book<br>está disponível.</h1>
+      <p class="lead">Também enviamos o link para o seu e-mail e o seu WhatsApp. Se preferir, baixe agora mesmo pelo botão abaixo e comece pela ficha da página 6.</p>
+      <div class="acoes">
+        <a class="btn" href="download/ebook-metodo-da-ideia-ao-lucro.pdf" download>Baixar o PDF agora</a>
+        <a class="btn btn--linha" href="/index.html">Voltar ao site</a>
+      </div>
+      <p class="aviso">Não chegou o e-mail em alguns minutos? Verifique as abas promoções e spam, ou fale com a gente pelo <a href="/contato.html" style="color:var(--ouro2)">formulário de contato</a>.</p>
+    </div>
+
+    <div class="upsell">
+      <div class="in">
+        <img class="logo" src="/assets/images/logo-globalinvestbr-circular.png" alt="Global Invest Brasil">
+        <h2>Já tem os três números.<br>Agora percorra os <span>vinte e um passos.</span></h2>
+        <p>O e-book gratuito mostra onde o dinheiro fica. O método completo Da Ideia ao Lucro conduz a operação inteira: da primeira conta de uma ideia até o negócio lucrativo, medido e pronto para escalar, com um caso real acompanhado do começo ao fim.</p>
+        <div class="acoes">
+          <a class="btn" href="/da-ideia-ao-lucro/">Conhecer o material completo</a>
+        </div>
+      </div>
+      <div class="assinatura">
+        <img src="/assets/images/prof.png" alt="Professor Jorge Dadalt">
+        <div>
+          <p class="nome">Professor Jorge Dadalt</p>
+          <p>Empreendedor digital, escritor e estrategista de negócios, com mais de quatro décadas de operações no Brasil, nos Estados Unidos e na Europa. Fundador da Global Invest Brasil, Educação e Negócios.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="rodape">
+  <p><strong style="color:#C9D6CB">Global Invest Brasil · Educação e Negócios</strong><br>
+  Professor Jorge Dadalt · globalinvestbr.com</p>
+</footer>
+
+<script>
+(function(){
+  var mt = document.getElementById("menuToggle"), sm = document.getElementById("site-menu");
+  if (mt && sm) {
+    mt.addEventListener("click", function () {
+      var open = sm.classList.toggle("open");
+      mt.setAttribute("aria-expanded", String(open));
+      mt.innerHTML = open ? "&#10005;" : "&#9776;";
+    });
+  }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+Coloque aqui o PDF do e-book gratuito com este nome exato:
+
+    ebook-metodo-da-ideia-ao-lucro.pdf
+
+A pagina /ebook-gratuito/obrigado.html aponta o botao "Baixar o PDF agora"
+para /ebook-gratuito/download/ebook-metodo-da-ideia-ao-lucro.pdf
+
+Enquanto o arquivo nao estiver aqui, o botao vai dar 404.
+Pode apagar este LEIA-ME.txt depois de subir o PDF.

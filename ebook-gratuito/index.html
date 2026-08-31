@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>E-book gratuito: por que você vende e não sobra dinheiro | Professor Jorge Dadalt</title>
+<meta name="description" content="E-book gratuito do Método da Ideia ao Lucro. 20 páginas para descobrir em que dia do mês a sua empresa começa a trabalhar para você. Cortesia do Professor Jorge Dadalt.">
+<meta property="og:title" content="E-book gratuito: por que você vende e não sobra dinheiro">
+<meta property="og:description" content="Os três números que decidem se a sua empresa está lucrando ou apenas girando dinheiro alheio. Material gratuito da Global Invest Brasil.">
+<link rel="canonical" href="https://globalinvestbr.com/ebook-gratuito/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://globalinvestbr.com/ebook-gratuito/">
+<meta property="og:image" content="https://globalinvestbr.com/assets/images/globalinvest-social.jpg">
+<meta property="og:locale" content="pt_BR">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://globalinvestbr.com/assets/images/globalinvest-social.jpg">
+<meta name="theme-color" content="#06363a">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --noite:#06363a; --verde:#07535a; --verde2:#0a4a44; --verde3:#0e6b60;
+  --ouro:#ff7a1a; --ouro2:#ffb267; --ouro3:#d95a00;
+  --creme:#faf7f0; --areia:#f4f7f5; --texto:#DCE5DD; --fraco:#8fb0ac;
+  --borda:rgba(255,122,26,.3);
+  --sans:'Poppins',system-ui,-apple-system,'Segoe UI',sans-serif;
+  --serif:'Lora',Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--serif); background:var(--noite); color:var(--texto);
+  font-size:17px; line-height:1.65; -webkit-font-smoothing:antialiased; overflow-x:hidden;
+}
+img{max-width:100%;display:block;height:auto}
+a{color:inherit}button,input{font-family:inherit}
+:focus-visible{outline:3px solid var(--ouro2);outline-offset:3px;border-radius:4px}
+.wrap{width:min(1120px,92vw); margin:0 auto}
+.sec{padding:84px 0; position:relative}
+.sec--esc{background:linear-gradient(180deg,#06363a 0%,#0a4a44 100%)}
+.sec--claro{background:var(--areia); color:#20302A}
+.sec--verde{background:linear-gradient(165deg,#07535a 0%,#0a4a44 60%,#052a2e 100%)}
+
+h1,h2,h3,.sans{font-family:var(--sans)}
+h2{font-size:clamp(28px,4.6vw,44px); line-height:1.08; font-weight:700; letter-spacing:-.025em; color:#fff}
+.sec--claro h2{color:#06363a}
+h3{font-size:19px; font-weight:600; letter-spacing:-.01em; color:#fff}
+.sec--claro h3{color:#06363a}
+.olho{font-family:var(--sans); font-size:11px; font-weight:700; letter-spacing:.3em;
+  text-transform:uppercase; color:var(--ouro); margin-bottom:16px}
+.sub{font-size:18px; color:var(--fraco); margin-top:18px; max-width:60ch}
+.sec--claro .sub{color:#55717a}
+.ouro{color:var(--ouro2)}
+
+/* cabecalho do site (self-contained) */
+.site-header{position:sticky;top:0;z-index:60;background:#07535a;border-bottom:3px solid var(--ouro);
+  box-shadow:0 8px 26px rgba(6,54,58,.28);font-family:var(--sans)}
+.site-header .nav{max-width:1120px;margin:0 auto;padding:8px clamp(20px,5vw,44px);min-height:100px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px}
+.site-header .brand{display:inline-flex;align-items:center;gap:12px;text-decoration:none;flex:0 0 auto}
+.site-header .brand img{width:78px;height:78px;display:block}
+.site-header .brand-name{color:#fff;font-family:var(--sans);font-weight:700;font-size:clamp(15px,1.9vw,18px);
+  text-transform:none;letter-spacing:.01em;line-height:1.1}
+.site-header .brand-name em{color:var(--ouro2);font-style:normal}
+.site-header .menu-toggle{display:none;width:42px;height:42px;border:1px solid rgba(255,255,255,.28);
+  background:rgba(255,255,255,.12);border-radius:10px;color:#fff;font-size:1.2rem;cursor:pointer;line-height:1}
+.site-header .nav-links{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0}
+.site-header .nav-links a{display:block;text-decoration:none;color:rgba(255,255,255,.88);
+  font-size:14.5px;font-weight:600;letter-spacing:0;padding:6px 0}
+.site-header .nav-links a:hover,.site-header .nav-links a[aria-current="page"]{color:#fff;box-shadow:inset 0 -2px 0 var(--ouro)}
+.site-header .nav-links li:last-child a{background:var(--ouro);color:#fff;padding:11px 20px;border-radius:10px;box-shadow:none}
+.site-header .nav-links li:last-child a:hover{background:var(--ouro3)}
+@media(max-width:920px){
+  .site-header .nav{min-height:72px}
+  .site-header .brand img{width:50px;height:50px}
+  .site-header .brand-name{font-size:14px}
+  .site-header .menu-toggle{display:grid;place-items:center}
+  .site-header .nav-links{position:fixed;inset:72px 0 auto 0;flex-direction:column;align-items:stretch;gap:0;
+    background:#fff;padding:6px 14px 22px;max-height:calc(100dvh - 72px);overflow-y:auto;
+    box-shadow:0 18px 30px rgba(21,40,32,.12);display:none}
+  .site-header .nav-links.open{display:flex}
+  .site-header .nav-links li{border-top:1px solid #ece4d3}
+  .site-header .nav-links li:first-child{border-top:0}
+  .site-header .nav-links a{color:#0b2430;font-size:16px;padding:15px 6px;box-shadow:none}
+  .site-header .nav-links li:last-child a{background:none;color:#0b2430;padding:15px 6px;border-radius:0}
+}
+
+/* botões */
+.btn{display:inline-block; font-family:var(--sans); font-weight:700; font-size:15px;
+  padding:14px 26px; border-radius:8px; border:0; cursor:pointer; text-decoration:none;
+  background:linear-gradient(135deg,var(--ouro2),var(--ouro)); color:#2a1400;
+  transition:transform .18s ease, box-shadow .18s ease; box-shadow:0 6px 22px rgba(255,122,26,.3)}
+.btn:hover{transform:translateY(-2px); box-shadow:0 10px 30px rgba(255,122,26,.42)}
+.btn--sm{padding:10px 18px; font-size:13px}
+.btn--bloco{display:block; width:100%; padding:17px; font-size:17px}
+
+/* hero */
+.hero{position:relative; padding:56px 0 78px; overflow:hidden;
+  background:radial-gradient(120% 90% at 15% 0%,#0e6b60 0%,#0a4a44 45%,#06363a 100%)}
+.hero::after{content:""; position:absolute; inset:0; pointer-events:none;
+  background:radial-gradient(46% 40% at 82% 22%,rgba(255,122,26,.18),transparent 70%)}
+.hero .wrap{position:relative; z-index:2; display:grid; gap:46px;
+  grid-template-columns:1.05fr .95fr; align-items:center}
+.selo-linha{display:flex; align-items:center; gap:13px; margin-bottom:22px}
+.selo-linha img{width:52px}
+.selo-linha span{font-family:var(--sans); font-size:11.5px; font-weight:600; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--ouro2); line-height:1.5}
+h1{font-size:clamp(34px,5.6vw,56px); line-height:1.02; font-weight:700;
+  letter-spacing:-.035em; color:#fff; text-transform:uppercase}
+h1 em{font-style:normal; color:var(--ouro2); display:block}
+.hero p.lead{font-size:19px; margin-top:22px; color:#C9D6CB; max-width:52ch}
+.hero .marcas{display:flex; flex-wrap:wrap; gap:10px 22px; margin-top:26px;
+  font-family:var(--sans); font-size:13px; color:var(--fraco)}
+.hero .marcas b{color:var(--ouro2); font-weight:600}
+
+.capa-caixa{position:relative}
+.capa-caixa img.capa{width:100%; border-radius:4px;
+  box-shadow:0 40px 80px rgba(0,0,0,.6), 0 0 0 1px rgba(255,122,26,.35);
+  transform:rotate(-1.6deg)}
+.fita{position:absolute; top:-14px; left:-14px; z-index:3; font-family:var(--sans);
+  font-size:11px; font-weight:700; letter-spacing:.2em; text-transform:uppercase;
+  background:var(--ouro); color:#2a1400; padding:9px 15px; border-radius:4px;
+  box-shadow:0 8px 22px rgba(0,0,0,.4)}
+
+/* formulário */
+#receber{scroll-margin-top:110px}
+.form-card{background:linear-gradient(170deg,#0a4a44,#052a2e); border:1px solid var(--borda);
+  border-radius:10px; padding:30px; box-shadow:0 30px 70px rgba(0,0,0,.5)}
+.form-card h3{font-size:21px; margin-bottom:6px}
+.form-card .aj{font-family:var(--sans); font-size:13.5px; color:var(--fraco); margin-bottom:20px}
+.campo{margin-bottom:14px}
+.campo label{display:block; font-family:var(--sans); font-size:11.5px; font-weight:600;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--ouro2); margin-bottom:7px}
+.campo input{width:100%; font-family:var(--sans); font-size:16px; padding:14px 15px;
+  background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.15);
+  border-radius:6px; color:#fff; transition:border-color .15s ease, background .15s ease}
+.campo input::placeholder{color:#7fa39f}
+.campo input:focus{outline:none; border-color:var(--ouro); background:rgba(255,255,255,.1)}
+.campo input:focus-visible{outline:2px solid var(--ouro2); outline-offset:2px}
+.campo.erro input{border-color:#E4756A}
+.campo .msg{font-family:var(--sans); font-size:12px; color:#E4756A; margin-top:5px; display:none}
+.campo.erro .msg{display:block}
+.privacidade{font-family:var(--sans); font-size:12px; color:var(--fraco);
+  margin-top:14px; text-align:center; line-height:1.6}
+.ok-box{display:none; text-align:center; padding:22px 6px}
+.ok-box .tick{width:56px; height:56px; margin:0 auto 16px; border-radius:50%;
+  background:var(--ouro); color:#2a1400; font-size:30px; font-weight:700;
+  display:flex; align-items:center; justify-content:center; font-family:var(--sans)}
+.ok-box h3{margin-bottom:8px}
+.ok-box p{font-family:var(--sans); font-size:14.5px; color:var(--fraco)}
+.enviado .form-corpo{display:none}
+.enviado .ok-box{display:block}
+
+/* faixa de números */
+.faixa{background:var(--verde2); border-top:1px solid var(--borda); border-bottom:1px solid var(--borda)}
+.faixa .wrap{display:grid; grid-template-columns:repeat(4,1fr); gap:1px; background:rgba(255,122,26,.2)}
+.faixa div{background:var(--verde2); padding:24px 14px; text-align:center}
+.faixa b{display:block; font-family:var(--sans); font-size:30px; font-weight:700; color:var(--ouro2);
+  letter-spacing:-.03em; line-height:1}
+.faixa span{font-family:var(--sans); font-size:11.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--fraco); display:block; margin-top:9px; line-height:1.4}
+
+/* socos */
+.socos{display:grid; grid-template-columns:repeat(2,1fr); gap:16px; margin-top:40px}
+.soco{border:1px solid var(--borda); border-radius:9px; padding:26px 26px 24px;
+  background:linear-gradient(160deg,rgba(14,107,96,.30),rgba(6,54,58,.35))}
+.soco b{display:block; font-family:var(--sans); font-weight:700; font-size:clamp(30px,4.4vw,42px);
+  line-height:1; letter-spacing:-.04em; color:var(--ouro2); margin-bottom:12px}
+.soco p{font-family:var(--sans); font-size:15.5px; line-height:1.55; color:#D3DFD6}
+.soco p em{font-style:normal; color:#fff; font-weight:600}
+.soco--largo{grid-column:1 / -1; text-align:center}
+.soco--largo p{font-size:17px; max-width:44ch; margin:0 auto}
+
+.citar{font-family:var(--sans); font-weight:700; font-size:clamp(22px,3.4vw,32px); line-height:1.22;
+  color:#fff; text-align:center; margin:50px auto 0; max-width:22ch;
+  padding:30px 20px; border-top:2px solid var(--ouro); border-bottom:2px solid var(--ouro)}
+
+/* calculadora */
+.calc{display:grid; grid-template-columns:.92fr 1.08fr; gap:40px; align-items:start; margin-top:38px}
+.controles{background:rgba(255,255,255,.05); border:1px solid var(--borda);
+  border-radius:10px; padding:26px}
+.ctrl{margin-bottom:22px}
+.ctrl:last-child{margin-bottom:0}
+.ctrl .cab{display:flex; justify-content:space-between; align-items:baseline;
+  font-family:var(--sans); font-size:13.5px; color:var(--texto); margin-bottom:10px}
+.ctrl .cab b{font-size:17px; font-weight:700; color:var(--ouro2)}
+input[type=range]{width:100%; height:5px; -webkit-appearance:none; appearance:none;
+  background:rgba(255,255,255,.16); border-radius:4px; outline:none}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none; width:22px; height:22px;
+  border-radius:50%; background:var(--ouro2); cursor:pointer; border:3px solid #06363a;
+  box-shadow:0 3px 10px rgba(0,0,0,.5)}
+input[type=range]::-moz-range-thumb{width:22px; height:22px; border-radius:50%;
+  background:var(--ouro2); cursor:pointer; border:3px solid #06363a}
+input[type=range]:focus-visible{outline:2px solid var(--ouro2); outline-offset:4px}
+
+.painel{background:linear-gradient(170deg,#0a4a44,#052a2e); border:1px solid var(--borda);
+  border-radius:10px; padding:28px}
+.res3{display:grid; grid-template-columns:repeat(3,1fr); gap:12px; margin-bottom:22px}
+.res3 div{background:rgba(255,255,255,.05); border-radius:7px; padding:15px 8px; text-align:center}
+.res3 b{display:block; font-family:var(--sans); font-size:21px; font-weight:700; color:#fff; line-height:1}
+.res3 span{font-family:var(--sans); font-size:10.5px; letter-spacing:.1em; text-transform:uppercase;
+  color:var(--fraco); display:block; margin-top:8px; line-height:1.35}
+.cal-grid{display:grid; grid-template-columns:repeat(10,1fr); gap:5px}
+.cal-grid i{aspect-ratio:1; border-radius:4px; background:rgba(255,255,255,.09);
+  font-family:var(--sans); font-style:normal; font-size:11px; font-weight:600; color:#7fa39f;
+  display:flex; align-items:center; justify-content:center; transition:background .25s ease,color .25s ease}
+.cal-grid i.virada{background:var(--ouro); color:#2a1400}
+.cal-grid i.seu{background:var(--verde3); color:#DDF0E3}
+.legenda{display:flex; flex-wrap:wrap; gap:8px 20px; margin-top:15px;
+  font-family:var(--sans); font-size:12px; color:var(--fraco)}
+.legenda em{width:11px; height:11px; border-radius:3px; display:inline-block; margin-right:7px;
+  vertical-align:-1px; font-style:normal}
+.veredito{font-family:var(--sans); font-size:14.5px; line-height:1.6; margin-top:18px;
+  padding:16px 18px; border-left:3px solid var(--ouro); background:rgba(255,122,26,.1);
+  border-radius:0 6px 6px 0; color:#E6EFE8}
+.veredito b{color:var(--ouro2)}
+
+/* o que tem dentro */
+.itens{display:grid; grid-template-columns:repeat(3,1fr); gap:14px 30px; margin-top:34px;
+  list-style:none}
+.itens li{font-family:var(--sans); font-size:15px; line-height:1.5; padding-left:28px;
+  position:relative; color:#D3DFD6}
+.itens li::before{content:"\2713"; position:absolute; left:0; top:1px; width:19px; height:19px;
+  background:var(--ouro); color:#2a1400; border-radius:50%; font-size:11px; font-weight:700;
+  display:flex; align-items:center; justify-content:center}
+.itens li b{color:#fff; font-weight:600}
+
+/* bloco final */
+.final{border:1px solid var(--borda); border-radius:14px; overflow:hidden;
+  background:linear-gradient(160deg,rgba(14,107,96,.42),rgba(6,54,58,.72))}
+.final .topo-final{text-align:center; padding:44px 40px 8px}
+.final img.logo{width:120px; margin:0 auto 20px}
+.final h2{margin-bottom:14px}
+.final .desc{max-width:60ch; margin:0 auto; color:#C3D2C6; font-size:17.5px}
+.partes{display:grid; grid-template-columns:repeat(3,1fr); gap:11px; margin:30px 40px 34px}
+.partes div{border:1px solid rgba(255,122,26,.3); border-radius:7px; padding:14px 15px;
+  font-family:var(--sans); font-size:12.5px; color:#C3D2C6; line-height:1.5}
+.partes b{display:block; font-size:10.5px; letter-spacing:.14em; text-transform:uppercase;
+  color:var(--ouro2); margin-bottom:6px}
+.acesso{text-align:center; padding:0 40px 40px}
+.acesso .chamada{font-family:var(--sans); font-size:13px; letter-spacing:.2em;
+  text-transform:uppercase; color:var(--fraco); margin-bottom:12px}
+.site{font-family:var(--sans); font-weight:700; font-size:clamp(20px,3.4vw,30px);
+  color:var(--ouro2); letter-spacing:.01em; text-decoration:none; display:block; margin-bottom:22px}
+.site:hover{color:#fff}
+.assinatura{display:flex; align-items:center; gap:22px; padding:26px 40px 34px;
+  border-top:1px solid rgba(255,122,26,.25); background:rgba(0,0,0,.28); text-align:left}
+.assinatura img{width:98px; height:98px; border-radius:50%; border:3px solid var(--ouro);
+  flex:none; object-fit:cover}
+.assinatura .nome{font-family:var(--sans); font-weight:700; font-size:18px; color:#fff;
+  margin-bottom:5px}
+.assinatura p{font-family:var(--sans); font-size:13.5px; line-height:1.6; color:#B6C6BA}
+.assinatura p em{color:var(--ouro2); font-style:normal; font-weight:600}
+
+/* rodapé */
+.rodape{background:#04282b; padding:40px 0 108px; border-top:1px solid rgba(255,122,26,.2);
+  text-align:center}
+.rodape img{width:118px; margin:0 auto 16px}
+.rodape p{font-family:var(--sans); font-size:12.5px; color:#7fa39f; line-height:1.7}
+
+/* barra fixa mobile */
+.barra{position:fixed; left:0; right:0; bottom:0; z-index:70; display:none;
+  padding:11px 14px; background:rgba(6,54,58,.96); backdrop-filter:blur(12px);
+  border-top:1px solid var(--borda)}
+
+@media(max-width:900px){
+  .hero .wrap,.calc{grid-template-columns:1fr}
+  .socos,.itens,.partes{grid-template-columns:1fr}
+  .faixa .wrap{grid-template-columns:repeat(2,1fr)}
+  .sec{padding:58px 0}
+  .final .topo-final{padding:32px 22px 6px}
+  .partes{margin:24px 22px 28px}
+  .acesso{padding:0 22px 32px}
+  .assinatura{flex-direction:column; text-align:center; padding:26px 22px 30px; gap:16px}
+  .barra{display:block}
+  .capa-caixa{max-width:320px; margin:0 auto}
+}
+@media(prefers-reduced-motion:reduce){
+  *{animation:none!important; transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="nav" aria-label="Navegação principal">
+    <a class="brand" href="/index.html" aria-label="Global Invest Brasil - início">
+      <img decoding="async" src="/assets/images/logo-globalinvestbr-circular.png" alt="" width="96" height="96">
+      <span class="brand-name">Global <em>Invest</em> Brasil</span>
+    </a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="site-menu" id="menuToggle">&#9776;</button>
+    <ul class="nav-links" id="site-menu">
+      <li><a href="/index.html">Início</a></li>
+      <li><a href="/produtos.html">Produtos</a></li>
+      <li><a href="/publicacoes.html">Artigos Técnicos</a></li>
+      <li><a href="/seu-negocio.html">Proteja Seu Negócio</a></li>
+      <li><a href="/artigos.html">Blog</a></li>
+      <li><a href="/contato.html">Contato</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="selo-linha">
+        <img src="/assets/images/logo-globalinvestbr-circular.png" alt="Global Invest Brasil">
+        <span>Cortesia do Professor Jorge Dadalt<br>Nada a pagar. Nada a assinar.</span>
+      </div>
+      <h1>Você vendeu bem<br>de novo. E de novo<br><em>não sobrou nada.</em></h1>
+      <p class="lead">Não é falta de venda. É falta de conta. Em 20 páginas gratuitas você vai descobrir <strong>em que dia do mês</strong> a sua empresa termina de pagar os outros e começa a trabalhar para você.</p>
+      <div class="marcas">
+        <span><b>20</b> páginas em PDF</span>
+        <span><b>4</b> fichas para preencher</span>
+        <span><b>30</b> minutos para aplicar</span>
+      </div>
+    </div>
+
+    <div>
+      <div class="capa-caixa" style="margin-bottom:24px">
+        <span class="fita">E-book gratuito</span>
+        <img class="capa" src="/assets/images/ebook-da-ideia-ao-lucro.webp" alt="Capa do e-book: por que você vende e não sobra dinheiro">
+      </div>
+      <div class="form-card" id="receber">
+        <div class="form-corpo">
+          <h3>Receba agora, sem custo</h3>
+          <p class="aj">Três campos e o link chega no seu e-mail e no seu WhatsApp.</p>
+          <form class="lead-form" novalidate>
+            <div class="campo"><label for="n1">Seu nome</label>
+              <input id="n1" name="nome" type="text" placeholder="Como você quer ser chamado" autocomplete="name">
+              <span class="msg">Escreva seu nome.</span></div>
+            <div class="campo"><label for="e1">Seu melhor e-mail</label>
+              <input id="e1" name="email" type="email" placeholder="voce@email.com" autocomplete="email">
+              <span class="msg">Confira o e-mail digitado.</span></div>
+            <div class="campo"><label for="w1">WhatsApp com DDD</label>
+              <input id="w1" name="whatsapp" type="tel" placeholder="(00) 00000-0000" inputmode="numeric" autocomplete="tel">
+              <span class="msg">Informe o número com DDD.</span></div>
+            <div style="position:absolute;left:-9999px" aria-hidden="true">
+              <label>Não preencha <input name="website" tabindex="-1" autocomplete="off"></label>
+            </div>
+            <button class="btn btn--bloco" type="submit">Baixar o e-book gratuito</button>
+            <p class="privacidade">Seus dados ficam com a Global Invest Brasil. Sem spam, e você sai da lista quando quiser.</p>
+          </form>
+        </div>
+        <div class="ok-box">
+          <div class="tick">&#10003;</div>
+          <h3>Pronto, está a caminho</h3>
+          <p>Enviamos o link para o seu e-mail e o seu WhatsApp. Se não aparecer em alguns minutos, olhe em promoções ou spam.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="faixa">
+  <div class="wrap">
+    <div><b>3</b><span>números que decidem tudo</span></div>
+    <div><b>20</b><span>páginas objetivas</span></div>
+    <div><b>4</b><span>fichas para preencher</span></div>
+    <div><b>R$ 0</b><span>hoje e sempre</span></div>
+  </div>
+</section>
+
+<section class="sec sec--esc">
+  <div class="wrap">
+    <p class="olho">Quatro verdades que ninguém te conta</p>
+    <h2>O dinheiro não sumiu.<br><span class="ouro">Ele nunca foi seu.</span></h2>
+
+    <div class="socos">
+      <div class="soco">
+        <b>Dia 25</b>
+        <p>É quando a empresa média termina de pagar fornecedor, imposto, aluguel e folha. <em>Todo o lucro do mês cabe em cinco dias</em> e a maioria dos donos não sabe disso.</p>
+      </div>
+      <div class="soco">
+        <b>+111%</b>
+        <p>É o quanto você precisa vender a mais para sustentar um desconto de 20%. <em>Dobrar a empresa para ganhar o mesmo.</em> Aquele desconto do balcão custa isso.</p>
+      </div>
+      <div class="soco">
+        <b>R$ 27 mil</b>
+        <p>É o que fica parado entre comprar e receber num negócio que fatura R$ 24 mil por mês. <em>Não é lucro, não é reserva</em> e é por isso que o extrato nunca bate com a sua conta de cabeça.</p>
+      </div>
+      <div class="soco">
+        <b>R$ 6,33</b>
+        <p>É o que sobra de cada R$ 100 que entram numa operação saudável. <em>Os outros R$ 93,67 já têm dono</em> antes de você tocar neles.</p>
+      </div>
+      <div class="soco soco--largo">
+        <p>Nenhum desses números aparece no seu extrato. Todos eles decidem se a sua empresa vai existir daqui a dois anos.</p>
+      </div>
+    </div>
+
+    <p class="citar">Empresa não quebra por falta de esforço. Quebra por falta de conta.</p>
+  </div>
+</section>
+
+<section class="sec sec--verde">
+  <div class="wrap">
+    <p class="olho">Faça o teste antes de baixar</p>
+    <h2>Descubra agora o seu<br><span class="ouro">dia da virada.</span></h2>
+    <p class="sub">Arraste os controles com os números aproximados do seu negócio. Leva vinte segundos e costuma ser desconfortável.</p>
+
+    <div class="calc">
+      <div class="controles">
+        <div class="ctrl">
+          <div class="cab"><span>Preço médio de venda</span><b id="v-preco">R$ 100</b></div>
+          <input type="range" id="preco" min="20" max="600" step="5" value="100" aria-label="Preço médio de venda">
+        </div>
+        <div class="ctrl">
+          <div class="cab"><span>Custo variável por venda</span><b id="v-custo">R$ 62</b></div>
+          <input type="range" id="custo" min="5" max="500" step="1" value="62" aria-label="Custo variável por venda">
+        </div>
+        <div class="ctrl">
+          <div class="cab"><span>Custo fixo do mês</span><b id="v-fixo">R$ 7.600</b></div>
+          <input type="range" id="fixo" min="1000" max="60000" step="200" value="7600" aria-label="Custo fixo mensal">
+        </div>
+        <div class="ctrl">
+          <div class="cab"><span>Vendas por mês</span><b id="v-qtd">240 un.</b></div>
+          <input type="range" id="qtd" min="10" max="1500" step="10" value="240" aria-label="Quantidade vendida por mês">
+        </div>
+      </div>
+
+      <div class="painel">
+        <div class="res3">
+          <div><b id="r-margem">R$ 38</b><span>Margem por venda</span></div>
+          <div><b id="r-pe">200</b><span>Unidades para empatar</span></div>
+          <div><b id="r-dia">Dia 25</b><span>A virada do mês</span></div>
+        </div>
+        <div class="cal-grid" id="calendario" aria-hidden="true"></div>
+        <div class="legenda">
+          <span><em style="background:rgba(255,255,255,.09)"></em>Pagando os outros</span>
+          <span><em style="background:#ff7a1a"></em>Dia da virada</span>
+          <span><em style="background:#0e6b60"></em>Trabalhando para você</span>
+        </div>
+        <p class="veredito" id="veredito"></p>
+        <a class="btn btn--bloco" href="#receber" style="margin-top:20px">Quero o cálculo completo, de graça</a>
+      </div>
+    </div>
+
+    <ul class="itens">
+      <li><b>As 4 fichas</b> para preencher com os seus números reais</li>
+      <li><b>A tabela do desconto</b>: quanto custa cada 5% concedido</li>
+      <li><b>O ciclo de caixa</b>: quanto do seu dinheiro está parado</li>
+      <li><b>O veredito</b> em três caixas: seguir, ajustar ou refazer</li>
+      <li><b>Os 6 erros</b> que drenam lucro em silêncio</li>
+      <li><b>O plano de 7 dias</b>, uma tarefa por dia, sem gastar nada</li>
+    </ul>
+  </div>
+</section>
+
+<section class="sec sec--esc">
+  <div class="wrap">
+    <div class="final">
+      <div class="topo-final">
+        <img class="logo" src="/assets/images/logo-globalinvestbr-circular.png" alt="Global Invest Brasil">
+        <p class="olho" style="margin-bottom:10px">Depois do e-book gratuito</p>
+        <h2>Método da Ideia ao Lucro<br><span class="ouro">completo</span></h2>
+        <p class="desc">O e-book gratuito trabalha três números. O método completo percorre os vinte e um passos: da primeira conta de uma ideia até a operação lucrativa, medida e pronta para escalar, com uma empresa real acompanhada do começo ao fim.</p>
+      </div>
+
+      <div class="partes">
+        <div><b>Parte I · Fundação</b>Nicho, tipo de operação, sociedade, abertura, custo inicial e equipe.</div>
+        <div><b>Parte II · O núcleo</b>Ponto de equilíbrio, preço, capital de giro, tributação e tecnologia.</div>
+        <div><b>Parte III · Operação</b>Site, omnicanal, aquisição de clientes, logística e escala.</div>
+        <div><b>Parte IV · Resultado</b>Apuração, balanço e os indicadores do seu progresso.</div>
+        <div><b>Parte V · Sem fronteiras</b>Mercado internacional e negócio nômade, do Brasil para o mundo.</div>
+        <div><b>Caso real completo</b>Uma empresa acompanhada nas 21 etapas, com os números na mesa.</div>
+      </div>
+
+      <div class="acesso">
+        <p class="chamada">Conheça o material completo</p>
+        <a class="site" href="/da-ideia-ao-lucro/">Ver o método Da Ideia ao Lucro</a>
+        <a class="btn" href="/da-ideia-ao-lucro/">Ver o material completo</a>
+      </div>
+
+      <div class="assinatura">
+        <img src="/assets/images/prof.png" alt="Professor Jorge Dadalt">
+        <div>
+          <p class="nome">Um produto desenvolvido pelo Professor Jorge Dadalt</p>
+          <p>Empreendedor digital, escritor e estrategista de negócios, com mais de quatro décadas de estrada e operações no Brasil, nos Estados Unidos e na Europa. Autor dos livros <em>Da Ideia ao Lucro</em>, <em>Trabalhe Pouco, Ganhe Muito</em> e <em>O Seu Maior Patrimônio</em>. Fundador da Global Invest Brasil, Educação e Negócios.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="rodape">
+  <img src="/assets/images/logo-globalinvestbr-circular.png" alt="Global Invest Brasil">
+  <p><strong style="color:#C9D6CB">Global Invest Brasil · Educação e Negócios</strong><br>
+  Professor Jorge Dadalt · Brasil · Estados Unidos · Europa<br>
+  globalinvestbr.com</p>
+</footer>
+
+<div class="barra"><a class="btn btn--bloco" href="#receber">Baixar o e-book gratuito</a></div>
+
+<script>
+(function(){
+  "use strict";
+
+  /* menu mobile */
+  var mt = document.getElementById("menuToggle"), sm = document.getElementById("site-menu");
+  if (mt && sm) {
+    mt.addEventListener("click", function () {
+      var open = sm.classList.toggle("open");
+      mt.setAttribute("aria-expanded", String(open));
+      mt.innerHTML = open ? "&#10005;" : "&#9776;";
+    });
+    sm.addEventListener("click", function (e) {
+      if (e.target.closest("a") && sm.classList.contains("open")) {
+        sm.classList.remove("open"); mt.setAttribute("aria-expanded", "false"); mt.innerHTML = "&#9776;";
+      }
+    });
+  }
+
+  /* máscara de WhatsApp */
+  function mascara(v){
+    v = v.replace(/\D/g,'').slice(0,11);
+    if(v.length <= 2) return v.length ? '('+v : '';
+    if(v.length <= 6) return '('+v.slice(0,2)+') '+v.slice(2);
+    if(v.length <= 10) return '('+v.slice(0,2)+') '+v.slice(2,6)+'-'+v.slice(6);
+    return '('+v.slice(0,2)+') '+v.slice(2,7)+'-'+v.slice(7);
+  }
+  document.querySelectorAll('input[name=whatsapp]').forEach(function(el){
+    el.addEventListener('input', function(){ el.value = mascara(el.value); });
+  });
+
+  /* envio do formulário: grava no /admin/ -> Contatos, marcado como lead do e-book. */
+  function enviar(dados){
+    return fetch('/api/contacts.php', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: dados.nome,
+        email: dados.email,
+        phone: dados.whatsapp,
+        subject: 'E-book gratuito - Metodo da Ideia ao Lucro',
+        message: 'Solicitou o e-book gratuito pela landing /ebook-gratuito/. WhatsApp: ' + dados.whatsapp,
+        consent: true,
+        website: dados.website || ''
+      })
+    }).then(function(r){ if(!r.ok) throw new Error('falha'); return r.json(); });
+  }
+
+  document.querySelectorAll('.lead-form').forEach(function(form){
+    form.addEventListener('submit', function(ev){
+      ev.preventDefault();
+      if (form.querySelector('input[name=website]').value) { window.location.href = 'obrigado.html'; return; }
+      var campos = form.querySelectorAll('.campo');
+      var ok = true, dados = {};
+      campos.forEach(function(c){
+        var i = c.querySelector('input'), v = i.value.trim(), bom;
+        if(i.name === 'nome')       bom = v.length >= 2;
+        else if(i.name === 'email') bom = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v);
+        else                        bom = v.replace(/\D/g,'').length >= 10;
+        c.classList.toggle('erro', !bom);
+        if(!bom){ ok = false; } else { dados[i.name] = v; }
+      });
+      if(!ok){ form.querySelector('.campo.erro input').focus(); return; }
+
+      var botao = form.querySelector('button[type=submit]');
+      botao.disabled = true;
+      botao.textContent = 'Enviando...';
+      enviar(dados).then(function(){
+        window.location.href = 'obrigado.html';
+      }).catch(function(){
+        form.closest('.form-card').classList.add('enviado');
+      });
+    });
+    form.querySelectorAll('input').forEach(function(i){
+      i.addEventListener('input', function(){ i.closest('.campo').classList.remove('erro'); });
+    });
+  });
+
+  /* calculadora do dia da virada */
+  var el = function(id){ return document.getElementById(id); };
+  var moeda = function(n){ return 'R$ ' + Math.round(n).toLocaleString('pt-BR'); };
+  var grade = el('calendario');
+  for(var d = 1; d <= 30; d++){
+    var i = document.createElement('i'); i.textContent = d; grade.appendChild(i);
+  }
+  var celulas = grade.querySelectorAll('i');
+
+  function calcular(){
+    var preco = +el('preco').value, custo = +el('custo').value,
+        fixo  = +el('fixo').value,  qtd   = +el('qtd').value;
+
+    if(custo >= preco){ custo = preco - 1; el('custo').value = custo; }
+
+    el('v-preco').textContent = moeda(preco);
+    el('v-custo').textContent = moeda(custo);
+    el('v-fixo').textContent  = moeda(fixo);
+    el('v-qtd').textContent   = qtd + ' un.';
+
+    var margem = preco - custo;
+    var pe  = Math.ceil(fixo / margem);
+    var dia = Math.ceil(pe / qtd * 30);
+
+    el('r-margem').textContent = moeda(margem);
+    el('r-pe').textContent  = pe.toLocaleString('pt-BR');
+    el('r-dia').textContent = dia > 30 ? 'Não vira' : 'Dia ' + dia;
+
+    celulas.forEach(function(c, k){
+      var n = k + 1;
+      c.className = (dia <= 30 && n === dia) ? 'virada' : (dia <= 30 && n > dia ? 'seu' : '');
+    });
+
+    var lucro = margem * qtd - fixo, txt;
+    if(dia > 30){
+      txt = 'Nesse cenário a empresa <b>não chega ao ponto de equilíbrio</b>: faltam ' +
+            (pe - qtd).toLocaleString('pt-BR') + ' unidades no mês. Vender mais assim aprofunda a perda. O que precisa mudar é a margem ou o custo fixo.';
+    } else if(dia >= 26){
+      txt = 'A virada só acontece no <b>dia ' + dia + '</b>. Sobram ' + (30 - dia) +
+            ' dias de lucro no mês inteiro, e uma queda pequena nas vendas apaga tudo.';
+    } else if(dia >= 16){
+      txt = 'A virada cai no <b>dia ' + dia + '</b> e o mês fecha com cerca de ' + moeda(lucro) +
+            ' de lucro operacional. Dá para viver, mas qualquer desconto mal calculado come essa sobra.';
+    } else {
+      txt = 'A virada acontece já no <b>dia ' + dia + '</b>, com cerca de ' + moeda(lucro) +
+            ' de lucro no mês. A pergunta agora deixa de ser sobrevivência e passa a ser escala.';
+    }
+    el('veredito').innerHTML = txt;
+  }
+
+  ['preco','custo','fixo','qtd'].forEach(function(id){
+    el(id).addEventListener('input', calcular);
+  });
+  calcular();
+})();
+</script>
+</body>
+</html>
