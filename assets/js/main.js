@@ -349,7 +349,7 @@ fetch("/api/content", { cache: "no-store" }).then((response) => response.ok ? re
       if (para && item.summary) para.textContent = item.summary;
       if (item.category) el.dataset.productCategory = productCategorySlug(item.category);
       if (img && item.image) img.setAttribute("src", item.image);
-      if (cta) cta.setAttribute("href", `/produto/${slug}`);
+      if (cta) cta.setAttribute("href", slug === "produto-ideia-ao-lucro" ? "/da-ideia-ao-lucro/" : `/produto/${slug}`);
     });
     // as categorias agora vêm do banco; reaplica o filtro ?categoria= do catálogo
     applyProductCategoryFilter();

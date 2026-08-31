@@ -32,6 +32,9 @@ RewriteRule ^publicacao/([a-z0-9-]+)\.html$ /publicacao/$1 [R=301,L,NC]
 RewriteRule ^blog/([a-z0-9-]+)\.html$ /blog/$1 [R=301,L,NC]
 RewriteRule ^produto/([a-z0-9-]+)\.html$ /produto/$1 [R=301,L,NC]
 
+# Produtos com landing page própria (página estática dedicada).
+RewriteRule ^produto/produto-ideia-ao-lucro/?$ /da-ideia-ao-lucro/ [R=301,L]
+
 # URLs amigáveis de conteúdo dinâmico (publicações, blog, produtos).
 RewriteRule ^publicacao/([a-z0-9-]+)/?$ article.php?type=publication&slug=$1 [L,QSA,NC]
 RewriteRule ^blog/([a-z0-9-]+)/?$ article.php?type=blog&slug=$1 [L,QSA,NC]

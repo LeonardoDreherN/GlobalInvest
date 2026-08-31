@@ -5,6 +5,9 @@ require_once __DIR__ . '/app/markdown.php';
 
 $slug = trim($_GET['slug'] ?? '');
 
+// Produtos com landing page própria (estática).
+if ($slug === 'produto-ideia-ao-lucro') { header('Location: /da-ideia-ao-lucro/', true, 301); exit; }
+
 try {
     $s = db()->prepare("SELECT p.*, c.name AS category_name FROM products p LEFT JOIN product_categories c ON c.id = p.category_id WHERE p.slug = ? AND p.status = 'published'");
     $s->execute([$slug]);

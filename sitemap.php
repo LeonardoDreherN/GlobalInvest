@@ -2,9 +2,9 @@
 declare(strict_types=1);
 require_once __DIR__ . '/app/bootstrap.php';
 header('Content-Type: application/xml; charset=utf-8');
-$urls = ['/','/index.html','/produtos.html','/mentorias.html','/publicacoes.html','/artigos.html','/seu-negocio.html','/contato.html','/privacidade.html','/politicas-de-uso.html'];
+$urls = ['/','/index.html','/produtos.html','/mentorias.html','/publicacoes.html','/artigos.html','/seu-negocio.html','/contato.html','/privacidade.html','/politicas-de-uso.html','/da-ideia-ao-lucro/'];
 
-try { foreach (db()->query("SELECT slug FROM products WHERE status='published'") as $r) $urls[] = '/produto/' . rawurlencode($r['slug']); } catch (Throwable $e) {}
+try { foreach (db()->query("SELECT slug FROM products WHERE status='published'") as $r) { if ($r['slug'] === 'produto-ideia-ao-lucro') continue; $urls[] = '/produto/' . rawurlencode($r['slug']); } } catch (Throwable $e) {}
 try { foreach (db()->query("SELECT slug FROM publications WHERE status='published'") as $r) $urls[] = '/publicacao/' . rawurlencode($r['slug']); } catch (Throwable $e) {}
 try { foreach (db()->query("SELECT slug FROM blog_posts WHERE status='published'") as $r) $urls[] = '/blog/' . rawurlencode($r['slug']); } catch (Throwable $e) {}
 
