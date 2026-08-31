@@ -186,18 +186,32 @@ h1 .accent { color: var(--teal-500); font-style: italic; }
 .kicker { color: var(--orange-dark); font-size: .76rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }
 .institutional-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; }
 .institutional-hero { padding-bottom: 88px; }
-.home-page .institutional-hero { padding: 56px 0 34px; background: linear-gradient(180deg, #faf6ee 0%, #f3ede0 100%); }
+.home-page .institutional-hero {
+  position: relative;
+  padding: 66px 0 52px;
+  background:
+    radial-gradient(48% 62% at 92% -12%, rgba(16, 169, 164, .12), transparent 70%),
+    linear-gradient(168deg, #fdfbf6 0%, #f6f2e9 46%, #eff5f1 100%);
+}
+.home-page .institutional-hero::after {
+  content: "";
+  position: absolute; right: -320px; top: -300px; z-index: 0;
+  width: 640px; height: 640px; border-radius: 50%;
+  border: 84px solid rgba(16, 169, 164, .06);
+  pointer-events: none;
+}
+.home-page .institutional-hero .container { position: relative; z-index: 1; }
 .home-page .institutional-hero .hero-grid { grid-template-columns: 1.15fr .85fr; gap: 56px; align-items: center; }
 .home-page .institutional-hero h1 { max-width: 640px; font-size: clamp(2.2rem, 3.6vw, 3.4rem); font-weight: 500; color: #152820; }
 .home-page .institutional-hero h1 .accent { color: var(--teal-700); }
 .home-portrait { position: relative; }
-.home-portrait-frame { position: relative; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; background: linear-gradient(160deg,#e7ddc8,#cdbfa0); border: 1px solid #cdbfa0; display: flex; align-items: center; justify-content: center; }
+.home-portrait-frame { position: relative; aspect-ratio: 4/5; border-radius: 20px; overflow: hidden; background: #eef3f0; border: 1px solid rgba(6,54,58,.1); box-shadow: 0 34px 60px rgba(6,54,58,.2); display: flex; align-items: center; justify-content: center; }
 .home-portrait-frame svg { width: 30%; height: 30%; opacity: .5; color: #8a7a58; }
 .home-portrait-frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; display: block; }
 .home-portrait-note { position: absolute; left: 14px; right: 14px; bottom: 14px; padding: 10px 14px; border-radius: 10px; background: rgba(21,40,32,.82); color: #f3ead9; font-size: .78rem; font-weight: 600; text-align: center; }
-.home-portrait-badge { position: absolute; top: -16px; right: -16px; width: 60px; height: 60px; border-radius: 50%; background: var(--teal-700); display: grid; place-items: center; color: #fff; font-size: 1.3rem; font-weight: 800; border: 4px solid #faf6ee; }
+.home-portrait-badge { position: absolute; top: -16px; right: -16px; width: 60px; height: 60px; border-radius: 50%; background: var(--teal-700); display: grid; place-items: center; color: #fff; font-size: 1.3rem; font-weight: 800; border: 4px solid #fdfbf6; }
 @media (max-width: 900px) { .home-page .institutional-hero .hero-grid { grid-template-columns: 1fr; } .home-portrait { max-width: 320px; margin: 0 auto; } }
-.home-page .institutional-hero .hero-copy { max-width: 1050px; margin: 16px 0 0; font-size: clamp(.98rem, 1.4vw, 1.08rem); line-height: 1.68; }
+.home-page .institutional-hero .hero-copy { max-width: 60ch; margin: 18px 0 0; color: #46606a; font-size: clamp(1rem, 1.4vw, 1.1rem); line-height: 1.78; }
 .home-page .institutional-hero .hero-copy + .hero-copy { margin-top: 14px; }
 .home-page .institutional-hero .hero-copy:last-of-type { margin-bottom: 22px; }
 .home-page .institutional-hero .institutional-statement {
