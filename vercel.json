@@ -1,5 +1,6 @@
 {
   "redirects": [
+    { "source": "/index.html", "destination": "/", "permanent": true },
     { "source": "/produto/produto-ideia-ao-lucro", "destination": "/da-ideia-ao-lucro/", "permanent": true },
     { "source": "/publicacao/:slug.html", "destination": "/publicacao/:slug", "permanent": true },
     { "source": "/blog/:slug.html", "destination": "/blog/:slug", "permanent": true },

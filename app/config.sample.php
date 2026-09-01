@@ -9,5 +9,5 @@ return [
     'db_user' => 'postgres',
     'db_password' => 'ALTERE_NO_INSTALADOR',
     'db_sslmode' => 'require',
-    'site_url' => 'https://globalinvestbr.com',
+    'site_url' => 'https://globalinvestbrasil.com',
 ];

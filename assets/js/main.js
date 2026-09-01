@@ -85,8 +85,8 @@ const socialIcon = (path) => `<svg viewBox="0 0 24 24" role="img" focusable="fal
     "@context": "https://schema.org",
     "@type": "Organization",
     name: "Global Invest Brasil",
-    url: "https://globalinvestbr.com/",
-    logo: "https://globalinvestbr.com/assets/images/logo-globalinvestbr-circular.png",
+    url: "https://globalinvestbrasil.com/",
+    logo: "https://globalinvestbrasil.com/assets/images/logo-globalinvestbr-circular.png",
     email: "contato@globalinvestbrasil.com",
     address: { "@type": "PostalAddress", addressLocality: "Porto Alegre", addressRegion: "RS", addressCountry: "BR" },
     sameAs: [
@@ -926,12 +926,12 @@ function replacePublishedContactEmail(root = document.body) {
   while (walker.nextNode()) {
     const node = walker.currentNode;
     const parent = node.parentElement;
-    if (!parent || !node.nodeValue.includes("contato@globalinvestbr.com")) continue;
+    if (!parent || !node.nodeValue.includes("contato@globalinvestbrasil.com")) continue;
     if (parent.matches("script, style, title, textarea, option")) continue;
     matches.push(node);
   }
   matches.forEach((node) => {
-    node.nodeValue = node.nodeValue.replaceAll("contato@globalinvestbr.com", "contato@globalinvestbrasil.com");
+    node.nodeValue = node.nodeValue.replaceAll("contato@globalinvestbrasil.com", "contato@globalinvestbrasil.com");
   });
 }
 

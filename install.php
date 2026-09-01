@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if ((int)$check->fetchColumn() === 0) $pdo->prepare('INSERT INTO admins (name,email,password_hash,role) VALUES (?,?,?,?)')->execute([$adminName, $adminEmail, password_hash($adminPass, PASSWORD_DEFAULT), 'administrator']);
 
         if (!$envMode) {
-            $siteUrl = 'https://' . preg_replace('/[^a-z0-9.\-]/i', '', $_SERVER['HTTP_HOST'] ?? 'globalinvestbr.com');
+            $siteUrl = 'https://' . preg_replace('/[^a-z0-9.\-]/i', '', $_SERVER['HTTP_HOST'] ?? 'globalinvestbrasil.com');
             $config = "<?php\nreturn " . var_export(['db_host'=>$host,'db_port'=>$port,'db_name'=>$name,'db_user'=>$user,'db_password'=>$pass,'db_sslmode'=>'require','site_url'=>$siteUrl], true) . ";\n";
             if (file_put_contents($configFile, $config, LOCK_EX) === false) throw new RuntimeException('Não foi possível salvar app/config.php. Verifique a permissão da pasta app.');
         }
