@@ -119,6 +119,7 @@ const canonicalMenu = [
   { label: "Produtos", href: "/produtos.html", submenu: [
     { label: "Livros", href: "/produtos.html?categoria=livros" },
     { label: "E-books", href: "/produtos.html?categoria=ebooks" },
+    { label: "E-book gratuito", href: "/ebook-gratuito/" },
     { label: "Cursos e palestras", href: "/produtos.html?categoria=cursos" },
     { label: "Mentorias", href: "/produtos.html?categoria=mentorias" },
     { label: "Sites e e-commerces", href: "/produtos.html?categoria=sites-ecommerce" }
