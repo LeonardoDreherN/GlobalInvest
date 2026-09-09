@@ -4,11 +4,29 @@
  * Nenhuma chave privada ou credencial é exposta no navegador.
  */
 
+/* Meta Pixel: só é inicializado depois do aceite de cookies (LGPD) — nunca
+   dispara antes do consentimento, para ficar consistente com o banner abaixo. */
+function initMetaPixel() {
+  if (window.fbq) return;
+  !function(f,b,e,v,n,t,s)
+  {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  n.queue=[];t=b.createElement(e);t.async=!0;
+  t.src=v;s=b.getElementsByTagName(e)[0];
+  s.parentNode.insertBefore(t,s)}(window, document,'script',
+  'https://connect.facebook.net/en_US/fbevents.js');
+  fbq('init', '1055068993986637');
+  fbq('track', 'PageView');
+}
+
 /* Banner de consentimento de cookies (LGPD). A escolha grava um cookie próprio,
    lido no servidor por /adsense-loader.php para só carregar anúncios após aceite total. */
 (function cookieConsentBanner() {
   const STORAGE_KEY = "globalinvest:cookie-consent";
-  if (localStorage.getItem(STORAGE_KEY)) return;
+  const existingConsent = localStorage.getItem(STORAGE_KEY);
+  if (existingConsent === "accepted_all") initMetaPixel();
+  if (existingConsent) return;
 
   function setConsentCookie(value) {
     document.cookie = `globalinvest_cookie_consent=${value}; path=/; max-age=31536000; SameSite=Lax`;
@@ -17,6 +35,7 @@
   function recordConsent(preferences) {
     localStorage.setItem(STORAGE_KEY, preferences);
     setConsentCookie(preferences);
+    if (preferences === "accepted_all") initMetaPixel();
     fetch("/api/cookie-consent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
