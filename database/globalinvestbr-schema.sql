@@ -163,5 +163,5 @@ ON CONFLICT (slug) DO NOTHING;
 
 INSERT INTO site_settings (setting_key, setting_value) VALUES
 ('site_name', 'Global Invest Brasil'), ('adsense_enabled', '0'), ('adsense_publisher_id', ''),
-('google_site_verification', ''), ('contact_email', 'contato@globalinvestbr.com')
+('google_site_verification', ''), ('contact_email', 'contato@globalinvestbrasil.com')
 ON CONFLICT (setting_key) DO NOTHING;
