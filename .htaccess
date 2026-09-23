@@ -22,6 +22,7 @@ RewriteRule ^(?:app|database|storage)/ - [F,L,NC]
 # Rotas PHP utilizadas pelo site estático.
 RewriteRule ^api/content/?$ api/content.php [L,QSA]
 RewriteRule ^api/contacts/?$ api/contacts.php [L,QSA]
+RewriteRule ^api/briefing/?$ api/briefing.php [L,QSA]
 RewriteRule ^api/newsletter/?$ api/newsletter.php [L,QSA]
 RewriteRule ^api/cookie-consent/?$ api/cookie-consent.php [L,QSA]
 RewriteRule ^api/health/?$ api/health.php [L,QSA]

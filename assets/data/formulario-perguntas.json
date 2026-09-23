@@ -1,0 +1,318 @@
+{
+  "client_step": {
+    "title": "Seus dados",
+    "intro": "Antes de falarmos do projeto, precisamos te conhecer.",
+    "fields": [
+      { "key": "full_name", "label": "Nome completo", "type": "text", "required": true, "autocomplete": "name" },
+      { "key": "company", "label": "Empresa", "type": "text", "autocomplete": "organization" },
+      { "key": "role_title", "label": "Cargo/função", "type": "text" },
+      { "key": "document_number", "label": "CPF ou CNPJ (se necessário)", "type": "text" },
+      { "key": "email", "label": "E-mail", "type": "email", "required": true, "autocomplete": "email" },
+      { "key": "whatsapp", "label": "WhatsApp/telefone", "type": "tel", "required": true, "autocomplete": "tel" },
+      { "key": "city", "label": "Cidade", "type": "text" },
+      { "key": "state", "label": "Estado", "type": "text" },
+      { "key": "country", "label": "País", "type": "text", "placeholder": "Brasil" },
+      { "key": "current_site", "label": "Site atual, se houver", "type": "url" },
+      { "key": "instagram", "label": "Instagram", "type": "text", "placeholder": "@seuusuario" },
+      { "key": "linkedin", "label": "LinkedIn", "type": "text" },
+      { "key": "other_social", "label": "Outras redes sociais", "type": "text" },
+      { "key": "how_found", "label": "Como conheceu a Global Invest Brasil?", "type": "select", "required": true,
+        "options": ["Google", "YouTube", "Instagram", "Facebook", "LinkedIn", "Indicação", "Cliente anterior", "Outro"] },
+      { "key": "how_found_other", "label": "Qual?", "type": "text", "showIf": { "key": "how_found", "equals": "Outro" } }
+    ]
+  },
+  "products": {
+    "site": {
+      "label": "Site",
+      "description": "Institucional, landing page, portal, blog ou site de serviços.",
+      "steps": [
+        {
+          "title": "Sobre o projeto",
+          "fields": [
+            { "key": "objetivo_principal", "label": "Qual é o principal objetivo do site?", "type": "textarea", "required": true },
+            { "key": "possui_site", "label": "A empresa já possui um site?", "type": "yesno", "required": true },
+            { "key": "site_atual_url", "label": "Informe o endereço do site atual", "type": "url", "showIf": { "key": "possui_site", "equals": "Sim" } },
+            { "key": "tipo_site", "label": "O site será um(a):", "type": "select", "required": true,
+              "options": ["Institucional", "Landing page", "Portal", "Blog", "Site de serviços", "Site pessoal/profissional", "Site educacional", "Outro"] },
+            { "key": "tipo_site_outro", "label": "Qual?", "type": "text", "showIf": { "key": "tipo_site", "equals": "Outro" } },
+            { "key": "publico_alvo", "label": "Qual é o público-alvo do site?", "type": "textarea", "required": true },
+            { "key": "produtos_servicos", "label": "Quais produtos ou serviços deverão ser apresentados?", "type": "textarea", "required": true }
+          ]
+        },
+        {
+          "title": "Estrutura e conteúdo",
+          "fields": [
+            { "key": "paginas_desejadas", "label": "Quais páginas deverão existir?", "type": "checkbox", "required": true,
+              "options": ["Início", "Empresa", "Produtos", "Serviços", "Blog", "Contato", "FAQ", "Galeria", "Equipe", "Depoimentos", "Outras"] },
+            { "key": "paginas_outras", "label": "Quais outras páginas?", "type": "text", "showIf": { "key": "paginas_desejadas", "includes": "Outras" } },
+            { "key": "fornecedor_textos", "label": "Quem fornecerá os textos do site?", "type": "select",
+              "options": ["Nós vamos fornecer", "Preciso que a equipe produza", "Ainda não sei"] },
+            { "key": "fornecedor_imagens", "label": "Quem fornecerá fotografias e imagens?", "type": "select",
+              "options": ["Nós vamos fornecer", "Preciso que a equipe produza/busque", "Ainda não sei"] },
+            { "key": "revisao_conteudo", "label": "Será necessário produzir ou revisar conteúdo existente?", "type": "yesno" },
+            { "key": "tera_blog", "label": "O site terá blog/notícias?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "Domínio, hospedagem e identidade visual",
+          "fields": [
+            { "key": "possui_dominio", "label": "Já possui domínio registrado?", "type": "yesno" },
+            { "key": "dominio_atual", "label": "Qual é o domínio?", "type": "text", "showIf": { "key": "possui_dominio", "equals": "Sim" } },
+            { "key": "possui_hospedagem", "label": "Já possui hospedagem contratada?", "type": "yesno" },
+            { "key": "hospedagem_detalhe", "label": "Qual empresa/plano de hospedagem?", "type": "text", "showIf": { "key": "possui_hospedagem", "equals": "Sim" } },
+            { "key": "possui_logo", "label": "A empresa já possui logomarca?", "type": "yesno" },
+            { "key": "possui_manual_marca", "label": "Possui manual de identidade visual (cores, fontes, etc.)?", "type": "yesno" },
+            { "key": "cores_desejadas", "label": "Quais cores deverão ser utilizadas no site?", "type": "text" },
+            { "key": "sites_referencia", "label": "Cite até 3 sites de referência e o que você gosta em cada um", "type": "textarea" }
+          ]
+        },
+        {
+          "title": "Funcionalidades",
+          "fields": [
+            { "key": "form_contato", "label": "Precisará de formulário de contato?", "type": "yesno" },
+            { "key": "integracao_whatsapp", "label": "Precisará de integração com WhatsApp?", "type": "yesno" },
+            { "key": "integracao_redes_sociais", "label": "Precisará integrar redes sociais?", "type": "yesno" },
+            { "key": "captacao_leads", "label": "Precisará de captação de leads (materiais, newsletter, etc.)?", "type": "yesno" },
+            { "key": "integracao_email_crm", "label": "Precisará de integração com e-mail marketing ou CRM?", "type": "yesno" },
+            { "key": "qual_crm", "label": "Qual ferramenta (RD Station, Mailchimp, HubSpot, etc.)?", "type": "text", "showIf": { "key": "integracao_email_crm", "equals": "Sim" } },
+            { "key": "area_restrita_login", "label": "Precisará de área restrita com login?", "type": "yesno" },
+            { "key": "niveis_usuario", "label": "Haverá diferentes níveis de usuários/permissões?", "type": "yesno", "showIf": { "key": "area_restrita_login", "equals": "Sim" } },
+            { "key": "aceitar_pagamentos", "label": "Precisará aceitar pagamentos pelo site?", "type": "yesno" },
+            { "key": "meios_pagamento", "label": "Quais meios de pagamento?", "type": "checkbox", "options": ["PIX", "Cartão", "Boleto", "Outros"], "showIf": { "key": "aceitar_pagamentos", "equals": "Sim" } },
+            { "key": "agendamento_online", "label": "Precisará de agendamento online?", "type": "yesno" },
+            { "key": "multilingue", "label": "O site será multilíngue?", "type": "yesno" },
+            { "key": "idiomas", "label": "Quais idiomas?", "type": "text", "showIf": { "key": "multilingue", "equals": "Sim" } }
+          ]
+        },
+        {
+          "title": "Marketing, integrações e LGPD",
+          "fields": [
+            { "key": "necessidade_seo", "label": "Há necessidade de otimização para buscadores (SEO)?", "type": "yesno" },
+            { "key": "anuncios_google_ads", "label": "Há intenção de anunciar no Google Ads?", "type": "yesno" },
+            { "key": "google_analytics", "label": "Será necessário instalar o Google Analytics?", "type": "yesno" },
+            { "key": "google_tag_manager", "label": "Será necessário o Google Tag Manager?", "type": "yesno" },
+            { "key": "meta_pixel", "label": "Será necessário o Meta Pixel (Facebook/Instagram Ads)?", "type": "yesno" },
+            { "key": "sistemas_externos", "label": "Existem sistemas externos que deverão ser integrados?", "type": "textarea" },
+            { "key": "exigencias_lgpd", "label": "Há exigências específicas relacionadas à LGPD para este projeto?", "type": "textarea" }
+          ]
+        },
+        {
+          "title": "Prazo e investimento",
+          "fields": [
+            { "key": "prazo_desejado", "label": "Qual é o prazo desejado para conclusão?", "type": "text" },
+            { "key": "data_lancamento", "label": "Existe uma data específica para lançamento?", "type": "date" },
+            { "key": "faixa_investimento", "label": "Qual é a faixa estimada de investimento?", "type": "select",
+              "options": ["Até R$ 3.000", "R$ 3.000 a R$ 7.000", "R$ 7.000 a R$ 15.000", "R$ 15.000 a R$ 30.000", "Acima de R$ 30.000", "Prefiro conversar com a equipe"] },
+            { "key": "responsavel_aprovacoes", "label": "Quem será responsável pelas aprovações do projeto?", "type": "text" },
+            { "key": "administrar_conteudo_depois", "label": "Pretende administrar o conteúdo após a entrega?", "type": "yesno" },
+            { "key": "necessita_treinamento", "label": "Será necessário treinamento para a equipe?", "type": "yesno" },
+            { "key": "funcionalidades_especiais", "label": "Descreva qualquer funcionalidade especial que o site deverá possuir", "type": "textarea" }
+          ]
+        }
+      ]
+    },
+    "ecommerce": {
+      "label": "E-commerce",
+      "description": "Loja virtual para vender produtos físicos, digitais ou serviços.",
+      "steps": [
+        {
+          "title": "Sobre a loja",
+          "fields": [
+            { "key": "segmento_loja", "label": "Qual é o segmento da loja?", "type": "text", "required": true },
+            { "key": "produtos_vendidos", "label": "Quais produtos serão vendidos?", "type": "textarea", "required": true },
+            { "key": "tipo_produto", "label": "Os produtos são:", "type": "select", "options": ["Físicos", "Digitais", "Serviços", "Combinação de tipos"] },
+            { "key": "qtd_produtos_lancamento", "label": "Quantos produtos aproximadamente no lançamento?", "type": "text" },
+            { "key": "qtd_skus", "label": "Quantos SKUs aproximadamente?", "type": "text" },
+            { "key": "existem_variacoes", "label": "Existem variações de produto (cor, tamanho, etc.)?", "type": "yesno" },
+            { "key": "quais_variacoes", "label": "Quais variações?", "type": "checkbox", "options": ["Cor", "Tamanho", "Modelo", "Peso", "Material", "Outras"], "showIf": { "key": "existem_variacoes", "equals": "Sim" } }
+          ]
+        },
+        {
+          "title": "Situação atual",
+          "fields": [
+            { "key": "possui_ecommerce", "label": "Já possui um e-commerce?", "type": "yesno" },
+            { "key": "ecommerce_url", "label": "Qual é a URL?", "type": "url", "showIf": { "key": "possui_ecommerce", "equals": "Sim" } },
+            { "key": "plataforma_atual", "label": "Qual plataforma utiliza atualmente?", "type": "text", "showIf": { "key": "possui_ecommerce", "equals": "Sim" } },
+            { "key": "preferencia_plataforma", "label": "Existe preferência de plataforma?", "type": "select", "options": ["Shopify", "WooCommerce", "Nuvemshop", "Solução própria", "Outra", "Sem preferência"] },
+            { "key": "possui_dominio", "label": "Já possui domínio?", "type": "yesno" },
+            { "key": "possui_identidade_visual", "label": "Já possui identidade visual (logo, cores)?", "type": "yesno" },
+            { "key": "possui_fotos_produtos", "label": "Já possui fotografias dos produtos?", "type": "yesno" },
+            { "key": "possui_descricoes_produtos", "label": "Já possui descrições dos produtos?", "type": "yesno" },
+            { "key": "importacao_catalogo", "label": "Será necessária importação de catálogo existente?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "Estoque e ERP",
+          "fields": [
+            { "key": "controle_estoque", "label": "Como será controlado o estoque?", "type": "textarea" },
+            { "key": "possui_erp", "label": "Existe um ERP em uso?", "type": "yesno" },
+            { "key": "qual_erp", "label": "Qual ERP?", "type": "text", "showIf": { "key": "possui_erp", "equals": "Sim" } },
+            { "key": "integracao_erp", "label": "Será necessária integração da loja com o ERP?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "Pagamentos e frete",
+          "fields": [
+            { "key": "meios_pagamento", "label": "Quais meios de pagamento deverão ser aceitos?", "type": "checkbox", "required": true, "options": ["PIX", "Cartão de crédito", "Boleto", "Outros"] },
+            { "key": "gateway_pagamento", "label": "Qual gateway/intermediador de pagamento será utilizado?", "type": "text", "placeholder": "Ex.: Mercado Pago, PagSeguro, Stripe" },
+            { "key": "parcelamento", "label": "Será necessário oferecer parcelamento?", "type": "yesno" },
+            { "key": "tipo_frete", "label": "Como funcionará o frete?", "type": "checkbox", "options": ["Correios", "Transportadora", "Retirada no local", "Frete próprio", "Outros"] },
+            { "key": "calculo_frete_automatico", "label": "Será necessário cálculo automático de frete?", "type": "yesno" },
+            { "key": "frete_gratis_valor_minimo", "label": "Haverá frete grátis a partir de um valor mínimo?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "Marketing e fidelização",
+          "fields": [
+            { "key": "cupons_desconto", "label": "Haverá cupons de desconto?", "type": "yesno" },
+            { "key": "campanhas_promocionais", "label": "Haverá campanhas promocionais?", "type": "yesno" },
+            { "key": "programa_fidelidade", "label": "Haverá programa de fidelidade?", "type": "yesno" },
+            { "key": "recuperacao_carrinho", "label": "Haverá recuperação de carrinho abandonado?", "type": "yesno" },
+            { "key": "avaliacoes_produtos", "label": "Haverá avaliações de produtos?", "type": "yesno" },
+            { "key": "lista_desejos", "label": "Haverá lista de desejos/favoritos?", "type": "yesno" },
+            { "key": "atendimento_whatsapp", "label": "Haverá atendimento via WhatsApp?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "Marketplaces e fiscal",
+          "fields": [
+            { "key": "integracao_marketplaces", "label": "Haverá integração com marketplaces?", "type": "yesno" },
+            { "key": "quais_marketplaces", "label": "Quais marketplaces?", "type": "checkbox", "options": ["Mercado Livre", "Amazon", "Shopee", "Outros"], "showIf": { "key": "integracao_marketplaces", "equals": "Sim" } },
+            { "key": "integracao_social_shopping", "label": "Haverá integração com Instagram/Facebook Shopping?", "type": "yesno" },
+            { "key": "emitir_nota_fiscal", "label": "Será necessário emitir nota fiscal?", "type": "yesno" },
+            { "key": "sistema_fiscal", "label": "Qual sistema fiscal é utilizado?", "type": "text", "showIf": { "key": "emitir_nota_fiscal", "equals": "Sim" } }
+          ]
+        },
+        {
+          "title": "Alcance e clientes",
+          "fields": [
+            { "key": "vendas_somente_brasil", "label": "A loja venderá somente no Brasil?", "type": "yesno" },
+            { "key": "vendas_internacionais", "label": "Haverá vendas internacionais?", "type": "yesno" },
+            { "key": "detalhe_internacional", "label": "Informe países, moedas e idiomas desejados", "type": "textarea", "showIf": { "key": "vendas_internacionais", "equals": "Sim" } },
+            { "key": "precos_atacado_varejo", "label": "Haverá preços diferentes para atacado e varejo?", "type": "yesno" },
+            { "key": "clientes_b2b", "label": "Haverá clientes B2B (venda entre empresas)?", "type": "yesno" },
+            { "key": "cadastro_login", "label": "Será necessário cadastro/login de clientes?", "type": "yesno" },
+            { "key": "grupos_clientes", "label": "Haverá diferentes grupos de clientes com condições distintas?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "SEO, anúncios e políticas",
+          "fields": [
+            { "key": "seo_produtos", "label": "Será necessário SEO das páginas de produto?", "type": "yesno" },
+            { "key": "google_shopping", "label": "O Google Shopping será utilizado?", "type": "yesno" },
+            { "key": "google_ads", "label": "O Google Ads será utilizado?", "type": "yesno" },
+            { "key": "meta_ads", "label": "O Meta Ads (Facebook/Instagram) será utilizado?", "type": "yesno" },
+            { "key": "analytics_tagmanager_pixels", "label": "Será necessário instalar Analytics, Tag Manager e pixels?", "type": "yesno" },
+            { "key": "politicas_existentes", "label": "Quais políticas comerciais já existem prontas?", "type": "checkbox", "options": ["Trocas", "Devoluções", "Privacidade", "Entrega", "Termos de uso", "Nenhuma ainda"] }
+          ]
+        },
+        {
+          "title": "Prazo e investimento",
+          "fields": [
+            { "key": "prazo_lancamento", "label": "Qual é o prazo esperado para lançamento?", "type": "text" },
+            { "key": "data_lancamento", "label": "Existe uma data específica para lançamento?", "type": "date" },
+            { "key": "faixa_investimento", "label": "Qual é a faixa estimada de investimento?", "type": "select",
+              "options": ["Até R$ 3.000", "R$ 3.000 a R$ 7.000", "R$ 7.000 a R$ 15.000", "R$ 15.000 a R$ 30.000", "Acima de R$ 30.000", "Prefiro conversar com a equipe"] },
+            { "key": "funcionalidade_especial", "label": "Há alguma funcionalidade especial que a loja deverá possuir?", "type": "textarea" }
+          ]
+        }
+      ]
+    },
+    "aplicativo": {
+      "label": "Aplicativo",
+      "description": "App para Android, iOS ou aplicativo web (PWA).",
+      "steps": [
+        {
+          "title": "Sobre o app",
+          "fields": [
+            { "key": "objetivo_principal", "label": "Qual é o objetivo principal do aplicativo?", "type": "textarea", "required": true },
+            { "key": "problema_resolver", "label": "Que problema ele pretende resolver?", "type": "textarea", "required": true },
+            { "key": "publico_alvo", "label": "Quem é o público-alvo do aplicativo?", "type": "textarea", "required": true },
+            { "key": "tipo_app", "label": "O aplicativo será:", "type": "select", "options": ["B2B", "B2C", "Interno (uso da empresa)", "Marketplace", "Serviço", "Educacional", "Outro"] },
+            { "key": "ja_existe_versao", "label": "Já existe uma versão do sistema/app?", "type": "yesno" },
+            { "key": "site_relacionado", "label": "Existe site ou plataforma relacionada?", "type": "url" }
+          ]
+        },
+        {
+          "title": "Plataforma e acesso",
+          "fields": [
+            { "key": "plataformas", "label": "Será desenvolvido para:", "type": "checkbox", "required": true, "options": ["Android", "iOS", "Ambos"] },
+            { "key": "precisa_pwa", "label": "Será necessário aplicativo web/PWA?", "type": "yesno" },
+            { "key": "usuarios_criam_conta", "label": "Os usuários precisarão criar conta?", "type": "yesno" },
+            { "key": "formas_login", "label": "Quais formas de login?", "type": "checkbox", "options": ["E-mail e senha", "Google", "Apple", "Telefone", "Redes sociais", "Outras"], "showIf": { "key": "usuarios_criam_conta", "equals": "Sim" } },
+            { "key": "tipos_usuarios_diferentes", "label": "Existirão diferentes tipos de usuários (perfis)?", "type": "yesno" },
+            { "key": "permissoes_perfis", "label": "Quais permissões cada perfil terá?", "type": "textarea", "showIf": { "key": "tipos_usuarios_diferentes", "equals": "Sim" } }
+          ]
+        },
+        {
+          "title": "Recursos do dispositivo",
+          "fields": [
+            { "key": "geolocalizacao", "label": "Precisará de geolocalização/GPS?", "type": "yesno" },
+            { "key": "usa_mapas", "label": "Precisará utilizar mapas?", "type": "yesno" },
+            { "key": "usa_camera", "label": "Precisará usar a câmera?", "type": "yesno" },
+            { "key": "acessa_galeria", "label": "Precisará acessar a galeria de imagens?", "type": "yesno" },
+            { "key": "envia_arquivos", "label": "Precisará enviar arquivos/documentos?", "type": "yesno" },
+            { "key": "notificacoes_push", "label": "Precisará de notificações push?", "type": "yesno" },
+            { "key": "chat_entre_usuarios", "label": "Precisará de chat entre usuários?", "type": "yesno" },
+            { "key": "atendimento_chat", "label": "Precisará de atendimento por chat (suporte)?", "type": "yesno" },
+            { "key": "funciona_offline", "label": "Precisará funcionar offline?", "type": "yesno" },
+            { "key": "sincroniza_dados", "label": "Precisará sincronizar dados posteriormente?", "type": "yesno", "showIf": { "key": "funciona_offline", "equals": "Sim" } }
+          ]
+        },
+        {
+          "title": "Monetização e integrações",
+          "fields": [
+            { "key": "pagamentos_no_app", "label": "Haverá pagamentos dentro do aplicativo?", "type": "yesno" },
+            { "key": "assinaturas_recorrentes", "label": "Haverá assinaturas recorrentes?", "type": "yesno" },
+            { "key": "planos_gratuito_pago", "label": "Haverá planos gratuitos e pagos?", "type": "yesno" },
+            { "key": "gateway_pagamento_app", "label": "Qual gateway de pagamento deverá ser integrado?", "type": "text", "showIf": { "key": "pagamentos_no_app", "equals": "Sim" } },
+            { "key": "sistemas_externos_api", "label": "Quais sistemas externos/APIs deverão ser integrados?", "type": "textarea" }
+          ]
+        },
+        {
+          "title": "Administração e segurança",
+          "fields": [
+            { "key": "painel_administrativo", "label": "Precisará de painel administrativo?", "type": "yesno" },
+            { "key": "info_administradas_painel", "label": "Quais informações deverão ser administradas pelo painel?", "type": "textarea", "showIf": { "key": "painel_administrativo", "equals": "Sim" } },
+            { "key": "gera_relatorios", "label": "Precisará gerar relatórios?", "type": "yesno" },
+            { "key": "dashboard", "label": "Precisará de dashboard com indicadores?", "type": "yesno" },
+            { "key": "armazena_dados_pessoais", "label": "O app armazenará dados pessoais dos usuários?", "type": "yesno" },
+            { "key": "dados_sensiveis", "label": "O app trabalhará com dados sensíveis (saúde, financeiros, etc.)?", "type": "yesno" },
+            { "key": "requisitos_seguranca", "label": "Quais requisitos de segurança existem?", "type": "textarea" },
+            { "key": "requisitos_lgpd", "label": "Quais requisitos de LGPD deverão ser considerados?", "type": "textarea" },
+            { "key": "autenticacao_dois_fatores", "label": "Haverá autenticação em dois fatores?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "Identidade e referências",
+          "fields": [
+            { "key": "identidade_visual_pronta", "label": "Já existe identidade visual pronta para o app?", "type": "yesno" },
+            { "key": "apps_referencia", "label": "Cite até 3 aplicativos de referência e o que você gosta em cada um", "type": "textarea" }
+          ]
+        },
+        {
+          "title": "Publicação e manutenção",
+          "fields": [
+            { "key": "publicar_google_play", "label": "Será publicado na Google Play?", "type": "yesno" },
+            { "key": "publicar_app_store", "label": "Será publicado na Apple App Store?", "type": "yesno" },
+            { "key": "possui_contas_desenvolvedor", "label": "Já possui contas de desenvolvedor Google/Apple?", "type": "yesno" },
+            { "key": "suporte_publicacao", "label": "Será necessário suporte para o processo de publicação?", "type": "yesno" },
+            { "key": "manutencao_pos_lancamento", "label": "Será necessária manutenção após o lançamento?", "type": "yesno" },
+            { "key": "atualizacoes_continuas", "label": "Há previsão de atualizações contínuas?", "type": "yesno" }
+          ]
+        },
+        {
+          "title": "Prazo, investimento e MVP",
+          "fields": [
+            { "key": "prazo_esperado", "label": "Qual é o prazo esperado?", "type": "text" },
+            { "key": "data_lancamento_obrigatoria", "label": "Existe uma data de lançamento obrigatória?", "type": "date" },
+            { "key": "faixa_investimento", "label": "Qual é a faixa estimada de investimento?", "type": "select",
+              "options": ["Até R$ 3.000", "R$ 3.000 a R$ 7.000", "R$ 7.000 a R$ 15.000", "R$ 15.000 a R$ 30.000", "Acima de R$ 30.000", "Prefiro conversar com a equipe"] },
+            { "key": "funcionalidade_indispensavel_mvp", "label": "Qual funcionalidade é absolutamente indispensável para a primeira versão (MVP)?", "type": "textarea", "required": true },
+            { "key": "outras_funcionalidades", "label": "Descreva outras funcionalidades desejadas", "type": "textarea" }
+          ]
+        }
+      ]
+    }
+  }
+}

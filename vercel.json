@@ -12,6 +12,7 @@
     { "source": "/adsense-loader.php", "destination": "https://globalinvest.onrender.com/adsense-loader.php" },
     { "source": "/sitemap.xml", "destination": "https://globalinvest.onrender.com/sitemap.xml" },
     { "source": "/install.php", "destination": "https://globalinvest.onrender.com/install.php" },
+    { "source": "/migrate-briefings.php", "destination": "https://globalinvest.onrender.com/migrate-briefings.php" },
     { "source": "/publicacao/:slug", "destination": "https://globalinvest.onrender.com/publicacao/:slug" },
     { "source": "/blog/:slug", "destination": "https://globalinvest.onrender.com/blog/:slug" },
     { "source": "/produto/:slug", "destination": "https://globalinvest.onrender.com/produto/:slug" }
