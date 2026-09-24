@@ -47,7 +47,7 @@ function admin_role_label(string $role): string {
 
 function admin_header(string $title): void { $a=require_admin(); $path=basename($_SERVER['PHP_SELF']); $site=admin_current_site($path); ?>
 <!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title><?=h($title)?> | Administração</title><link rel="stylesheet" href="/admin/admin.css"></head><body><div class="layout"><aside class="side">
-<div class="brand"><span class="brand-mark">GI</span><span class="brand-text">Global <b class="brand-accent">Invest</b><br>Brasil</span></div>
+<div class="brand"><img src="/assets/images/logo-globalinvestbr-circular.png" alt="Global Invest Brasil"><small>Central de conteúdo</small></div>
 
 <div class="site-switcher" role="tablist">
   <a class="site-tab <?=$site==='gib'?'active':''?>" href="/admin/dashboard.php"><?=admin_icon('building')?><span>Global Invest</span></a>

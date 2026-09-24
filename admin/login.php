@@ -26,7 +26,7 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
 ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acesso administrativo | Global Invest Brasil</title><link rel="stylesheet" href="/admin/admin.css"></head><body>
 <div class="login-screen">
   <aside class="login-side">
-    <div class="brand"><span class="brand-mark">GI</span><span class="brand-text">Global <b class="brand-accent">Invest</b><br>Brasil</span></div>
+    <div class="brand login-brand"><img src="/assets/images/logo-globalinvestbr-circular.png" alt="Global Invest Brasil"></div>
     <div>
       <h2>Um único painel para toda a operação digital.</h2>
       <p>Produtos, publicações, blog, formulários de projeto e o catálogo do Professor Jorge Dadalt — tudo em um só lugar, com dados reais e atualizados.</p>

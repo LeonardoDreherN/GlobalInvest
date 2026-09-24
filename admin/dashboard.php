@@ -57,7 +57,7 @@ function admin_daily_counts(PDO $pdo, string $table, int $days = 14): array {
     return $counts;
 }
 
-function admin_kpi_tile(string $icon, string $label, int $value, ?int $delta = null, ?array $sparkline = null): string {
+function admin_kpi_tile(string $icon, string $label, int $value, ?int $delta = null, ?array $sparkline = null, bool $pulse = false): string {
     $deltaHtml = '';
     if ($delta !== null) {
         $cls = $delta > 0 ? 'up' : ($delta < 0 ? 'down' : 'flat');
@@ -66,9 +66,9 @@ function admin_kpi_tile(string $icon, string $label, int $value, ?int $delta = n
         $deltaHtml = '<span class="kpi-delta ' . $cls . '">' . $arrow . $sign . $delta . '/7d</span>';
     }
     $sparkHtml = $sparkline !== null ? admin_sparkline_svg($sparkline) : '<span></span>';
-    return '<div class="kpi-tile"><div class="kpi-head"><span class="kpi-icon">' . admin_icon($icon) . '</span></div>'
+    return '<div class="kpi-tile' . ($pulse ? ' pulse' : '') . '"><div class="kpi-head"><span class="kpi-icon">' . admin_icon($icon) . '</span></div>'
         . '<div class="kpi-label">' . h($label) . '</div>'
-        . '<div class="kpi-value">' . number_format($value, 0, ',', '.') . '</div>'
+        . '<div class="kpi-value count-up" data-count="' . $value . '">0</div>'
         . '<div class="kpi-foot">' . $deltaHtml . $sparkHtml . '</div></div>';
 }
 
@@ -87,7 +87,8 @@ function admin_bar_chart(array $values, array $labels): string {
         $bh = $v > 0 ? max(4, ($v / $max) * ($h - 10)) : 2;
         $x = round($i * $slot + ($slot - $barW) / 2, 1);
         $y = round($h - $bh, 1);
-        $svg .= '<rect class="bar" tabindex="0" data-value="' . (int) $v . '" data-label="' . h($labels[$i]) . '" x="' . $x . '" y="' . $y . '" width="' . round($barW, 1) . '" height="' . round($bh, 1) . '" rx="4"/>';
+        $delayMs = $i * 30;
+        $svg .= '<rect class="bar" tabindex="0" style="animation-delay:' . $delayMs . 'ms" data-value="' . (int) $v . '" data-label="' . h($labels[$i]) . '" x="' . $x . '" y="' . $y . '" width="' . round($barW, 1) . '" height="' . round($bh, 1) . '" rx="4"/>';
         $svg .= '<text class="axis-label" x="' . round($x + $barW / 2, 1) . '" y="' . ($h + 16) . '" text-anchor="middle">' . h($labels[$i]) . '</text>';
     }
     $svg .= '</svg>';
@@ -153,14 +154,14 @@ admin_header('Painel principal');
     <p>Gestão direta dos dois sites: crie, edite, publique e acompanhe leads em um só lugar.</p>
   </div>
   <div class="dash-hero-figure">
-    <b><?=number_format($leadsThisMonth, 0, ',', '.')?></b>
+    <b class="count-up" data-count="<?=$leadsThisMonth?>">0</b>
     <span>leads recebidos este mês</span>
   </div>
 </div>
 
 <div class="kpi-row">
   <?=admin_kpi_tile('mail', 'Contatos', $contactsTotal, $contactsDelta, $contactsSpark)?>
-  <?=admin_kpi_tile('clipboard', 'Formulários novos', $briefingsNovo, $briefingsDelta, $briefingsSpark)?>
+  <?=admin_kpi_tile('clipboard', 'Formulários novos', $briefingsNovo, $briefingsDelta, $briefingsSpark, $briefingsNovo > 0)?>
   <?=admin_kpi_tile('box', 'Produtos', $counts['Produtos'])?>
   <?=admin_kpi_tile('file-text', 'Publicações', $counts['Publicações'])?>
   <?=admin_kpi_tile('edit', 'Posts no blog', $counts['Posts no blog'])?>
@@ -233,6 +234,23 @@ admin_header('Painel principal');
   chart.querySelectorAll('.bar').forEach(function (bar) {
     bar.addEventListener('focus', function () { showTip(bar); });
     bar.addEventListener('blur', function () { tooltip.classList.remove('show'); });
+  });
+})();
+
+(function () {
+  var prefersReduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.querySelectorAll('.count-up[data-count]').forEach(function (el) {
+    var target = parseInt(el.getAttribute('data-count'), 10) || 0;
+    if (prefersReduced) { el.textContent = target.toLocaleString('pt-BR'); return; }
+    var duration = 900, start = null;
+    function step(ts) {
+      if (start === null) start = ts;
+      var p = Math.min((ts - start) / duration, 1);
+      var eased = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(eased * target).toLocaleString('pt-BR');
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
   });
 })();
 </script>
