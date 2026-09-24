@@ -1,207 +1,25 @@
--- Global Invest Brasil | Banco PostgreSQL (Supabase)
--- Estrutura limpa para produtos, publicações técnicas, blog, contatos e administração.
+<?php
+declare(strict_types=1);
+/*
+ * Uso ÚNICO. Cria a tabela "jd_catalog_items" (catálogo do site do Professor
+ * Jorge Dadalt: livros/e-books, cursos/mentorias, negócios digitais) e adiciona
+ * a coluna "site" em "contacts", em bancos que já foram instalados antes desta
+ * função existir. Se o banco for instalado do zero via /install.php, tudo isso
+ * já é criado automaticamente pelo schema — este script não é necessário.
+ *
+ * Também insere (uma vez, ON CONFLICT DO NOTHING) os 14 itens de catálogo com
+ * o texto hoje publicado no site do Jorge Dadalt, para a migração não perder
+ * conteúdo.
+ *
+ * Exige login no /admin/. Depois de rodar (uma vez), APAGUE este arquivo.
+ */
+require_once __DIR__ . '/app/auth.php';
+require_admin();
+header('Content-Type: text/plain; charset=utf-8');
 
-CREATE TABLE IF NOT EXISTS admins (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(160) NOT NULL,
-  email VARCHAR(190) NOT NULL UNIQUE,
-  password_hash VARCHAR(255) NOT NULL,
-  role VARCHAR(20) NOT NULL DEFAULT 'administrator' CHECK (role IN ('administrator','editor')),
-  is_active SMALLINT NOT NULL DEFAULT 1,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS login_attempts (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  email VARCHAR(190) NOT NULL,
-  ip_address VARCHAR(45) NOT NULL,
-  attempted_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-CREATE INDEX IF NOT EXISTS idx_login_attempts_ip_time ON login_attempts (ip_address, attempted_at);
-CREATE INDEX IF NOT EXISTS idx_login_attempts_email_time ON login_attempts (email, attempted_at);
-
-CREATE TABLE IF NOT EXISTS newsletter_subscribers (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  email VARCHAR(190) NOT NULL UNIQUE,
-  status VARCHAR(20) NOT NULL DEFAULT 'active' CHECK (status IN ('active','unsubscribed')),
-  source VARCHAR(120),
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-CREATE INDEX IF NOT EXISTS idx_newsletter_status ON newsletter_subscribers (status);
-
-CREATE TABLE IF NOT EXISTS cookie_consents (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  ip_address VARCHAR(45) NOT NULL,
-  preferences VARCHAR(40) NOT NULL,
-  consented_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS site_settings (
-  setting_key VARCHAR(120) PRIMARY KEY,
-  setting_value TEXT,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS product_categories (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  slug VARCHAR(120) NOT NULL UNIQUE,
-  sort_order INT NOT NULL DEFAULT 0,
-  is_active SMALLINT NOT NULL DEFAULT 1,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS products (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  category_id BIGINT NULL REFERENCES product_categories(id) ON DELETE SET NULL,
-  title VARCHAR(220) NOT NULL,
-  slug VARCHAR(240) NOT NULL UNIQUE,
-  summary TEXT,
-  body TEXT,
-  image_url VARCHAR(500),
-  purchase_url VARCHAR(500),
-  cta_label VARCHAR(100) NOT NULL DEFAULT 'Conheça agora',
-  price DECIMAL(12,2),
-  status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','published','archived')),
-  featured SMALLINT NOT NULL DEFAULT 0,
-  published_at TIMESTAMP NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-CREATE INDEX IF NOT EXISTS idx_products_status_published ON products (status, published_at);
-CREATE INDEX IF NOT EXISTS idx_products_category ON products (category_id);
-
-CREATE TABLE IF NOT EXISTS publication_categories (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  slug VARCHAR(120) NOT NULL UNIQUE,
-  sort_order INT NOT NULL DEFAULT 0,
-  is_active SMALLINT NOT NULL DEFAULT 1,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS publications (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  category_id BIGINT NULL REFERENCES publication_categories(id) ON DELETE SET NULL,
-  title VARCHAR(220) NOT NULL,
-  slug VARCHAR(240) NOT NULL UNIQUE,
-  excerpt TEXT,
-  content TEXT NOT NULL,
-  image_url VARCHAR(500),
-  image_alt VARCHAR(255),
-  author_name VARCHAR(160) NOT NULL DEFAULT 'Global Invest Brasil',
-  seo_title VARCHAR(255),
-  seo_description VARCHAR(320),
-  status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','published','archived')),
-  published_at TIMESTAMP NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-CREATE INDEX IF NOT EXISTS idx_publications_status_published ON publications (status, published_at);
-CREATE INDEX IF NOT EXISTS idx_publications_category ON publications (category_id);
-
-CREATE TABLE IF NOT EXISTS blog_categories (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(100) NOT NULL,
-  slug VARCHAR(120) NOT NULL UNIQUE,
-  sort_order INT NOT NULL DEFAULT 0,
-  is_active SMALLINT NOT NULL DEFAULT 1,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-
-CREATE TABLE IF NOT EXISTS blog_posts (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  category_id BIGINT NULL REFERENCES blog_categories(id) ON DELETE SET NULL,
-  title VARCHAR(220) NOT NULL,
-  slug VARCHAR(240) NOT NULL UNIQUE,
-  excerpt TEXT,
-  content TEXT NOT NULL,
-  image_url VARCHAR(500),
-  image_alt VARCHAR(255),
-  author_name VARCHAR(160) NOT NULL DEFAULT 'Global Invest Brasil',
-  seo_title VARCHAR(255),
-  seo_description VARCHAR(320),
-  status VARCHAR(20) NOT NULL DEFAULT 'draft' CHECK (status IN ('draft','published','archived')),
-  published_at TIMESTAMP NULL,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-CREATE INDEX IF NOT EXISTS idx_blog_status_published ON blog_posts (status, published_at);
-CREATE INDEX IF NOT EXISTS idx_blog_category ON blog_posts (category_id);
-
-CREATE TABLE IF NOT EXISTS contacts (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  name VARCHAR(160) NOT NULL,
-  email VARCHAR(190) NOT NULL,
-  phone VARCHAR(40) NOT NULL,
-  subject VARCHAR(220) NOT NULL,
-  message TEXT NOT NULL,
-  consent_at TIMESTAMP NULL,
-  status VARCHAR(20) NOT NULL DEFAULT 'new' CHECK (status IN ('new','read','replied','archived')),
-  internal_notes TEXT,
-  replied_at TIMESTAMP NULL,
-  site VARCHAR(20) NOT NULL DEFAULT 'gib',
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-CREATE INDEX IF NOT EXISTS idx_contacts_status_created ON contacts (status, created_at);
-CREATE INDEX IF NOT EXISTS idx_contacts_email ON contacts (email);
-
-INSERT INTO product_categories (name, slug, sort_order) VALUES
-('Livros', 'livros', 10), ('E-books', 'ebooks', 20), ('Cursos e palestras', 'cursos-palestras', 30),
-('Mentorias', 'mentorias', 40), ('Sites e e-commerces', 'sites-ecommerces', 50)
-ON CONFLICT (slug) DO NOTHING;
-
-INSERT INTO publication_categories (name, slug, sort_order) VALUES
-('Gestão', 'gestao', 10), ('Investimentos', 'investimentos', 20), ('Negócios digitais', 'negocios-digitais', 30),
-('Tecnologia', 'tecnologia', 40), ('Carreira', 'carreira', 50), ('Reflexões', 'reflexoes', 60)
-ON CONFLICT (slug) DO NOTHING;
-
-INSERT INTO blog_categories (name, slug, sort_order) VALUES
-('Atualidades', 'atualidades', 10), ('Negócios', 'negocios', 20), ('Mercado', 'mercado', 30)
-ON CONFLICT (slug) DO NOTHING;
-
-INSERT INTO site_settings (setting_key, setting_value) VALUES
-('site_name', 'Global Invest Brasil'), ('adsense_enabled', '0'), ('adsense_publisher_id', ''),
-('google_site_verification', ''), ('contact_email', 'contato@globalinvestbrasil.com')
-ON CONFLICT (setting_key) DO NOTHING;
-
--- Formulário de Pesquisa de Necessidade de Produto Digital (briefing comercial/técnico).
-CREATE TABLE IF NOT EXISTS briefings (
-  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
-  reference_code VARCHAR(20) NOT NULL UNIQUE,
-  product VARCHAR(20) NOT NULL CHECK (product IN ('site','ecommerce','aplicativo')),
-  full_name VARCHAR(160) NOT NULL,
-  company VARCHAR(160),
-  role_title VARCHAR(120),
-  document_number VARCHAR(30),
-  email VARCHAR(190) NOT NULL,
-  whatsapp VARCHAR(40) NOT NULL,
-  city VARCHAR(120),
-  state VARCHAR(80),
-  country VARCHAR(80),
-  current_site VARCHAR(255),
-  instagram VARCHAR(160),
-  linkedin VARCHAR(160),
-  other_social VARCHAR(255),
-  how_found VARCHAR(120),
-  answers JSONB NOT NULL DEFAULT '{}'::jsonb,
-  status VARCHAR(30) NOT NULL DEFAULT 'novo' CHECK (status IN (
-    'novo','em_analise','contato_realizado','orcamento_enviado','aguardando_cliente',
-    'aprovado','nao_aprovado','projeto_iniciado','concluido'
-  )),
-  internal_notes TEXT,
-  consent_at TIMESTAMP NOT NULL,
-  source_url VARCHAR(255),
-  ip_address VARCHAR(45),
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
-);
-CREATE INDEX IF NOT EXISTS idx_briefings_status_created ON briefings (status, created_at);
-CREATE INDEX IF NOT EXISTS idx_briefings_product ON briefings (product);
-CREATE INDEX IF NOT EXISTS idx_briefings_email ON briefings (email);
-CREATE INDEX IF NOT EXISTS idx_briefings_ip_created ON briefings (ip_address, created_at);
+$pdo = db();
+$sql = <<<SQL
+ALTER TABLE contacts ADD COLUMN IF NOT EXISTS site VARCHAR(20) NOT NULL DEFAULT 'gib';
 
 -- Catálogo do site do Professor Jorge Dadalt (livros/e-books, cursos/mentorias,
 -- negócios digitais), gerenciado neste mesmo admin e servido via api/jd-catalog.php.
@@ -254,3 +72,17 @@ INSERT INTO jd_catalog_items (category, item_type, slug, url_slug, type_label, t
 ('negocios-digitais', 'negocio', 'ecommerce', 'criacao-de-ecommerce', 'Solução digital', 'Criação de E-commerce', '/images/negocio-ecommerce.png', 'Uma loja online pronta para vender <em>no Brasil ou no mundo</em>.', 'Estrutura comercial, tecnológica e operacional para apresentar produtos, receber pagamentos e desenvolver vendas com segurança.', 'Uma loja online preparada para vender com segurança no mercado local, nacional ou internacional.', '["Loja completa, responsiva e fácil de navegar","Integração com meios de pagamento adequados","Estrutura pensada para gestão e crescimento"]'::jsonb, NULL, 'Conhecer', '/contato?assunto=projeto-ecommerce', '[]'::jsonb, 'Sua loja online facilita a compra — ou faz o cliente desistir antes do pagamento?', '["Um e-commerce não é apenas um catálogo. Ele precisa transmitir segurança, tornar a escolha simples e conduzir o cliente até a finalização da compra.","O projeto considera posicionamento, arquitetura de produtos, experiência de compra, pagamentos e preparação para campanhas."]'::jsonb, '[["01","Experiência de compra","Produtos organizados e caminhos claros até o checkout."],["02","Operação segura","Integrações adequadas ao mercado e ao modelo do negócio."],["03","Escalabilidade","Base preparada para ampliar produtos, regiões e campanhas."]]'::jsonb, '["Marcas que desejam iniciar vendas online","Lojas físicas em processo de digitalização","Empresas que querem vender nacionalmente","Projetos preparados para alcançar mercados internacionais"]'::jsonb, NULL, NULL, NULL, '[]'::jsonb),
 ('negocios-digitais', 'negocio', 'apps', 'apps-dedicados', 'Solução digital', 'Apps Dedicados', '/images/negocio-apps-dedicados.png', 'Transforme uma necessidade real em um aplicativo <em>seguro e escalável</em>.', 'Desenvolvimento sob medida para conectar sua ideia às pessoas, integrar processos e criar novas possibilidades de negócio.', 'Aplicações personalizadas para integrar processos, atender pessoas e criar novos modelos de negócio.', '["Solução desenhada para o problema do usuário","Integração com sistemas e processos existentes","Arquitetura preparada para segurança e evolução"]'::jsonb, NULL, 'Conhecer', '/contato?assunto=projeto-app-dedicado', '[]'::jsonb, 'Sua ideia precisa de um aplicativo — ou de uma solução digital capaz de produzir resultado?', '["Tecnologia sem propósito apenas transfere complexidade para uma nova tela. Um bom aplicativo nasce de um problema claro, de usuários reais e de objetivos mensuráveis.","Partimos do diagnóstico para definir funcionalidades, fluxos, integrações e etapas de desenvolvimento com visão de longo prazo."]'::jsonb, '[["01","Sob medida","Funcionalidades ligadas às necessidades do negócio."],["02","Integração","Conexão com dados, processos e sistemas adequados."],["03","Evolução","Base tecnológica preparada para novas etapas."]]'::jsonb, '["Empresas que precisam digitalizar processos próprios","Negócios com uma nova proposta de serviço","Projetos que exigem experiência móvel dedicada","Organizações que buscam eficiência e escala"]'::jsonb, NULL, NULL, NULL, '[]'::jsonb)
 ON CONFLICT (slug) DO NOTHING;
+
+SQL;
+
+try {
+    foreach (preg_split('/;\s*(?:\r?\n|$)/', $sql) as $statement) {
+        if (trim($statement) !== '') $pdo->exec($statement);
+    }
+    $count = (int) $pdo->query('SELECT COUNT(*) FROM jd_catalog_items')->fetchColumn();
+    echo "OK: tabela 'jd_catalog_items' pronta, coluna 'contacts.site' pronta.\n";
+    echo "Itens no catálogo agora: {$count} (esperado: 14 na primeira execução).\n";
+    echo "Acesse /admin/jd-catalog.php para conferir. Depois APAGUE este arquivo (migrate-jd-catalog.php).\n";
+} catch (Throwable $e) {
+    echo "ERRO: " . $e->getMessage() . "\n";
+}
