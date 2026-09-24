@@ -23,4 +23,25 @@ if($_SERVER['REQUEST_METHOD']==='POST'){
         $error='E-mail ou senha inválidos.';
     }
 }
-?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acesso administrativo | Global Invest Brasil</title><link rel="stylesheet" href="/admin/admin.css"></head><body><main class="login"><section class="card"><span class="kicker">Central de conteúdo</span><h1>Global Invest Brasil</h1><p class="muted">Entre com seu e-mail e senha administrativos.</p><?php if(isset($_GET['installed'])):?><p class="notice">Instalação concluída. Faça seu primeiro acesso.</p><?php endif;?><?php if($error):?><p class="error"><?=h($error)?></p><?php endif;?><form method="post"><input type="hidden" name="csrf" value="<?=csrf()?>"><label>E-mail<input type="email" name="email" required autofocus></label><label style="margin-top:15px">Senha<input type="password" name="password" required></label><button style="margin-top:18px">Entrar</button></form></section></main></body></html>
+?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Acesso administrativo | Global Invest Brasil</title><link rel="stylesheet" href="/admin/admin.css"></head><body>
+<div class="login-screen">
+  <aside class="login-side">
+    <div class="brand"><span class="brand-mark">GI</span><span class="brand-text">Global <b class="brand-accent">Invest</b><br>Brasil</span></div>
+    <div>
+      <h2>Um único painel para toda a operação digital.</h2>
+      <p>Produtos, publicações, blog, formulários de projeto e o catálogo do Professor Jorge Dadalt — tudo em um só lugar, com dados reais e atualizados.</p>
+    </div>
+    <div class="login-foot">© <?=date('Y')?> Global Invest Brasil. Acesso restrito à equipe.</div>
+  </aside>
+  <div class="login-form-wrap">
+    <div class="login">
+      <span class="kicker">Central de conteúdo</span>
+      <h1>Acesso administrativo</h1>
+      <p class="muted" style="margin:0 0 26px">Entre com seu e-mail e senha para continuar.</p>
+      <?php if(isset($_GET['installed'])):?><p class="notice" style="margin-bottom:16px">Instalação concluída. Faça seu primeiro acesso.</p><?php endif;?>
+      <?php if($error):?><p class="error" style="margin-bottom:16px"><?=h($error)?></p><?php endif;?>
+      <form method="post"><input type="hidden" name="csrf" value="<?=csrf()?>"><label>E-mail<input type="email" name="email" required autofocus></label><label style="margin-top:15px">Senha<input type="password" name="password" required></label><button style="margin-top:20px;width:100%;padding:13px">Entrar</button></form>
+    </div>
+  </div>
+</div>
+</body></html>

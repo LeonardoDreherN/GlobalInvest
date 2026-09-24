@@ -44,7 +44,10 @@ if ($error): ?><p class="error"><?=h($error)?></p><?php endif; ?>
 <a href="https://www.jorgedadalt.com" target="_blank" rel="noopener">jorgedadalt.com</a>.
 Editar aqui atualiza o site automaticamente (sem precisar reenviar arquivos).</p>
 
-<div class="actions" style="margin-bottom:6px"><a class="button orange" href="/admin/jd-catalog-edit.php?action=new">+ Cadastrar item</a></div>
+<div class="actions" style="margin-bottom:6px">
+  <a class="button orange" href="/admin/jd-catalog-edit.php?action=new"><?=admin_icon('plus-circle')?> Cadastrar item</a>
+  <span class="badge" style="align-self:center"><?=count($rows)?> <?=count($rows)===1?'item':'itens'?> no total</span>
+</div>
 
 <section class="card">
   <form class="grid filter-form" method="get">
@@ -68,10 +71,11 @@ Editar aqui atualiza o site automaticamente (sem precisar reenviar arquivos).</p
 
 <section class="card table-wrap">
   <table>
-    <thead><tr><th>Título</th><th>Categoria / Tipo</th><th>Status</th><th>Atualizado</th><th></th></tr></thead>
+    <thead><tr><th></th><th>Título</th><th>Categoria / Tipo</th><th>Status</th><th>Atualizado</th><th></th></tr></thead>
     <tbody>
       <?php foreach ($rows as $r): $liveUrl = 'https://www.jorgedadalt.com/' . $r['category'] . '/' . $r['url_slug'] . '/'; ?>
       <tr>
+        <td><?php if ($r['image_url']): $img = str_starts_with((string) $r['image_url'], 'http') ? $r['image_url'] : 'https://www.jorgedadalt.com' . $r['image_url']; ?><img class="row-thumb" src="<?=h($img)?>" alt=""><?php endif; ?></td>
         <td><b><?=h($r['title'])?></b><br><small class="muted"><?=h($r['slug'])?></small></td>
         <td><?=h($categoryLabels[$r['category']] ?? $r['category'])?><br><small class="muted"><?=h($typeLabels[$r['item_type']] ?? $r['item_type'])?></small></td>
         <td><span class="badge" data-status="<?=h($r['status'])?>"><?=$r['status']==='published'?'Publicado':'Rascunho'?></span></td>
@@ -88,7 +92,7 @@ Editar aqui atualiza o site automaticamente (sem precisar reenviar arquivos).</p
         </td>
       </tr>
       <?php endforeach; if (!$rows): ?>
-      <tr><td colspan="5">Nenhum item encontrado com estes filtros.</td></tr>
+      <tr><td colspan="6">Nenhum item encontrado com estes filtros.</td></tr>
       <?php endif; ?>
     </tbody>
   </table>
