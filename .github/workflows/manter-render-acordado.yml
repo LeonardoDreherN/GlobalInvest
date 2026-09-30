@@ -1,0 +1,26 @@
+# Mantém o backend do Render acordado (o plano gratuito dorme após 15 min sem acesso
+# e o próximo visitante espera 30-60s na tela de carregamento do Render).
+# Acessa /api/health a cada 10 minutos; como esse endpoint consulta o banco, também
+# evita que o Supabase gratuito seja pausado por inatividade.
+# Gratuito: repositórios públicos têm GitHub Actions ilimitado.
+# Obs.: o GitHub pode atrasar execuções agendadas em alguns minutos nos horários de pico.
+name: Manter Render acordado
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Acessar /api/health
+        run: |
+          for i in 1 2 3; do
+            code=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://globalinvest.onrender.com/api/health) && echo "HTTP $code" && [ "$code" = "200" ] && exit 0
+            echo "Tentativa $i falhou (HTTP $code), tentando de novo..."
+            sleep 20
+          done
+          exit 1

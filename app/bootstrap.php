@@ -30,11 +30,25 @@ function db(): PDO {
     if ($pdo instanceof PDO) return $pdo;
     $c = app_config();
     $dsn = 'pgsql:host=' . $c['db_host'] . ';port=' . ($c['db_port'] ?? '5432') . ';dbname=' . $c['db_name'] . ';sslmode=' . ($c['db_sslmode'] ?? 'require');
-    $pdo = new PDO($dsn, $c['db_user'], $c['db_password'], [
+    $options = [
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
-    ]);
+    ];
+    // Conexão persistente: cada processo do Apache reaproveita a conexão com o Supabase entre
+    // requisições, em vez de refazer SSL + autenticação toda vez (economiza ~2s por acesso).
+    // Desligue com a variável de ambiente DB_PERSISTENT=0. O número de conexões é limitado
+    // pelo MaxRequestWorkers definido no Dockerfile.
+    if (getenv('DB_PERSISTENT') !== '0') {
+        try {
+            $pdo = new PDO($dsn, $c['db_user'], $c['db_password'], $options + [PDO::ATTR_PERSISTENT => true]);
+            $pdo->query('SELECT 1'); // conexão guardada pode ter caído (reinício do banco, timeout)
+            return $pdo;
+        } catch (PDOException $e) {
+            $pdo = null; // cai para uma conexão nova e comum abaixo
+        }
+    }
+    $pdo = new PDO($dsn, $c['db_user'], $c['db_password'], $options);
     return $pdo;
 }
 
