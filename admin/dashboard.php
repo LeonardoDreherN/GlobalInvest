@@ -36,14 +36,6 @@ function admin_time_ago(string $datetime): string {
     return date('d/m/Y', strtotime($datetime . ' UTC'));
 }
 
-function admin_week_delta(PDO $pdo, string $table): array {
-    try {
-        $cur = (int) $pdo->query("SELECT COUNT(*) FROM {$table} WHERE created_at >= NOW() - INTERVAL '7 days'")->fetchColumn();
-        $prev = (int) $pdo->query("SELECT COUNT(*) FROM {$table} WHERE created_at >= NOW() - INTERVAL '14 days' AND created_at < NOW() - INTERVAL '7 days'")->fetchColumn();
-        return ['delta' => $cur - $prev];
-    } catch (Throwable $e) { return ['delta' => 0]; }
-}
-
 function admin_daily_counts(PDO $pdo, string $table, int $days = 14): array {
     $counts = array_fill(0, $days, 0);
     try {
@@ -95,18 +87,29 @@ function admin_bar_chart(array $values, array $labels): string {
     return $svg;
 }
 
-$counts = [];
-foreach (['products' => 'Produtos', 'publications' => 'Publicações', 'blog_posts' => 'Posts no blog'] as $t => $n) {
-    $counts[$n] = (int) $pdo->query("SELECT COUNT(*) FROM {$t}")->fetchColumn();
-}
+// Cada consulta custa uma ida e volta ao Supabase, então as contagens são agrupadas
+// em uma consulta por tabela-base em vez de uma consulta por número.
+$weekCounts = "COUNT(*) FILTER (WHERE created_at >= NOW() - INTERVAL '7 days') AS cur,
+    COUNT(*) FILTER (WHERE created_at >= NOW() - INTERVAL '14 days' AND created_at < NOW() - INTERVAL '7 days') AS prev,
+    COUNT(*) FILTER (WHERE created_at >= date_trunc('month', NOW())) AS month";
+$core = $pdo->query("SELECT
+    (SELECT COUNT(*) FROM products) AS products,
+    (SELECT COUNT(*) FROM publications) AS publications,
+    (SELECT COUNT(*) FROM blog_posts) AS blog_posts,
+    c.*
+    FROM (SELECT COUNT(*) AS total, {$weekCounts} FROM contacts) c")->fetch();
+$counts = ['Produtos' => (int) $core['products'], 'Publicações' => (int) $core['publications'], 'Posts no blog' => (int) $core['blog_posts']];
 try { $catalogTotal = (int) $pdo->query('SELECT COUNT(*) FROM jd_catalog_items')->fetchColumn(); } catch (Throwable $e) { $catalogTotal = 0; }
 
-$contactsTotal = (int) $pdo->query('SELECT COUNT(*) FROM contacts')->fetchColumn();
-$contactsDelta = admin_week_delta($pdo, 'contacts')['delta'];
+$contactsTotal = (int) $core['total'];
+$contactsDelta = (int) $core['cur'] - (int) $core['prev'];
 $contactsSpark = admin_daily_counts($pdo, 'contacts');
 
-try { $briefingsNovo = (int) $pdo->query("SELECT COUNT(*) FROM briefings WHERE status='novo'")->fetchColumn(); } catch (Throwable $e) { $briefingsNovo = 0; }
-$briefingsDelta = admin_week_delta($pdo, 'briefings')['delta'];
+try {
+    $briefingStats = $pdo->query("SELECT COUNT(*) FILTER (WHERE status = 'novo') AS novo, {$weekCounts} FROM briefings")->fetch();
+} catch (Throwable $e) { $briefingStats = ['novo' => 0, 'cur' => 0, 'prev' => 0, 'month' => 0]; }
+$briefingsNovo = (int) $briefingStats['novo'];
+$briefingsDelta = (int) $briefingStats['cur'] - (int) $briefingStats['prev'];
 $briefingsSpark = admin_daily_counts($pdo, 'briefings');
 
 $activitySeries = [];
@@ -116,13 +119,7 @@ for ($i = 0; $i < 14; $i++) {
     $activityLabels[$i] = date('d/m', strtotime('-' . (13 - $i) . ' days'));
 }
 
-$leadsThisMonth = 0;
-try {
-    $leadsThisMonth = (int) $pdo->query("SELECT COUNT(*) FROM contacts WHERE created_at >= date_trunc('month', NOW())")->fetchColumn()
-        + (int) $pdo->query("SELECT COUNT(*) FROM briefings WHERE created_at >= date_trunc('month', NOW())")->fetchColumn();
-} catch (Throwable $e) {
-    $leadsThisMonth = (int) $pdo->query("SELECT COUNT(*) FROM contacts WHERE created_at >= date_trunc('month', NOW())")->fetchColumn();
-}
+$leadsThisMonth = (int) $core['month'] + (int) $briefingStats['month'];
 
 $feed = [];
 $recentContacts = $pdo->query('SELECT name, subject, site, created_at FROM contacts ORDER BY created_at DESC LIMIT 6')->fetchAll();

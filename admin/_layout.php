@@ -3,6 +3,7 @@ require_once __DIR__ . '/../app/auth.php';
 
 function admin_current_site(string $path): string {
     if (in_array($path, ['jd-catalog.php', 'jd-catalog-edit.php'], true)) return 'jorgedadalt';
+    if ($path === 'ecovila.php') return 'ecovila';
     if ($path === 'manage.php' && ($_GET['entity'] ?? '') === 'contacts' && ($_GET['site'] ?? '') === 'jorgedadalt') return 'jorgedadalt';
     return 'gib';
 }
@@ -30,6 +31,7 @@ function admin_icon(string $name): string {
         'arrow-right' => '<path d="M5 12h14M13 6l6 6-6 6"/>',
         'users' => '<circle cx="9" cy="8" r="3.2"/><path d="M2.5 20c1.1-3.5 3.4-5.3 6.5-5.3s5.4 1.8 6.5 5.3"/><path d="M16 4.8c1.6.4 2.8 1.8 2.8 3.5 0 1.6-1.1 3-2.6 3.4"/><path d="M18.5 14.8c2 .6 3.4 2.2 4 4.7"/>',
         'target' => '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.3"/>',
+        'leaf' => '<path d="M5 19c0-8 5-14 15-15-1 10-7 15-15 15Z"/><path d="M5 19c3-4 6-7 10-9"/>',
     ];
     $inner = $paths[$name] ?? '';
     return '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' . $inner . '</svg>';
@@ -52,6 +54,7 @@ function admin_header(string $title): void { $a=require_admin(); $path=basename(
 <div class="site-switcher" role="tablist">
   <a class="site-tab <?=$site==='gib'?'active':''?>" href="/admin/dashboard.php"><?=admin_icon('building')?><span>Global Invest</span></a>
   <a class="site-tab <?=$site==='jorgedadalt'?'active':''?>" href="/admin/jd-catalog.php"><?=admin_icon('user')?><span>Jorge Dadalt</span></a>
+  <a class="site-tab soon <?=$site==='ecovila'?'active':''?>" href="/admin/ecovila.php" title="Ecovila Mundo Verde (em breve)"><?=admin_icon('leaf')?><span>Ecovila</span><em>Em breve</em></a>
 </div>
 
 <nav class="nav">
@@ -67,6 +70,9 @@ function admin_header(string $title): void { $a=require_admin(); $path=basename(
 <span class="nav-group-label">Sistema</span>
 <a class="<?=$path==='settings.php'?'on':''?>" href="/admin/settings.php"><?=admin_icon('sliders')?>SEO e AdSense</a>
 <div class="nav-external"><a href="/" target="_blank"><?=admin_icon('external-link')?>Visualizar site ↗</a></div>
+<?php elseif ($site === 'ecovila'): ?>
+<span class="nav-group-label">Ecovila Mundo Verde</span>
+<a class="on" href="/admin/ecovila.php"><?=admin_icon('leaf')?>Em breve</a>
 <?php else: ?>
 <span class="nav-group-label">Professor Jorge Dadalt</span>
 <a class="<?=$path==='jd-catalog.php'||$path==='jd-catalog-edit.php'?'on':''?>" href="/admin/jd-catalog.php"><?=admin_icon('book')?>Livros, cursos e soluções</a>

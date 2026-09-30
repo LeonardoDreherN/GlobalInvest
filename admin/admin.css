@@ -350,3 +350,14 @@ textarea[name=content] { min-height: 340px; font-family: ui-monospace, SFMono-Re
   .dash-hero { flex-direction: column; align-items: flex-start; }
   .dash-hero-figure { text-align: left; }
 }
+
+/* ---------- Ecovila Mundo Verde (em breve) ---------- */
+.site-tab.soon em { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; line-height: 1; padding: 2px 5px; border-radius: 99px; background: rgba(255, 255, 255, .12); color: rgba(255, 255, 255, .7); }
+.site-tab.soon:not(.active) { color: rgba(255, 255, 255, .45); }
+.site-tab.soon.active em { background: #e7f6ec; color: #166534; }
+.soon-card { text-align: center; padding: 48px 24px; }
+.soon-card h2 { margin: 14px 0 8px; }
+.soon-card p { max-width: 520px; margin: 0 auto; }
+.soon-icon { width: 64px; height: 64px; margin: 0 auto 14px; display: grid; place-items: center; border-radius: 50%; background: #e7f6ec; color: #16803c; }
+.soon-icon svg { width: 30px; height: 30px; }
+.soon-badge { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; background: #fff4e5; color: #9a3412; }

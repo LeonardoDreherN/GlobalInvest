@@ -34,6 +34,11 @@ function db(): PDO {
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
         PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         PDO::ATTR_EMULATE_PREPARES => false,
+        // Envia cada consulta com os parâmetros em UMA ida e volta ao banco (PQexecParams),
+        // em vez de preparar + executar + descartar (3 idas e voltas). Os parâmetros continuam
+        // separados do SQL (sem risco de SQL injection). Com o Supabase distante, isso reduz
+        // cada consulta de ~0,5s para ~0,18s.
+        PDO::PGSQL_ATTR_DISABLE_PREPARES => true,
     ];
     // Conexão persistente: cada processo do Apache reaproveita a conexão com o Supabase entre
     // requisições, em vez de refazer SSL + autenticação toda vez (economiza ~2s por acesso).
