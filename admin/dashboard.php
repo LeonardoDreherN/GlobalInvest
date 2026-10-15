@@ -124,7 +124,7 @@ $leadsThisMonth = (int) $core['month'] + (int) $briefingStats['month'];
 $feed = [];
 $recentContacts = $pdo->query('SELECT name, subject, site, created_at FROM contacts ORDER BY created_at DESC LIMIT 6')->fetchAll();
 foreach ($recentContacts as $row) {
-    $feed[] = ['icon' => 'mail', 'color' => 'blue', 'title' => 'Novo contato de ' . $row['name'], 'sub' => $row['subject'] . ' · ' . (($row['site'] ?? 'gib') === 'jorgedadalt' ? 'Jorge Dadalt' : 'Global Invest'), 'time' => $row['created_at']];
+    $feed[] = ['icon' => 'mail', 'color' => 'blue', 'title' => 'Novo contato de ' . $row['name'], 'sub' => $row['subject'] . ' · ' . (['jorgedadalt' => 'Jorge Dadalt', 'ecovila' => 'Ecovila'][$row['site'] ?? 'gib'] ?? 'Global Invest'), 'time' => $row['created_at']];
 }
 try {
     $recentBriefings = $pdo->query('SELECT full_name, product, reference_code, created_at FROM briefings ORDER BY created_at DESC LIMIT 6')->fetchAll();
@@ -148,7 +148,7 @@ admin_header('Painel principal');
   <div class="dash-hero-copy">
     <span><?=h($hoje)?></span>
     <h1><?=h($saudacao . ($primeiroNome !== '' ? ', ' . $primeiroNome : ''))?></h1>
-    <p>Gestão direta dos dois sites: crie, edite, publique e acompanhe leads em um só lugar.</p>
+    <p>Gestão direta dos três sites: crie, edite, publique e acompanhe leads em um só lugar.</p>
   </div>
   <div class="dash-hero-figure">
     <b class="count-up" data-count="<?=$leadsThisMonth?>">0</b>
@@ -169,7 +169,7 @@ admin_header('Painel principal');
   <div>
     <section class="card chart-card">
       <div class="card-header">
-        <div><h2>Atividade dos últimos 14 dias</h2><p class="muted">Contatos + formulários de projeto recebidos por dia, nos dois sites.</p></div>
+        <div><h2>Atividade dos últimos 14 dias</h2><p class="muted">Contatos + formulários de projeto recebidos por dia, nos três sites.</p></div>
         <span class="badge"><?=admin_icon('bar-chart')?> <?=array_sum($activitySeries)?> no período</span>
       </div>
       <div class="chart-wrap">

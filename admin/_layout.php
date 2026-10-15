@@ -3,7 +3,8 @@ require_once __DIR__ . '/../app/auth.php';
 
 function admin_current_site(string $path): string {
     if (in_array($path, ['jd-catalog.php', 'jd-catalog-edit.php'], true)) return 'jorgedadalt';
-    if ($path === 'ecovila.php') return 'ecovila';
+    if (in_array($path, ['ecovila.php', 'ecovila-lote.php'], true)) return 'ecovila';
+    if ($path === 'manage.php' && ($_GET['entity'] ?? '') === 'contacts' && ($_GET['site'] ?? '') === 'ecovila') return 'ecovila';
     if ($path === 'manage.php' && ($_GET['entity'] ?? '') === 'contacts' && ($_GET['site'] ?? '') === 'jorgedadalt') return 'jorgedadalt';
     return 'gib';
 }
@@ -54,7 +55,7 @@ function admin_header(string $title): void { $a=require_admin(); $path=basename(
 <div class="site-switcher" role="tablist">
   <a class="site-tab <?=$site==='gib'?'active':''?>" href="/admin/dashboard.php"><?=admin_icon('building')?><span>Global Invest</span></a>
   <a class="site-tab <?=$site==='jorgedadalt'?'active':''?>" href="/admin/jd-catalog.php"><?=admin_icon('user')?><span>Jorge Dadalt</span></a>
-  <a class="site-tab soon <?=$site==='ecovila'?'active':''?>" href="/admin/ecovila.php" title="Ecovila Mundo Verde (em breve)"><?=admin_icon('leaf')?><span>Ecovila</span><em>Em breve</em></a>
+  <a class="site-tab <?=$site==='ecovila'?'active':''?>" href="/admin/ecovila.php" title="Ecovila Mundo Verde"><?=admin_icon('leaf')?><span>Ecovila</span></a>
 </div>
 
 <nav class="nav">
@@ -65,14 +66,16 @@ function admin_header(string $title): void { $a=require_admin(); $path=basename(
 <a class="<?=$path==='manage.php'&&($_GET['entity']??'')==='publications'?'on':''?>" href="/admin/manage.php?entity=publications"><?=admin_icon('file-text')?>Publicações</a>
 <a class="<?=$path==='manage.php'&&($_GET['entity']??'')==='blog_posts'?'on':''?>" href="/admin/manage.php?entity=blog_posts"><?=admin_icon('edit')?>Blog</a>
 <a class="<?=$path==='categories.php'?'on':''?>" href="/admin/categories.php"><?=admin_icon('tag')?>Categorias</a>
-<a class="<?=$path==='manage.php'&&($_GET['entity']??'')==='contacts'&&($_GET['site']??'')!=='jorgedadalt'?'on':''?>" href="/admin/manage.php?entity=contacts&site=gib"><?=admin_icon('mail')?>Contatos</a>
+<a class="<?=$path==='manage.php'&&($_GET['entity']??'')==='contacts'&&!in_array($_GET['site']??'',['jorgedadalt','ecovila'],true)?'on':''?>" href="/admin/manage.php?entity=contacts&site=gib"><?=admin_icon('mail')?>Contatos</a>
 <a class="<?=$path==='briefings.php'||$path==='briefing-view.php'?'on':''?>" href="/admin/briefings.php"><?=admin_icon('clipboard')?>Formulários de projeto</a>
 <span class="nav-group-label">Sistema</span>
 <a class="<?=$path==='settings.php'?'on':''?>" href="/admin/settings.php"><?=admin_icon('sliders')?>SEO e AdSense</a>
 <div class="nav-external"><a href="/" target="_blank"><?=admin_icon('external-link')?>Visualizar site ↗</a></div>
 <?php elseif ($site === 'ecovila'): ?>
 <span class="nav-group-label">Ecovila Mundo Verde</span>
-<a class="on" href="/admin/ecovila.php"><?=admin_icon('leaf')?>Em breve</a>
+<a class="<?=$path==='ecovila.php'||$path==='ecovila-lote.php'?'on':''?>" href="/admin/ecovila.php"><?=admin_icon('target')?>Lotes</a>
+<a class="<?=$path==='manage.php'?'on':''?>" href="/admin/manage.php?entity=contacts&site=ecovila"><?=admin_icon('mail')?>Contatos</a>
+<div class="nav-external"><a href="https://ecovila-mundo-verde.vercel.app" target="_blank" rel="noopener"><?=admin_icon('external-link')?>Visualizar site ↗</a></div>
 <?php else: ?>
 <span class="nav-group-label">Professor Jorge Dadalt</span>
 <a class="<?=$path==='jd-catalog.php'||$path==='jd-catalog-edit.php'?'on':''?>" href="/admin/jd-catalog.php"><?=admin_icon('book')?>Livros, cursos e soluções</a>

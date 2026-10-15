@@ -351,13 +351,17 @@ textarea[name=content] { min-height: 340px; font-family: ui-monospace, SFMono-Re
   .dash-hero-figure { text-align: left; }
 }
 
-/* ---------- Ecovila Mundo Verde (em breve) ---------- */
-.site-tab.soon em { font-style: normal; font-size: 9px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; line-height: 1; padding: 2px 5px; border-radius: 99px; background: rgba(255, 255, 255, .12); color: rgba(255, 255, 255, .7); }
-.site-tab.soon:not(.active) { color: rgba(255, 255, 255, .45); }
-.site-tab.soon.active em { background: #e7f6ec; color: #166534; }
-.soon-card { text-align: center; padding: 48px 24px; }
-.soon-card h2 { margin: 14px 0 8px; }
-.soon-card p { max-width: 520px; margin: 0 auto; }
-.soon-icon { width: 64px; height: 64px; margin: 0 auto 14px; display: grid; place-items: center; border-radius: 50%; background: #e7f6ec; color: #16803c; }
-.soon-icon svg { width: 30px; height: 30px; }
-.soon-badge { display: inline-block; font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 4px 10px; border-radius: 99px; background: #fff4e5; color: #9a3412; }
+/* ---------- Ecovila Mundo Verde (admin/ecovila.php, ecovila-lote.php) ---------- */
+.eco-summary { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; margin: 14px 0; }
+.eco-stat { display: block; background: #fff; border: 1px solid #dce8e5; border-radius: 14px; padding: 14px 16px; text-decoration: none; color: inherit; }
+.eco-stat span { display: block; font-size: 12px; font-weight: 700; color: #5f6d70; text-transform: uppercase; letter-spacing: .04em; }
+.eco-stat b { font-size: 28px; }
+.eco-disponivel b { color: #166534; } .eco-reservado b { color: #92400e; } .eco-vendido b { color: #8b1e1e; }
+.eco-contacts:hover { border-color: #16803c; }
+.eco-status-form select { min-width: 140px; margin: 0; }
+.eco-check { display: flex; align-items: center; gap: 8px; font-weight: 600; align-self: end; padding-bottom: 12px; }
+.eco-check input { width: auto; margin: 0; }
+.eco-specs h2 { margin: 6px 0 4px; font-size: 18px; }
+.eco-spec-row { display: grid; grid-template-columns: 1fr 130px; gap: 12px; align-items: end; }
+.eco-preview { max-width: 360px; width: 100%; border-radius: 12px; border: 1px solid #dce8e5; }
+@media (max-width: 800px) { .eco-summary { grid-template-columns: 1fr 1fr; } .eco-spec-row { grid-template-columns: 1fr; } .eco-check { padding-bottom: 0; } }
