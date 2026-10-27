@@ -37,7 +37,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preload" as="image" href="/assets/images/ebook-da-ideia-ao-lucro.webp" fetchpriority="high">
+<link rel="preload" as="image" href="/assets/images/livro-da-ideia-ao-lucro-capa.jpeg" fetchpriority="high">
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 
 <style>
@@ -212,6 +212,8 @@ section,.card,.box{break-inside:avoid}
   background:radial-gradient(ellipse at center,rgba(6,54,58,.28),transparent 70%)}
 .bookframe img{max-width:190px;width:100%;position:relative;z-index:1;
   filter:drop-shadow(0 18px 26px rgba(6,54,58,.30))}
+.bookframe__images{position:relative;z-index:1;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:8px;width:100%}
+.bookframe__images img{width:100%;max-width:none;max-height:230px;object-fit:contain}
 .bookframe span{position:relative;z-index:1;margin-top:16px;font-family:var(--mono);font-size:9.5px;
   letter-spacing:.16em;text-transform:uppercase;color:var(--gold-dp)}
 
@@ -504,7 +506,10 @@ section,.card,.box{break-inside:avoid}
       "@id": "https://globalinvestbrasil.com/da-ideia-ao-lucro/#ebook",
       "name": "Da Ideia ao Lucro",
       "description": "E-book de 224 páginas com o método do Professor Jorge Dadalt para diagnosticar se um negócio é rentável e viável. Acompanha planilha de diagnóstico e guia de decisão.",
-      "image": "https://globalinvestbrasil.com/assets/images/ebook-da-ideia-ao-lucro.webp",
+      "image": [
+        "https://globalinvestbrasil.com/assets/images/livro-da-ideia-ao-lucro-capa.jpeg",
+        "https://globalinvestbrasil.com/assets/images/livro-da-ideia-ao-lucro-contracapa.jpeg"
+      ],
       "author": { "@id": "https://globalinvestbrasil.com/da-ideia-ao-lucro/#autor" },
       "publisher": { "@id": "https://globalinvestbrasil.com/da-ideia-ao-lucro/#organizacao" },
       "brand": { "@id": "https://globalinvestbrasil.com/da-ideia-ao-lucro/#organizacao" },
@@ -593,7 +598,7 @@ section,.card,.box{break-inside:avoid}
           <div class="vv__s">Professor Jorge Dadalt<br>explica o método</div>
         </div>
       </div>
-      <img class="vstage__book" decoding="async" src="/assets/images/ebook-da-ideia-ao-lucro.webp" alt="Capa do e-book Da Ideia ao Lucro, do Professor Jorge Dadalt" fetchpriority="high">
+      <img class="vstage__book" decoding="async" src="/assets/images/livro-da-ideia-ao-lucro-capa.jpeg" alt="Capa do livro Da Ideia ao Lucro, do Professor Jorge Dadalt" fetchpriority="high">
     </div>
   </div>
 </header>
@@ -855,8 +860,11 @@ section,.card,.box{break-inside:avoid}
       <div class="offer__b">
         <div class="offer__grid">
           <div class="bookframe">
-            <img decoding="async" src="/assets/images/ebook-da-ideia-ao-lucro.webp" alt="E-book Método Da Ideia ao Lucro, do Professor Jorge Dadalt" loading="lazy">
-            <span>224 páginas · PDF</span>
+            <div class="bookframe__images">
+              <img decoding="async" src="/assets/images/livro-da-ideia-ao-lucro-capa.jpeg" alt="Capa do livro Da Ideia ao Lucro" loading="lazy">
+              <img decoding="async" src="/assets/images/livro-da-ideia-ao-lucro-contracapa.jpeg" alt="Contracapa do livro Da Ideia ao Lucro" loading="lazy">
+            </div>
+            <span>Capa e contracapa · 224 páginas · PDF</span>
           </div>
           <div>
             <ul class="stack">
