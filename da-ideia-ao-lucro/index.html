@@ -947,27 +947,15 @@ section,.card,.box{break-inside:avoid}
 </div>
 
 <script>
-/* Checkout direto na Shopify (loja brcrystals.com). Resolve o ID da variante
-   do produto e manda todos os botoes .js-cta para /cart/{id}:1?return_to=/checkout.
-   Se falhar, cai na pagina do produto. */
+/* Checkout via Hotmart. Os três botões .js-cta apontam para o mesmo link
+   de pagamento; a própria página de checkout da Hotmart já deixa o
+   comprador escolher Pix ou cartão. */
 (function () {
-  var STORE = "https://brcrystals.com";
-  var HANDLE = "e-book-da-ideia-ao-lucro";
-  var fallback = STORE + "/products/" + HANDLE;
+  var HOTMART_CHECKOUT_URL = "https://pay.hotmart.com/C108203761V";
   var buttons = document.querySelectorAll(".js-cta");
 
-  function setHref(url) { buttons.forEach(function (el) { el.setAttribute("href", url); }); }
-  setHref(fallback);
-
-  fetch(STORE + "/products/" + HANDLE + ".js", { headers: { accept: "application/json" } })
-    .then(function (r) { return r.ok ? r.json() : null; })
-    .then(function (d) {
-      var v = d && d.variants && (d.variants.filter(function (x) { return x.available !== false; })[0] || d.variants[0]);
-      if (v && v.id) setHref(STORE + "/cart/" + v.id + ":1?return_to=/checkout");
-    })
-    .catch(function () {});
-
   buttons.forEach(function (el) {
+    if (el.getAttribute("href") === "#") el.setAttribute("href", HOTMART_CHECKOUT_URL);
     el.addEventListener("click", function () {
       if (typeof fbq === "function") fbq("track", "InitiateCheckout", { value: 97.0, currency: "BRL" });
       if (typeof gtag === "function") gtag("event", "begin_checkout", { value: 97.0, currency: "BRL", items: [{ item_id: "ebook-da-ideia-ao-lucro", item_name: "Da Ideia ao Lucro", price: 97.0 }] });
