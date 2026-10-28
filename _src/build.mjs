@@ -153,6 +153,10 @@ function layout(meta, body) {
   const title = meta.path === "/index.html" || meta.fullTitle ? meta.title : `${meta.title} | Global Invest Brasil`;
   const ogImage = BASE_URL + (meta.image || "/assets/images/globalinvest-social.jpg");
   const scripts = (meta.scripts || []).map((s) => `<script src="${s}?v=${ASSET_VERSION}" defer></script>`).join("\n");
+  // Dados estruturados: o "<" escapado evita que o conteúdo feche a tag antes da hora.
+  const jsonld = meta.jsonld
+    ? `<script type="application/ld+json">${JSON.stringify(meta.jsonld).replace(/</g, "\\u003c")}</script>`
+    : "";
   return `<!doctype html>
 <html lang="pt-BR">
 <head>
@@ -180,6 +184,7 @@ ${meta.head || ""}
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&display=swap">
 <link rel="stylesheet" href="/assets/css/site.css?v=${ASSET_VERSION}">
+${jsonld}
 <script>document.documentElement.classList.add("js")</script>
 <script src="/assets/js/site.js?v=${ASSET_VERSION}" defer></script>
 ${scripts}
