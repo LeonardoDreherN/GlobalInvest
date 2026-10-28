@@ -1,0 +1,52 @@
+<?php
+// Gerado por _src/build.mjs — não edite à mão.
+const SITE_ASSET_VERSION = '2026-10-28';
+function site_header(string $active = ''): string { return '<header class="site-header" data-header>
+  <div class="wrap header-row">
+    <a class="brand " href="/" aria-label="Global Invest Brasil, início"><picture><source srcset="/assets/images/site/logo-gib.webp" type="image/webp"><img class="brand-mark" src="/assets/images/site/logo-gib.png" alt="" width="159" height="144"></picture><span class="brand-name">Global Invest <b>Brasil</b></span></a>
+    <nav class="main-nav" id="menu" aria-label="Navegação principal" data-menu>
+      <ul class="nav-list"><li><a class="nav-link" href="/">Início</a></li><li class="has-sub"><a class="nav-link" href="/solucoes.html">Soluções</a><button class="sub-toggle" type="button" aria-expanded="false" aria-label="Abrir Soluções"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg></button><ul class="subnav"><li><a href="/ecommerce.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 8h14l-1 12H6L5 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg><span><strong>E-commerce</strong><small>Lojas Shopify e Nuvemshop</small></span></a></li><li><a href="/desenvolvimento.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m8 8-4 4 4 4M16 8l4 4-4 4M13.5 5l-3 14"/></svg><span><strong>Desenvolvimento</strong><small>Sites institucionais e apps</small></span></a></li><li><a href="/logistica.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 3 8 4.5v9L12 21l-8-4.5v-9L12 3Z"/><path d="m4 7.5 8 4.5 8-4.5M12 12v9"/></svg><span><strong>Logística e importação</strong><small>Compra, frete e envio internacional</small></span></a></li><li><a href="/mentorias.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5 5-2Z"/></svg><span><strong>Mentorias</strong><small>Do primeiro negócio ao patrimônio</small></span></a></li><li><a href="/seu-negocio.html"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3 5 6v6c0 4.5 3 7.5 7 9 4-1.5 7-4.5 7-9V6l-7-3Z"/><path d="m9 12 2 2 4-4"/></svg><span><strong>Proteja seu negócio</strong><small>Diagnóstico de riscos em 2 minutos</small></span></a></li><li><a href="/conteudos.html#livros"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 5a2 2 0 0 1 2-2h13v16H6a2 2 0 0 0-2 2V5Z"/><path d="M4 19a2 2 0 0 1 2-2h13"/></svg><span><strong>Livros e e-books</strong><small>E-book gratuito e obras do Prof. Dadalt</small></span></a></li></ul></li><li><a class="nav-link" href="/quem-somos.html">Quem somos</a></li><li><a class="nav-link" href="/conteudos.html">Conteúdos</a></li></ul>
+      <a class="btn btn-line nav-cta" href="/contato.html">Vamos conversar <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+    </nav>
+    <button class="menu-toggle" type="button" aria-controls="menu" aria-expanded="false" data-menu-toggle><span class="sr">Abrir menu</span><svg class="icon i-open" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 8h16M4 16h16"/></svg><svg class="icon i-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 6 12 12M18 6 6 18"/></svg></button>
+  </div>
+</header>'; }
+function site_footer(): string { return '<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div class="footer-brand">
+      <a class="brand brand-footer" href="/" aria-label="Global Invest Brasil, início"><picture><source srcset="/assets/images/site/logo-gib.webp" type="image/webp"><img class="brand-mark" src="/assets/images/site/logo-gib.png" alt="" width="159" height="144"></picture><span class="brand-name">Global Invest <b>Brasil</b></span></a>
+      <p class="footer-tag">Estratégia · Negócios · Tecnologia</p>
+      <p class="footer-note">Atividade educacional e de consultoria em negócios. Não fazemos gestão de recursos de terceiros nem recomendação de valores mobiliários.</p>
+    </div>
+    <nav class="footer-col" aria-label="Navegação do rodapé">
+      <h2>Navegação</h2>
+      <ul><li><a href="/">Início</a></li><li><a href="/solucoes.html">Soluções</a></li><li><a href="/quem-somos.html">Quem somos</a></li><li><a href="/conteudos.html">Conteúdos</a></li><li><a href="/conteudos.html#livros">Livros e e-books</a></li><li><a href="/ebook-gratuito/">E-book gratuito</a></li><li><a href="/contato.html">Contato</a></li></ul>
+    </nav>
+    <nav class="footer-col" aria-label="Soluções">
+      <h2>Soluções</h2>
+      <ul><li><a href="/ecommerce.html">E-commerce</a></li><li><a href="/desenvolvimento.html">Desenvolvimento</a></li><li><a href="/logistica.html">Logística e importação</a></li><li><a href="/mentorias.html">Mentorias</a></li><li><a href="/seu-negocio.html">Proteja seu negócio</a></li></ul>
+    </nav>
+    <div class="footer-col">
+      <h2>Fale com a gente</h2>
+      <ul class="footer-contact">
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="1.5"/><path d="m4 7 8 6 8-6"/></svg><a href="mailto:contato@globalinvestbrasil.com">contato@globalinvestbrasil.com</a></li>
+        <li><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5"/></svg><span>Florianópolis · SC</span></li>
+      </ul>
+    </div>
+    <form class="footer-news" data-newsletter novalidate>
+      <h2><label for="newsletter-email">Receba nossos conteúdos</label></h2>
+      <p>Novidades, tendências e análises de negócio direto no seu e-mail. Sem excesso.</p>
+      <div class="news-row">
+        <input id="newsletter-email" name="email" type="email" placeholder="Seu e-mail" autocomplete="email" required>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" aria-label="Inscrever e-mail"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+      </div>
+      <p class="form-status" data-status aria-live="polite"></p>
+    </form>
+  </div>
+  <div class="wrap footer-bottom">
+    <p>© 2026 Global Invest Brasil. Todos os direitos reservados.</p>
+    <p class="footer-legal"><a href="/privacidade.html">Política de privacidade</a><a href="/politicas-de-uso.html">Políticas de uso</a></p>
+    
+  </div>
+</footer>'; }

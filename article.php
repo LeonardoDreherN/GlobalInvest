@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/app/bootstrap.php';
 require_once __DIR__ . '/app/markdown.php';
+require_once __DIR__ . '/app/site-shell.php';
 
 $isBlog = ($_GET['type'] ?? '') === 'blog';
 $table = $isBlog ? 'blog_posts' : 'publications';
@@ -15,7 +16,7 @@ try {
     if (!$p) throw new RuntimeException('not found');
 } catch (Throwable $e) {
     http_response_code(404);
-    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Conteúdo não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=74"></head><body><main class="publication-page"><div class="container publication-article"><a class="publication-back" href="/">← Início</a><header class="publication-heading"><h1>Conteúdo não encontrado</h1></header><p class="publication-deck">A publicação que você procura não existe, saiu do ar ou o endereço está incorreto.</p><p><a class="publication-back" href="/publicacoes.html">Ver publicações</a></p></div></main></body></html><?php
+    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex"><title>Conteúdo não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:opsz,wght@6..72,300;6..72,400&display=swap"><link rel="stylesheet" href="/assets/css/site.css?v=<?= SITE_ASSET_VERSION ?>"><script src="/assets/js/site.js?v=<?= SITE_ASSET_VERSION ?>" defer></script></head><body><?= site_header() ?><main id="conteudo"><section class="page-hero"><div class="wrap"><p class="eyebrow">Conteúdo não encontrado</p><h1 class="h2" style="margin:22px 0 18px">Esta publicação não existe, saiu do ar ou mudou de endereço.</h1><div class="btn-row"><a class="btn" href="/conteudos.html">Ver todos os conteúdos</a></div></div></section></main><?= site_footer() ?></body></html><?php
     exit;
 }
 
@@ -31,8 +32,6 @@ $title = (string) ($p['title'] ?? '');
 $pageTitle = (string) (($p['seo_title'] ?? '') ?: $title);
 $desc = (string) (($p['seo_description'] ?? '') ?: ($p['excerpt'] ?? ''));
 $category = (string) ($p['category_name'] ?? '');
-$backHref = $isBlog ? '/artigos.html' : '/publicacoes.html';
-$backLabel = $isBlog ? '← Voltar ao blog' : '← Voltar às publicações';
 $canonical = base_url() . ($isBlog ? '/blog/' : '/publicacao/') . rawurlencode($p['slug']);
 $ogImage = (string) ($p['image_url'] ?? '') ?: (base_url() . '/assets/images/globalinvest-social.jpg');
 $bodyHtml = md_to_html($p['content'] ?? '');
@@ -40,11 +39,11 @@ $bodyHtml = md_to_html($p['content'] ?? '');
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title><?= h($pageTitle) ?> | Global Invest Brasil</title>
 <meta name="description" content="<?= h($desc) ?>">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#07535a">
+<meta name="theme-color" content="#0b1a1c">
 <link rel="canonical" href="<?= h($canonical) ?>">
 <meta property="og:type" content="article">
 <meta property="og:locale" content="pt_BR">
@@ -56,7 +55,10 @@ $bodyHtml = md_to_html($p['content'] ?? '');
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/favicon.ico" sizes="any">
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
-<link rel="stylesheet" href="/assets/css/styles.css?v=74">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;1,6..72,300&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=<?= SITE_ASSET_VERSION ?>">
 <script type="application/ld+json"><?= json_encode([
     '@context' => 'https://schema.org',
     '@type' => 'Article',
@@ -69,42 +71,44 @@ $bodyHtml = md_to_html($p['content'] ?? '');
     'publisher' => ['@type' => 'Organization', 'name' => 'Global Invest Brasil', 'logo' => ['@type' => 'ImageObject', 'url' => base_url() . '/assets/images/logo-globalinvestbr-circular.png']],
     'mainEntityOfPage' => ['@type' => 'WebPage', '@id' => $canonical],
 ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
-<script src="/assets/js/main.js?v=72" defer></script>
+<script>document.documentElement.classList.add("js")</script>
+<script src="/assets/js/site.js?v=<?= SITE_ASSET_VERSION ?>" defer></script>
 <script src="/adsense-loader.php" defer></script>
 </head>
-<body data-content-server-rendered="true">
+<body>
 <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
-<header class="site-header">
-<nav class="nav container" aria-label="Navegação principal">
-<a class="brand" href="/index.html" aria-label="Global Invest Brasil - início">
-<img class="home-brand-symbol" src="/assets/images/logo-globalinvestbr-circular.png" alt="" width="106" height="106">
-<strong class="home-brand-name home-brand-lines" aria-label="Global Invest Brasil"><span class="home-brand-top"><span>Global</span><em>Invest</em></span><span class="home-brand-bottom">Brasil</span></strong>
-</a>
-<button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu">☰</button>
-<ul class="nav-links" id="menu" data-nav-links></ul>
-</nav>
+<?= site_header() ?>
+<main id="conteudo">
+<article>
+<header class="page-hero">
+<div class="wrap">
+<nav class="crumbs" aria-label="Você está em"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/conteudos.html">Conteúdos</a><?php if ($category !== ''): ?><span aria-hidden="true">/</span><span><?= h($category) ?></span><?php endif; ?></nav>
+<p class="eyebrow"><?= h($isBlog ? 'Artigo' : 'Publicação') ?></p>
+<h1 class="display d-lg" style="margin-top:24px;max-width:22ch"><?= h($title) ?></h1>
+<?php if ($desc !== ''): ?><p class="lede" style="margin-top:24px"><?= h($desc) ?></p><?php endif; ?>
+<p class="article-meta"><?php if ($dateLabel !== ''): ?><time datetime="<?= h($dateAttr) ?>"><?= h($dateLabel) ?></time><?php endif; ?><span><?= h((string) ($p['author_name'] ?? '') ?: 'Global Invest Brasil') ?></span></p>
+</div>
 </header>
-<main id="conteudo" class="publication-page">
-<article class="container publication-article">
-<a class="publication-back" href="<?= h($backHref) ?>"><?= h($backLabel) ?></a>
-<header class="publication-heading">
-<?php if ($category !== ''): ?><span><?= h($category) ?></span><?php endif; ?>
-<h1><?= h($title) ?></h1>
-<?php if ($dateLabel !== ''): ?><time datetime="<?= h($dateAttr) ?>"><?= h($dateLabel) ?></time><?php endif; ?>
-</header>
-<?php if ($desc !== ''): ?><p class="publication-deck"><?= h($desc) ?></p><?php endif; ?>
-<div class="publication-body">
 <?php if (!empty($p['image_url'])): ?>
-<figure class="publication-editorial-image"><img src="<?= h($p['image_url']) ?>" alt="<?= h(($p['image_alt'] ?? '') ?: $title) ?>"><?php if (!empty($p['image_alt'])): ?><figcaption><?= h($p['image_alt']) ?></figcaption><?php endif; ?></figure>
+<div class="wrap"><figure class="article-cover"><img src="<?= h($p['image_url']) ?>" alt="<?= h(($p['image_alt'] ?? '') ?: $title) ?>"></figure></div>
 <?php endif; ?>
-<?= $bodyHtml ?>
+<section class="band">
+<div class="wrap legal-layout">
+<nav class="toc" data-toc aria-label="Neste artigo"><h2>Neste artigo</h2></nav>
+<div class="prose" data-toc-source><?= $bodyHtml ?></div>
 </div>
+</section>
 </article>
-</main>
-<footer class="site-footer">
-<div class="container">
-<p class="footer-legal-line">Global Invest Brasil - Todos os direitos reservados.</p>
+<section class="cta-band">
+<div class="bg"><img src="/assets/images/publicacoes/negocios-digitais-editorial.webp" alt="" loading="lazy" data-parallax="0.1"></div>
+<div class="wrap">
+<p class="eyebrow">Vamos conversar</p>
+<h2 class="h2">Quer aplicar isso no seu negócio?</h2>
+<p class="lede">Conte o seu momento e indicamos a solução que faz sentido agora.</p>
+<a class="btn" href="/contato.html">Fale com a gente</a>
 </div>
-</footer>
+</section>
+</main>
+<?= site_footer() ?>
 </body>
 </html>

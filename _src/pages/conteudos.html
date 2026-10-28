@@ -1,0 +1,97 @@
+<!--{
+  "title": "Conteúdos",
+  "description": "Artigos, publicações e livros da Global Invest Brasil sobre negócios, e-commerce, gestão, tecnologia e investimentos.",
+  "path": "/conteudos.html",
+  "nav": "conteudos",
+  "scripts": ["/assets/js/pages.js"]
+}-->
+<section class="page-hero">
+  <div class="wrap page-hero-grid">
+    <div>
+      <nav class="crumbs fade-up" aria-label="Você está em"><a href="/">Início</a><span aria-hidden="true">/</span><span>Conteúdos</span></nav>
+      <p class="eyebrow fade-up" style="--d:.1s">Conteúdos</p>
+      <h1 class="display d-lg">
+        <span class="line-mask"><span>Insights, estratégias</span></span>
+        <span class="line-mask"><span><em>e novidades do mercado.</em></span></span>
+      </h1>
+    </div>
+    <p class="lede fade-up" style="--d:.4s">Artigos, publicações técnicas e livros para decidir melhor em negócios, e-commerce, gestão, tecnologia e investimentos.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap">
+    <div class="filters" data-reveal>
+      <div class="chips" data-chips role="group" aria-label="Filtrar por tipo">
+        <button class="chip" type="button" data-filter="todos" aria-pressed="true">Todos</button>
+        <button class="chip" type="button" data-filter="blog" aria-pressed="false">Artigos</button>
+        <button class="chip" type="button" data-filter="publicacoes" aria-pressed="false">Publicações</button>
+      </div>
+      <label class="search"><span class="sr">Buscar conteúdo</span>{{icon:search}}<input type="search" id="busca-conteudo" placeholder="Buscar por tema ou título" data-search></label>
+    </div>
+    <div class="feed" data-feed aria-live="polite">
+      <div class="empty" data-empty>
+        <h3>Carregando conteúdos…</h3>
+        <p>Se nada aparecer, os novos artigos estão a caminho. Enquanto isso, veja os livros logo abaixo.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="band is-ink" id="livros">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="eyebrow">Livros e e-books</p>
+        <h2 class="h2">Leituras para decisões de longo prazo.</h2>
+      </div>
+      <p class="aside">Livros do Professor Jorge Dadalt, em versão digital e impressa.</p>
+    </div>
+    <div class="free-band is-light" data-reveal>
+      <img src="/assets/images/ebook-da-ideia-ao-lucro.webp" alt="" loading="lazy">
+      <div><p class="kick">E-book gratuito</p><h3>Por que você vende e não sobra dinheiro</h3><p>20 páginas e 4 fichas para descobrir em que dia do mês a sua empresa começa a trabalhar para você.</p></div>
+      <a class="btn" href="/ebook-gratuito/">Baixar grátis {{icon:arrow}}</a>
+    </div>
+    <div class="books">
+      <article class="book" data-reveal>
+        <div class="book-cover"><img src="/assets/images/livro-da-ideia-ao-lucro-contracapa.jpeg" alt="Capa do livro Da Ideia ao Lucro" loading="lazy"></div>
+        <p class="format">E-book e impresso</p>
+        <h3>Da Ideia ao Lucro</h3>
+        <p>Método prático para avaliar a viabilidade de um negócio e transformar faturamento em resultado sustentável: margem, fluxo de caixa, oportunidades e riscos.</p>
+        <div class="formats"><a class="btn" href="/da-ideia-ao-lucro/">E-book {{icon:arrow}}</a><a class="btn btn-line" href="/produto/produto-ideia-ao-lucro-impresso">Livro impresso</a></div>
+      </article>
+      <article class="book" data-reveal style="--d:.08s">
+        <div class="book-cover"><img src="/assets/images/livro-trabalhe-pouco-ganhe-muito.webp" alt="Capa do livro Trabalhe Pouco, Ganhe Muito" loading="lazy"></div>
+        <p class="format">E-book e impresso</p>
+        <h3>Trabalhe Pouco, Ganhe Muito</h3>
+        <p>Como construir liberdade financeira e geográfica com estratégia, disciplina, tecnologia e propósito: organização, automação e visão estratégica.</p>
+        <div class="formats"><a class="btn" href="/produto/Produto-Ebooks">E-book {{icon:arrow}}</a><a class="btn btn-line" href="/produto/produto-livro-impresso">Livro impresso</a></div>
+      </article>
+      <article class="book" data-reveal style="--d:.16s">
+        <div class="book-cover"><img src="/assets/images/livro-o-seu-maior-patrimonio.webp" alt="Capa do livro O Seu Maior Patrimônio" loading="lazy"></div>
+        <p class="format">E-book e impresso</p>
+        <h3>O Seu Maior Patrimônio</h3>
+        <p>Uma reflexão sobre critério, conhecimento e responsabilidade como ativos de longo prazo, que protegem decisões, relações e resultados.</p>
+        <div class="formats"><a class="btn" href="/produto/produto-o-seu-maior-patrimonio">E-book {{icon:arrow}}</a><a class="btn btn-line" href="/produto/produto-o-seu-maior-patrimonio-impresso">Livro impresso</a></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="band-sm is-paper-2">
+  <div class="wrap split">
+    <div data-reveal>
+      <p class="eyebrow">Newsletter</p>
+      <h2 class="h2" style="margin-top:18px">Receba o próximo conteúdo no seu e-mail.</h2>
+    </div>
+    <form class="footer-news inline-news" data-newsletter novalidate data-reveal>
+      <label class="sr" for="news-inline">Seu e-mail</label>
+      <div class="news-row">
+        <input id="news-inline" name="email" type="email" placeholder="Seu e-mail" autocomplete="email" required>
+        <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <button type="submit" aria-label="Inscrever e-mail">{{icon:arrow}}</button>
+      </div>
+      <p class="form-status" data-status aria-live="polite"></p>
+    </form>
+  </div>
+</section>

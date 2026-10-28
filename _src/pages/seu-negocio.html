@@ -1,0 +1,103 @@
+<!--{
+  "title": "Proteja seu negócio",
+  "description": "Diagnóstico gratuito em 2 minutos: descubra onde o seu negócio está exposto em caixa, contratos, segurança digital, dependência do dono, indicadores e crescimento.",
+  "path": "/seu-negocio.html",
+  "nav": "solucoes",
+  "scripts": ["/assets/js/pages.js"]
+}-->
+<section class="page-hero">
+  <div class="wrap page-hero-grid">
+    <div>
+      <nav class="crumbs fade-up" aria-label="Você está em"><a href="/">Início</a><span aria-hidden="true">/</span><a href="/solucoes.html">Soluções</a><span aria-hidden="true">/</span><span>Proteja seu negócio</span></nav>
+      <p class="eyebrow fade-up" style="--d:.1s">Proteção antes da expansão</p>
+      <h1 class="display d-lg">
+        <span class="line-mask"><span>Blinde seu negócio antes</span></span>
+        <span class="line-mask"><span><em>que o risco vire prejuízo.</em></span></span>
+      </h1>
+    </div>
+    <div class="fade-up" style="--d:.4s">
+      <p class="lede">Crescer exige controle, contratos, processos e segurança. Responda às seis perguntas abaixo e veja em que pontos a sua empresa está mais exposta.</p>
+      <div class="btn-row"><a class="btn" href="#diagnostico">Começar o diagnóstico {{icon:arrow}}</a></div>
+    </div>
+  </div>
+</section>
+
+<section class="band" id="diagnostico">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="eyebrow">Diagnóstico em 2 minutos</p>
+        <h2 class="h2">Os pontos frágeis que mais custam caro.</h2>
+      </div>
+      <p class="aside">As respostas ficam só no seu navegador. Nada é enviado.</p>
+    </div>
+    <form class="diag" data-diag>
+      <div class="risk-list">
+        <fieldset class="risk" data-risk="Caixa desorganizado">
+          <div><h3>As finanças da empresa ficam separadas das suas, com fluxo de caixa acompanhado?</h3><p>Misturar contas esconde a lucratividade real e enfraquece as decisões.</p></div>
+          <div class="seg" role="radiogroup" aria-label="Caixa"><label><input type="radio" name="caixa" value="0"><span>Sim</span></label><label><input type="radio" name="caixa" value="1"><span>Em parte</span></label><label><input type="radio" name="caixa" value="2"><span>Não</span></label></div>
+        </fieldset>
+        <fieldset class="risk" data-risk="Contratos frágeis">
+          <div><h3>Os acordos com clientes, fornecedores e sócios estão em contrato, com escopo claro?</h3><p>Acordos informais e escopo vago aumentam conflitos e perdas.</p></div>
+          <div class="seg" role="radiogroup" aria-label="Contratos"><label><input type="radio" name="contratos" value="0"><span>Sim</span></label><label><input type="radio" name="contratos" value="1"><span>Em parte</span></label><label><input type="radio" name="contratos" value="2"><span>Não</span></label></div>
+        </fieldset>
+        <fieldset class="risk" data-risk="Segurança digital">
+          <div><h3>Senhas únicas, verificação em duas etapas e backups testados fazem parte da rotina?</h3><p>Senhas repetidas, acessos sem controle e falta de backup expõem dados e operação.</p></div>
+          <div class="seg" role="radiogroup" aria-label="Segurança digital"><label><input type="radio" name="seguranca" value="0"><span>Sim</span></label><label><input type="radio" name="seguranca" value="1"><span>Em parte</span></label><label><input type="radio" name="seguranca" value="2"><span>Não</span></label></div>
+        </fieldset>
+        <fieldset class="risk" data-risk="Dependência do dono">
+          <div><h3>A empresa funcionaria uma semana inteira sem você?</h3><p>Quando tudo passa por uma pessoa, o negócio não ganha autonomia nem escala.</p></div>
+          <div class="seg" role="radiogroup" aria-label="Dependência do dono"><label><input type="radio" name="dono" value="0"><span>Sim</span></label><label><input type="radio" name="dono" value="1"><span>Em parte</span></label><label><input type="radio" name="dono" value="2"><span>Não</span></label></div>
+        </fieldset>
+        <fieldset class="risk" data-risk="Falta de indicadores">
+          <div><h3>Você acompanha vendas, margem e caixa com números, toda semana?</h3><p>Sem métricas simples, as decisões ficam baseadas em impressão e urgência.</p></div>
+          <div class="seg" role="radiogroup" aria-label="Indicadores"><label><input type="radio" name="indicadores" value="0"><span>Sim</span></label><label><input type="radio" name="indicadores" value="1"><span>Em parte</span></label><label><input type="radio" name="indicadores" value="2"><span>Não</span></label></div>
+        </fieldset>
+        <fieldset class="risk" data-risk="Crescimento sem estrutura">
+          <div><h3>Processos, equipe e caixa acompanham quando as vendas aumentam?</h3><p>Vender mais pode aumentar o caos quando a estrutura fica para trás.</p></div>
+          <div class="seg" role="radiogroup" aria-label="Crescimento"><label><input type="radio" name="crescimento" value="0"><span>Sim</span></label><label><input type="radio" name="crescimento" value="1"><span>Em parte</span></label><label><input type="radio" name="crescimento" value="2"><span>Não</span></label></div>
+        </fieldset>
+      </div>
+
+      <aside class="score-card" aria-live="polite">
+        <p class="eyebrow">Índice de proteção</p>
+        <div class="gauge">
+          <svg viewBox="0 0 200 110" aria-hidden="true"><path class="g-track" d="M15 100a85 85 0 0 1 170 0" fill="none" stroke-width="12" stroke-linecap="round"/><path class="g-val" d="M15 100a85 85 0 0 1 170 0" fill="none" stroke-width="12" stroke-linecap="round" pathLength="100" stroke-dasharray="100" stroke-dashoffset="100" data-gauge/></svg>
+          <div class="gauge-num"><strong data-score>–</strong><small>de 100</small></div>
+        </div>
+        <h3 data-verdict>Responda às perguntas</h3>
+        <p data-advice>O índice aparece conforme você responde. Ao final, mostramos os pontos mais urgentes e a mentoria indicada.</p>
+        <a class="btn" href="/mentorias.html" data-cta hidden>Ver a mentoria indicada {{icon:arrow}}</a>
+        <p class="score-progress" data-progress>0 de 6 respondidas</p>
+      </aside>
+    </form>
+  </div>
+</section>
+
+<section class="band is-ink">
+  <div class="wrap">
+    <div class="section-head" data-reveal>
+      <div>
+        <p class="eyebrow">Boas práticas</p>
+        <h2 class="h2">Uma empresa protegida enxerga, registra e controla.</h2>
+      </div>
+      <p class="aside">Proteção não elimina todo risco. Reduz a exposição e evita que um problema pare a operação.</p>
+    </div>
+    <div class="practice-grid" data-reveal>
+      <div class="practice">{{icon:trend}}<h3>Separe e acompanhe as finanças</h3><p>Conta da empresa, fluxo de caixa, margem, capital de giro e reserva.</p></div>
+      <div class="practice">{{icon:book}}<h3>Documente responsabilidades</h3><p>Contratos, acessos, processos essenciais e um responsável por rotina.</p></div>
+      <div class="practice">{{icon:shield}}<h3>Proteja dados e continuidade</h3><p>Verificação em duas etapas, backups testados e acesso por função.</p></div>
+      <div class="practice">{{icon:users}}<h3>Revise com especialistas</h3><p>Questões jurídicas, contábeis e de segurança pedem profissionais habilitados.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="bg"><img src="/assets/images/publicacoes/gestao-editorial.webp" alt="" loading="lazy" data-parallax="0.1"></div>
+  <div class="wrap" data-reveal>
+    <p class="eyebrow">Próximo passo</p>
+    <h2 class="h2">Organize os riscos e transforme proteção em capacidade de crescer.</h2>
+    <p class="lede">A mentoria Organizando Meu Negócio trabalha caixa, processos, rotinas e indicadores com você.</p>
+    <a class="btn" href="/mentorias.html#fases">Conhecer a mentoria {{icon:arrow}}</a>
+  </div>
+</section>

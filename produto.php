@@ -2,6 +2,7 @@
 declare(strict_types=1);
 require_once __DIR__ . '/app/bootstrap.php';
 require_once __DIR__ . '/app/markdown.php';
+require_once __DIR__ . '/app/site-shell.php';
 
 $slug = trim($_GET['slug'] ?? '');
 
@@ -15,7 +16,7 @@ try {
     if (!$p) throw new RuntimeException('not found');
 } catch (Throwable $e) {
     http_response_code(404);
-    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/styles.css?v=74"></head><body><main style="max-width:640px;margin:80px auto;padding:0 24px"><a href="/produtos.html">← Ver produtos</a><h1>Produto não encontrado</h1><p>O item que você procura não existe ou saiu do ar.</p></main></body></html><?php
+    ?><!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>Produto não encontrado | Global Invest Brasil</title><link rel="stylesheet" href="/assets/css/site.css?v=<?= SITE_ASSET_VERSION ?>"><script src="/assets/js/site.js?v=<?= SITE_ASSET_VERSION ?>" defer></script></head><body><?= site_header() ?><main id="conteudo"><section class="page-hero"><div class="wrap"><p class="eyebrow">Produto não encontrado</p><h1 class="h2" style="margin-top:22px">Este item não existe ou saiu do ar.</h1><div class="btn-row"><a class="btn" href="/solucoes.html">Ver soluções</a></div></div></section></main><?= site_footer() ?></body></html><?php
     exit;
 }
 
@@ -55,18 +56,33 @@ $alert = $isExternal
     ? 'Compra segura na loja oficial &middot; acesso imediato por e-mail.'
     : 'Conteúdo e método do Professor Jorge Dadalt, com décadas conduzindo negócios reais.';
 
-function pl_buy(string $url, string $attrs, string $label): string {
-    return '<a class="pl-btn" href="' . h($url) . '"' . $attrs . '>' . h($label) . '</a>';
+// Livros e e-books ganham a capa em destaque; serviços usam foto de fundo.
+$slugLower = strtolower((string) $p['slug']);
+$isBook = in_array($category, ['Livros', 'E-books'], true) || (bool) preg_match('/livro|e-?book|patrimonio|ideia-ao-lucro/', $slugLower);
+$isPoster = $image === '' || (bool) preg_match('#mentoria|palestra|curso#', $image);
+$heroPhoto = $isPoster ? '/assets/images/publicacoes/gestao-editorial.webp' : $image;
+$parent = match (true) {
+    $isBook => ['Livros e e-books', '/conteudos.html#livros'],
+    $category === 'Mentorias', $category === 'Cursos e palestras' => ['Mentorias', '/mentorias.html'],
+    default => ['Soluções', '/solucoes.html'],
+};
+$shopHandle = preg_match('#^https://brcrystals\.com/products/([\w-]+)#', $buyUrl, $hm) ? $hm[1] : '';
+$checkoutAttr = $shopHandle !== '' ? ' data-checkout="' . h($shopHandle) . '"' . ($price ? ' data-value="' . h((string) (float) $price) . '"' : '') : '';
+$arrow = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+$check = '<svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 4.5 4.5L19 7"/></svg>';
+function pd_buy(string $url, string $attrs, string $label, string $extra, string $cls = 'btn'): string {
+    global $arrow;
+    return '<a class="' . $cls . '" href="' . h($url) . '"' . $attrs . $extra . '>' . h($label) . ' ' . $arrow . '</a>';
 }
 ?><!doctype html>
 <html lang="pt-BR">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title><?= h($title) ?> | Global Invest Brasil</title>
 <meta name="description" content="<?= h($summary) ?>">
 <meta name="robots" content="index,follow,max-image-preview:large">
-<meta name="theme-color" content="#06363a">
+<meta name="theme-color" content="#0b1a1c">
 <link rel="canonical" href="<?= h($canonical) ?>">
 <meta property="og:type" content="product">
 <meta property="og:locale" content="pt_BR">
@@ -76,13 +92,12 @@ function pl_buy(string $url, string $attrs, string $label): string {
 <meta property="og:url" content="<?= h($canonical) ?>">
 <meta property="og:image" content="<?= h($ogImage) ?>">
 <meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700;800;900&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/styles.css?v=74">
-<link rel="stylesheet" href="/assets/css/produto-landing.css?v=2">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300&display=swap">
+<link rel="stylesheet" href="/assets/css/site.css?v=<?= SITE_ASSET_VERSION ?>">
 <script type="application/ld+json"><?= json_encode(array_filter([
     '@context' => 'https://schema.org',
     '@type' => 'Product',
@@ -98,117 +113,106 @@ function pl_buy(string $url, string $attrs, string $label): string {
         'availability' => 'https://schema.org/InStock',
     ] : null,
 ]), JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT) ?></script>
-<script src="/assets/js/main.js?v=72" defer></script>
+<script>document.documentElement.classList.add("js")</script>
+<script src="/assets/js/site.js?v=<?= SITE_ASSET_VERSION ?>" defer></script>
+<script src="/assets/js/venda.js?v=<?= SITE_ASSET_VERSION ?>" defer></script>
 <script src="/adsense-loader.php" defer></script>
 </head>
-<body data-content-server-rendered="true">
+<body>
 <a class="skip-link" href="#conteudo">Ir para o conteúdo</a>
-<header class="site-header">
-<nav class="nav container" aria-label="Navegação principal">
-<a class="brand" href="/index.html" aria-label="Global Invest Brasil - início">
-<img class="home-brand-symbol" src="/assets/images/logo-globalinvestbr-circular.png" alt="" width="106" height="106">
-<strong class="home-brand-name home-brand-lines" aria-label="Global Invest Brasil"><span class="home-brand-top"><span>Global</span><em>Invest</em></span><span class="home-brand-bottom">Brasil</span></strong>
-</a>
-<button class="menu-toggle" type="button" data-menu-toggle aria-expanded="false" aria-controls="menu">☰</button>
-<ul class="nav-links" id="menu" data-nav-links></ul>
-</nav>
-</header>
+<?= site_header() ?>
+<main id="conteudo">
 
-<main id="conteudo" class="product-page">
-
-<section class="pl-hero">
-<div class="pl-wrap pl-hero-in">
-<div>
-<a class="pl-back" href="/produtos.html">&larr; Voltar aos produtos</a>
-<span class="pl-flag"><?= h($category ?: 'Global Invest Brasil') ?></span>
-<h1><?= h($title) ?></h1>
-<?php if ($summary !== ''): ?><p class="pl-hero-lead"><?= h($summary) ?></p><?php endif; ?>
-<?= pl_buy($buyUrl, $ctaAttrs, $cta) ?>
-<p class="pl-note"><?= h($buyNote) ?></p>
-<div class="pl-trust"><?php foreach ($trust as $t): ?><span><?= h($t) ?></span><?php endforeach; ?></div>
+<section class="sale-hero<?= $isBook ? '' : ' has-photo' ?>">
+<?php if (!$isBook): ?><div class="page-hero-media"><img src="<?= h($heroPhoto) ?>" alt="" fetchpriority="high" data-parallax="0.08"></div><?php endif; ?>
+<div class="wrap <?= $isBook ? 'sale-grid' : '' ?>">
+<div class="<?= $isBook ? '' : 'page-hero-copy' ?>">
+<nav class="crumbs fade-up" aria-label="Você está em"><a href="/">Início</a><span aria-hidden="true">/</span><a href="<?= h($parent[1]) ?>"><?= h($parent[0]) ?></a><span aria-hidden="true">/</span><span><?= h($category ?: 'Produto') ?></span></nav>
+<p class="eyebrow fade-up" style="--d:.1s"><?= h($category ?: 'Global Invest Brasil') ?></p>
+<h1 class="display d-lg fade-up" style="--d:.15s"><?= h($title) ?></h1>
+<?php if ($summary !== ''): ?><p class="lede fade-up" style="--d:.3s"><?= h($summary) ?></p><?php endif; ?>
+<div class="sale-cta fade-up" style="--d:.45s">
+<?php if ($priceLabel !== ''): ?><div class="price-tag"><strong><?= h($priceLabel) ?></strong></div><?php endif; ?>
+<?= pd_buy($buyUrl, $ctaAttrs, $cta, $checkoutAttr) ?>
+<p class="sale-note"><?= h($buyNote) ?></p>
 </div>
-<?php if ($image !== ''): ?><div class="pl-hero-media"><img src="<?= h($image) ?>" alt="<?= h($title) ?>" decoding="async" fetchpriority="high"></div><?php endif; ?>
+<div class="trust-row fade-up" style="--d:.6s"><?php foreach ($trust as $t): ?><span><?= $check ?><?= h($t) ?></span><?php endforeach; ?></div>
+</div>
+<?php if ($isBook && $image !== ''): ?>
+<div class="cover-stage fade-up" style="--d:.3s"><img src="<?= h($image) ?>" alt="<?= h($title) ?>" decoding="async" fetchpriority="high"></div>
+<?php endif; ?>
 </div>
 </section>
 
-<div class="pl-alert"><div class="pl-wrap"><b><?= $alert ?></b></div></div>
+<section class="pd-alert"><div class="wrap"><p><?= $alert ?></p></div></section>
 
 <?php
-$dark = true; $pullGold = true;
+$tone = 0;
 foreach ($blocks as $block):
     if (strncmp($block, '<blockquote>', 12) === 0):
-        if (preg_match('#^(<blockquote>.*?</blockquote>)(.*)$#s', $block, $mm)):
-            $quote = preg_replace('#</?blockquote>#', '', $mm[1]);
-            ?><section class="pl-pull <?= $pullGold ? 'pl-pull--gold' : 'pl-pull--dark' ?>"><div class="pl-wrap"><?= $quote ?></div></section><?php
-            $pullGold = !$pullGold;
-            $rest = trim($mm[2]);
-            if ($rest !== ''):
-                ?><section class="pl-sec <?= $dark ? 'pl-sec--ink' : 'pl-sec--paper' ?>"><div class="pl-wrap pl-body pl-reveal"><?= $rest ?></div></section><?php
-                $dark = !$dark;
-            endif;
+        if (preg_match('#^<blockquote>(.*?)</blockquote>(.*)$#s', $block, $mm)):
+            ?><section class="pull<?= $tone % 2 ? ' is-dark' : '' ?>"><div class="wrap"><span>Global Invest Brasil</span><div class="pd-quote"><?= $mm[1] ?></div></div></section><?php
+            $block = trim($mm[2]);
+            if ($block === '') continue;
         endif;
-        continue;
     endif;
-    ?><section class="pl-sec <?= $dark ? 'pl-sec--ink' : 'pl-sec--paper' ?>"><div class="pl-wrap pl-body pl-reveal"><?= $block ?></div></section><?php
-    $dark = !$dark;
+    $heading = '';
+    if (preg_match('#^<h2>(.*?)</h2>(.*)$#s', $block, $bm)) { $heading = $bm[1]; $block = trim($bm[2]); }
+    $cls = ['band', 'band is-paper-2', 'band is-ink'][$tone % 3];
+    $tone++;
+    ?><section class="<?= $cls ?>"><div class="wrap two-col">
+<div data-reveal><p class="eyebrow"><?= h($category ?: 'Global Invest Brasil') ?></p><?php if ($heading !== ''): ?><h2 class="h2"><?= $heading ?></h2><?php endif; ?></div>
+<div class="pd-body" data-reveal style="--d:.08s"><?= $block ?></div>
+</div></section><?php
 endforeach;
 ?>
 
-<section class="pl-offer-sec">
-<div class="pl-wrap">
-<div class="pl-offer pl-reveal">
-<div class="pl-offer__t"><?= $isExternal ? 'Acesso imediato &middot; Compra segura' : 'Atendimento Global Invest Brasil' ?></div>
-<div class="pl-offer__b">
-<h2><?= h($title) ?></h2>
-<?php if ($summary !== ''): ?><p><?= h($summary) ?></p><?php endif; ?>
-<?php if ($priceLabel !== ''): ?><div class="pl-price"><?= h($priceLabel) ?></div><?php endif; ?>
-<div class="pl-offer__cta"><?= pl_buy($buyUrl, $ctaAttrs, $cta) ?></div>
-<?php if ($isExternal): ?><div class="pl-seals"><span>Pagamento seguro</span><span>Acesso imediato por e-mail</span><span>Garantia de 7 dias</span></div><?php endif; ?>
+<section class="band is-ink" id="oferta">
+<div class="wrap">
+<div class="offer-box<?= $isBook && $image !== '' ? '' : ' is-solo' ?>" data-reveal>
+<?php if ($isBook && $image !== ''): ?><div class="ob-cover"><img src="<?= h($image) ?>" alt="<?= h($title) ?>" loading="lazy"></div><?php endif; ?>
+<div class="ob-body">
+<p class="ob-head"><?= $isExternal ? 'Acesso imediato &middot; Compra segura' : 'Atendimento Global Invest Brasil' ?></p>
+<h3><?= h($title) ?></h3>
+<?php if ($summary !== ''): ?><p style="color:var(--muted)"><?= h($summary) ?></p><?php endif; ?>
+<?php if ($priceLabel !== ''): ?><div class="price-tag"><strong><?= h($priceLabel) ?></strong></div><?php endif; ?>
+<div class="btn-row"><?= pd_buy($buyUrl, $ctaAttrs, $cta, $checkoutAttr) ?></div>
+<?php if ($isExternal): ?><p class="seals"><span><?= $check ?>Pagamento seguro</span><span><?= $check ?>Acesso imediato por e-mail</span><span><?= $check ?>Garantia de 7 dias</span></p><?php endif; ?>
 </div>
 </div>
 <?php if ($isExternal): ?>
-<div class="pl-grt pl-reveal">
-<div class="pl-seal"><b>7</b><i>dias</i></div>
-<div><h3>O risco é todo nosso.</h3><p>Se em até 7 dias você concluir que não serve para a sua realidade, responde o e-mail da compra e devolvemos 100% do valor.</p></div>
+<div class="guarantee" data-reveal>
+<div class="seal"><b>7</b><small>dias</small></div>
+<div><h3>O risco é todo nosso.</h3><p>Se em até 7 dias você concluir que não serve para a sua realidade, responda o e-mail da compra e devolvemos 100% do valor.</p></div>
 </div>
 <?php endif; ?>
 </div>
 </section>
 
 <?php if ($faq !== ''): ?>
-<section class="pl-sec pl-sec--ink"><div class="pl-wrap pl-body pl-reveal">
-<h2>Perguntas frequentes</h2>
-<div class="pl-faq"><?= $faq ?></div>
-</div></section>
+<section class="band">
+<div class="wrap two-col">
+<div data-reveal><p class="eyebrow">Dúvidas frequentes</p><h2 class="h2">Perguntas frequentes.</h2></div>
+<div class="faq" data-reveal style="--d:.08s"><?= $faq ?></div>
+</div>
+</section>
 <?php endif; ?>
 
-<section class="pl-sec pl-sec--deep">
-<div class="pl-wrap pl-final pl-reveal">
-<span class="pl-eyebrow">Próximo passo</span>
-<h2><?= h($title) ?></h2>
-<p>Converse com a Global Invest Brasil e veja como esta solução se encaixa no seu momento.</p>
-<?= pl_buy($buyUrl, $ctaAttrs, $cta) ?>
+<section class="cta-band">
+<div class="bg"><img src="/assets/images/publicacoes/negocios-digitais-editorial.webp" alt="" loading="lazy" data-parallax="0.1"></div>
+<div class="wrap" data-reveal>
+<p class="eyebrow">Próximo passo</p>
+<h2 class="h2"><?= h($title) ?></h2>
+<p class="lede">Converse com a Global Invest Brasil e veja como esta solução se encaixa no seu momento.</p>
+<?= pd_buy($buyUrl, $ctaAttrs, $cta, $checkoutAttr) ?>
 </div>
 </section>
 
 </main>
-
-<div class="pl-buybar">
-<div class="pl-buybar__p"><b><?= $priceLabel !== '' ? h($priceLabel) : 'Global Invest Brasil' ?></b><small><?= h($category ?: 'Produto') ?></small></div>
-<?= pl_buy($buyUrl, $ctaAttrs, $cta) ?>
+<?= site_footer() ?>
+<div class="buybar" data-buybar>
+<div class="bb-info"><b><?= $priceLabel !== '' ? h($priceLabel) : h($title) ?></b><small><?= h($category ?: 'Global Invest Brasil') ?></small></div>
+<?= pd_buy($buyUrl, $ctaAttrs, $cta, $checkoutAttr) ?>
 </div>
-
-<footer class="site-footer">
-<div class="container">
-<p class="footer-legal-line">Global Invest Brasil - Todos os direitos reservados.</p>
-</div>
-</footer>
-
-<script>
-(function(){
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('is-in');io.unobserve(e.target);}});},{threshold:.1,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.pl-reveal').forEach(function(el){io.observe(el);});
-})();
-</script>
 </body>
 </html>

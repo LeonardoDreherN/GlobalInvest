@@ -1,0 +1,59 @@
+<!--{
+  "title": "Contato",
+  "description": "Fale com a Global Invest Brasil sobre e-commerce, desenvolvimento, logística e importação, mentorias, palestras e livros.",
+  "path": "/contato.html",
+  "nav": "contato"
+}-->
+<section class="page-hero">
+  <div class="wrap page-hero-grid">
+    <div>
+      <nav class="crumbs fade-up" aria-label="Você está em"><a href="/">Início</a><span aria-hidden="true">/</span><span>Contato</span></nav>
+      <p class="eyebrow fade-up" style="--d:.1s">Vamos conversar</p>
+      <h1 class="display d-lg">
+        <span class="line-mask"><span>Conte o seu momento.</span></span>
+        <span class="line-mask"><span><em>A gente responde.</em></span></span>
+      </h1>
+    </div>
+    <p class="lede fade-up" style="--d:.4s">Diga o que você precisa e em que fase está o negócio. Respondemos com os próximos passos.</p>
+  </div>
+</section>
+
+<section class="band">
+  <div class="wrap contact">
+    <div class="contact-info" data-reveal>
+      <div class="contact-line">{{icon:mail}}<div><h3>E-mail</h3><a href="mailto:{{email}}">{{email}}</a><br><button class="copy-btn" type="button" data-copy="{{email}}">{{icon:copy}}<span>Copiar e-mail</span></button></div></div>
+      <div class="contact-line">{{icon:pin}}<div><h3>Onde estamos</h3><p>Florianópolis · SC<br>Atendimento online em todo o Brasil e no exterior</p></div></div>
+      <div class="contact-line">{{icon:clock}}<div><h3>Retorno</h3><p>Pelo e-mail ou WhatsApp que você informar</p></div></div>
+    </div>
+
+    <form class="form" data-contact novalidate data-reveal style="--d:.08s">
+      <div class="field">
+        <span class="field-label" id="topic-label" style="font-size:.82rem;font-weight:600">Sobre o que você quer falar?</span>
+        <div class="topic-chips" role="radiogroup" aria-labelledby="topic-label">
+          <label><input type="radio" name="topic" value="E-commerce"><span>E-commerce</span></label>
+          <label><input type="radio" name="topic" value="Desenvolvimento"><span>Site ou app</span></label>
+          <label><input type="radio" name="topic" value="Logística e importação"><span>Logística e importação</span></label>
+          <label><input type="radio" name="topic" value="Mentoria"><span>Mentoria</span></label>
+          <label><input type="radio" name="topic" value="Palestra"><span>Palestra</span></label>
+          <label><input type="radio" name="topic" value="Livros"><span>Livros</span></label>
+          <label><input type="radio" name="topic" value="Outro assunto"><span>Outro assunto</span></label>
+        </div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="c-name">Nome</label><input id="c-name" name="name" autocomplete="name" required><span class="err"></span></div>
+        <div class="field"><label for="c-email">E-mail</label><input id="c-email" name="email" type="email" autocomplete="email" required><span class="err"></span></div>
+      </div>
+      <div class="form-row">
+        <div class="field"><label for="c-phone">WhatsApp <span style="font-weight:400;color:var(--muted)">(opcional)</span></label><input id="c-phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="(00) 00000-0000"></div>
+        <div class="field"><label for="c-company">Empresa <span style="font-weight:400;color:var(--muted)">(opcional)</span></label><input id="c-company" name="company" autocomplete="organization"></div>
+      </div>
+      <div class="field"><label for="c-message">Mensagem</label><textarea id="c-message" name="message" placeholder="O que você vende, em que fase está o negócio e o que precisa resolver" required></textarea><span class="err"></span></div>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <label class="consent"><input type="checkbox" name="consent" id="c-consent"><span>Concordo com o uso dos meus dados para receber resposta a este contato, conforme a <a href="/privacidade.html">Política de privacidade</a>.</span></label>
+      <div class="btn-row" style="align-items:center">
+        <button class="btn" type="submit">Enviar mensagem {{icon:arrow}}</button>
+        <p class="form-status" data-status aria-live="polite"></p>
+      </div>
+    </form>
+  </div>
+</section>
