@@ -73,7 +73,7 @@ const NAV = [
       { label: "Logística e importação", note: "Compra, frete e envio internacional", href: "/logistica.html", icon: "box" },
       { label: "Mentorias", note: "Do primeiro negócio ao patrimônio", href: "/mentorias.html", icon: "compass" },
       { label: "Proteja seu negócio", note: "Diagnóstico de riscos em 2 minutos", href: "/seu-negocio.html", icon: "shield" },
-      { label: "Livros e e-books", note: "E-book gratuito e obras do Prof. Dadalt", href: "/conteudos.html#livros", icon: "book" },
+      { label: "Livros e e-books", note: "E-book gratuito e obras do Prof. Dadalt", href: "/livros-e-ebooks.html", icon: "book" },
     ],
   },
   { key: "quem-somos", label: "Quem somos", href: "/quem-somos.html" },
@@ -116,7 +116,7 @@ function footer() {
     </div>
     <nav class="footer-col" aria-label="Navegação do rodapé">
       <h2>Navegação</h2>
-      <ul><li><a href="/">Início</a></li><li><a href="/solucoes.html">Soluções</a></li><li><a href="/quem-somos.html">Quem somos</a></li><li><a href="/conteudos.html">Conteúdos</a></li><li><a href="/conteudos.html#livros">Livros e e-books</a></li><li><a href="/ebook-gratuito/">E-book gratuito</a></li><li><a href="/contato.html">Contato</a></li></ul>
+      <ul><li><a href="/">Início</a></li><li><a href="/solucoes.html">Soluções</a></li><li><a href="/quem-somos.html">Quem somos</a></li><li><a href="/conteudos.html">Conteúdos</a></li><li><a href="/livros-e-ebooks.html">Livros e e-books</a></li><li><a href="/ebook-gratuito/">E-book gratuito</a></li><li><a href="/contato.html">Contato</a></li></ul>
     </nav>
     <nav class="footer-col" aria-label="Soluções">
       <h2>Soluções</h2>
