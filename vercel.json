@@ -11,6 +11,11 @@
       "permanent": true
     },
     {
+      "source": "/produto/Produto-Ebooks",
+      "destination": "/trabalhe-pouco-ganhe-muito/",
+      "permanent": true
+    },
+    {
       "source": "/publicacao/:slug.html",
       "destination": "/publicacao/:slug",
       "permanent": true
